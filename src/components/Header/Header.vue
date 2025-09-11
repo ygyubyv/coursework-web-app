@@ -74,7 +74,7 @@ const profileMenuLinks = {
     { to: "/parkings", text: "My parkings", icon: "calendar-check" },
     { to: "/book", text: "Book parking", icon: "credit-card" },
     { to: "/account", text: "Account", icon: "user" },
-    { to: "/settings", text: "Settings", icon: "cog" },
+    { to: "/account/settings", text: "Settings", icon: "cog" },
     { to: "/help", text: "Help", icon: "circle-question" },
   ],
   footer: [

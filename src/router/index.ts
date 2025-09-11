@@ -8,7 +8,6 @@ import parkings from "@/containers/parkings/routes/index";
 import contact from "@/containers/contact/routes/index";
 import help from "@/containers/help/routes/index";
 import faq from "@/containers/faq/routes/index";
-import settings from "@/containers/settings/routes/index";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +20,6 @@ const router = createRouter({
     ...contact,
     ...help,
     ...faq,
-    ...settings,
   ],
 });
 
