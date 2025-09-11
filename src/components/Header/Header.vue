@@ -12,7 +12,7 @@
         Virodip
       </RouterLink>
 
-      <div class="flex items-center gap-12">
+      <div class="flex items-center gap-6">
         <div class="hidden md:flex items-center gap-6">
           <RouterLink
             to="/parkings"

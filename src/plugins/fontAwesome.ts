@@ -8,10 +8,18 @@ import {
   faCog,
   faUser,
   faCircleQuestion,
+  faInfoCircle,
   faRightFromBracket,
   faRightToBracket,
   faCreditCard,
+  faSearch,
+  faCheckCircle,
+  faCashRegister,
+  faLaptop,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
   faParking,
@@ -19,10 +27,18 @@ library.add(
   faRightToBracket,
   faUserCircle,
   faCog,
+  faInfoCircle,
   faUser,
   faCircleQuestion,
   faRightFromBracket,
-  faCreditCard
+  faCreditCard,
+  faApple,
+  faAndroid,
+  faSearch,
+  faCheckCircle,
+  faCashRegister,
+  faLaptop,
+  faArrowRight
 );
 
 export { FontAwesomeIcon };

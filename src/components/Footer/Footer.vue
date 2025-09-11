@@ -3,9 +3,9 @@
     class="bg-white text-black border-t border-gray-200 shadow-inner mt-12"
   >
     <div
-      class="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-start md:items-start gap-4"
+      class="max-w-7xl mx-auto px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between gap-6"
     >
-      <div>
+      <div class="flex flex-col items-start">
         <RouterLink
           to="/"
           class="text-lg font-bold hover:underline hover:text-gray-700 transition-colors duration-200"
@@ -17,8 +17,10 @@
         </p>
       </div>
 
-      <div class="flex flex-col md:items-end gap-2">
-        <div class="flex flex-wrap gap-4 text-sm justify-end">
+      <div class="flex flex-col md:items-end gap-4 w-full md:w-auto">
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm md:flex md:flex-wrap md:gap-6"
+        >
           <RouterLink
             v-for="link in footerLinks"
             :key="link.to"
@@ -29,7 +31,7 @@
           </RouterLink>
         </div>
 
-        <div class="mt-2 text-xs text-gray-500">
+        <div class="text-xs text-gray-500 text-center md:text-right">
           &copy; 2025 Virodip. All rights reserved.
         </div>
       </div>
