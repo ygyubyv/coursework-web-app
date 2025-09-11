@@ -17,6 +17,8 @@ import {
   faCashRegister,
   faLaptop,
   faArrowRight,
+  faEraser,
+  faPaperPlane,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
@@ -38,7 +40,9 @@ library.add(
   faCheckCircle,
   faCashRegister,
   faLaptop,
-  faArrowRight
+  faArrowRight,
+  faEraser,
+  faPaperPlane
 );
 
 export { FontAwesomeIcon };
