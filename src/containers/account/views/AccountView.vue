@@ -11,48 +11,14 @@
             class="flex md:flex-col space-x-4 md:space-x-0 md:space-y-1 overflow-x-auto"
           >
             <RouterLink
-              to="/account/profile"
+              v-for="link in links"
+              :key="link.to"
+              :to="link.to"
               class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-100 whitespace-nowrap"
               active-class="bg-gray-200 text-black"
             >
-              <font-awesome-icon :icon="['fas', 'user']" />
-              Personal Info
-            </RouterLink>
-
-            <RouterLink
-              to="/account/payments"
-              class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-100 whitespace-nowrap"
-              active-class="bg-gray-200 text-black"
-            >
-              <font-awesome-icon :icon="['fas', 'credit-card']" />
-              Payments
-            </RouterLink>
-
-            <RouterLink
-              to="/account/stats"
-              class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-100 whitespace-nowrap"
-              active-class="bg-gray-200 text-black"
-            >
-              <font-awesome-icon :icon="['fas', 'chart-line']" />
-              Statistics
-            </RouterLink>
-
-            <RouterLink
-              to="/account/settings"
-              class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-100 whitespace-nowrap"
-              active-class="bg-gray-200 text-black"
-            >
-              <font-awesome-icon :icon="['fas', 'cog']" />
-              Settings
-            </RouterLink>
-
-            <RouterLink
-              to="/account/security"
-              class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-black hover:bg-gray-100 whitespace-nowrap"
-              active-class="bg-gray-200 text-black"
-            >
-              <font-awesome-icon :icon="['fas', 'shield-alt']" />
-              Security
+              <font-awesome-icon :icon="link.icon" />
+              {{ link.text }}
             </RouterLink>
           </nav>
         </aside>
@@ -64,6 +30,36 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const links = [
+  {
+    to: "/account/profile",
+    text: "Personal Info",
+    icon: ["fas", "user"],
+  },
+  {
+    to: "/account/payments",
+    text: "Payments",
+    icon: ["fas", "credit-card"],
+  },
+  {
+    to: "/account/stats",
+    text: "Statistics",
+    icon: ["fas", "chart-line"],
+  },
+  {
+    to: "/account/settings",
+    text: "Settings",
+    icon: ["fas", "cog"],
+  },
+  {
+    to: "/account/security",
+    text: "Security",
+    icon: ["fas", "shield-alt"],
+  },
+];
+</script>
 
 <style scoped>
 aside nav::-webkit-scrollbar {

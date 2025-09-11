@@ -31,8 +31,8 @@
         <div class="flex items-center justify-center flex-shrink-0">
           <!-- IF Authenticated -->
           <Profile
-            v-if="isAuthenticated && user"
-            :user="user"
+            v-if="isAuthenticated && DEFAULT_USER"
+            :user="DEFAULT_USER"
             :body-links="profileMenuLinks.body"
             :footer-links="profileMenuLinks.footer"
             @logout="logout"
@@ -54,20 +54,11 @@
 </template>
 
 <script setup lang="ts">
-import type { User } from "@/types/User";
 import Profile from "./Profile.vue";
 import BaseButton from "../Base/BaseButton.vue";
+import { DEFAULT_USER } from "@/constants";
 
 const isAuthenticated = true;
-
-const user: User = {
-  id: "1",
-  name: "Example name",
-  email: "dopi@gmail.com",
-  avatarUrl: null,
-  createdAt: "2025-09-04T16:25:50.636Z",
-  phoneNumber: "+380687586410",
-};
 
 const profileMenuLinks = {
   body: [

@@ -21,6 +21,8 @@ import {
   faPaperPlane,
   faChartLine,
   faShieldAlt,
+  faSave,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
@@ -46,7 +48,9 @@ library.add(
   faEraser,
   faPaperPlane,
   faShieldAlt,
-  faChartLine
+  faChartLine,
+  faSave,
+  faPlus
 );
 
 export { FontAwesomeIcon };
