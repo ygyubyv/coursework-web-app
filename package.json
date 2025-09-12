@@ -19,7 +19,9 @@
     "@fortawesome/free-solid-svg-icons": "^7.0.1",
     "@fortawesome/vue-fontawesome": "^3.1.2",
     "@tailwindcss/vite": "^4.1.13",
+    "@types/lodash": "^4.17.20",
     "@vueuse/core": "^13.9.0",
+    "lodash": "^4.17.21",
     "tailwindcss": "^4.1.13",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"

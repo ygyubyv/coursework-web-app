@@ -10,9 +10,26 @@ export const DEFAULT_USER: User = {
   email: "vasyl@example.com",
   phoneNumber: "+380 123 456 789",
   avatarUrl: null,
-  carNumbers: "AA1234BB",
   createdAt: "2024-06-18T12:34:56Z",
   roles: ["user", "guardian", "admin"],
+  cars: [
+    {
+      id: "1",
+      numbers: "AA1234BB",
+      brand: "Toyota",
+      model: "Camry",
+      year: 2020,
+      color: "White",
+    },
+    {
+      id: "2",
+      numbers: "CC5678DD",
+      brand: "BMW",
+      model: "X5",
+      year: 2022,
+      color: "Black",
+    },
+  ],
   subscription: {
     tier: {
       id: "1",

@@ -25,7 +25,7 @@
 import { computed } from "vue";
 
 type Size = "Small" | "Medium" | "Big";
-type Mode = "Primary" | "Secondary" | "Muted";
+type Mode = "Primary" | "Secondary" | "Muted" | "Danger";
 type ButtonType = "button" | "submit";
 
 interface Props {
@@ -38,14 +38,11 @@ interface Props {
   onClick?: () => void;
 }
 
-const { size, mode, type, icon, text, disabled, onClick } = withDefaults(
-  defineProps<Props>(),
-  {
-    size: "Medium",
-    mode: "Primary",
-    type: "button",
-  }
-);
+const { size, mode, type } = withDefaults(defineProps<Props>(), {
+  size: "Medium",
+  mode: "Primary",
+  type: "button",
+});
 
 const sizeClasses = computed(() => {
   switch (size) {
@@ -84,13 +81,17 @@ const textClasses = computed(() => {
 });
 
 const modeClasses = computed(() => {
-  if (mode === "Primary") {
-    return "bg-black text-white hover:bg-gray-900";
-  } else if (mode === "Secondary") {
-    return "border border-black text-black hover:bg-gray-100";
-  } else if (mode === "Muted") {
-    return "bg-gray-200 text-black hover:bg-gray-300";
+  switch (mode) {
+    case "Primary":
+      return "bg-black text-white hover:bg-gray-900";
+    case "Secondary":
+      return "border border-black text-black hover:bg-gray-100";
+    case "Muted":
+      return "bg-gray-200 text-black hover:bg-gray-300";
+    case "Danger":
+      return "bg-red-600 text-white hover:bg-red-700";
+    default:
+      return "";
   }
-  return "";
 });
 </script>

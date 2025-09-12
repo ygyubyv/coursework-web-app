@@ -1,5 +1,14 @@
 export type Role = "user" | "guardian" | "admin";
 
+export interface Car {
+  id: string;
+  numbers: string;
+  brand: string;
+  model: string;
+  year: number;
+  color: string;
+}
+
 export type Tier = {
   id: string;
   name: string;
@@ -19,7 +28,7 @@ export type User = {
   email: string;
   phoneNumber: string;
   avatarUrl: string | null;
-  carNumbers: string | null;
+  cars: Car[]; // Зв'язок в бд один до багатьох
   roles: Role[];
   subscription: UserSubscription; // Зв'язок в бд один до одного
   createdAt: string;

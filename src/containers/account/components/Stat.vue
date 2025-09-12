@@ -4,12 +4,10 @@
     <span class="text-black">{{ value }}</span>
   </div>
 </template>
-
 <script setup lang="ts">
 interface Props {
   label: string;
   value: any;
 }
-
 defineProps<Props>();
 </script>

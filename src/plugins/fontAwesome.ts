@@ -23,6 +23,8 @@ import {
   faShieldAlt,
   faSave,
   faPlus,
+  faTrash,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
@@ -50,7 +52,9 @@ library.add(
   faShieldAlt,
   faChartLine,
   faSave,
-  faPlus
+  faPlus,
+  faTrash,
+  faChevronDown
 );
 
 export { FontAwesomeIcon };
