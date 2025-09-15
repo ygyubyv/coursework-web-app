@@ -1,0 +1,20 @@
+export interface Tier {
+  title: string;
+  description: string;
+  price: string;
+  active: boolean;
+}
+
+export interface PaymentMethod {
+  brand: string;
+  pan: string;
+  expires: string;
+}
+
+export interface Transaction {
+  id: string;
+  date: string | Date;
+  description: string;
+  amount: string;
+  status: "Success" | "Failed" | "Pending";
+}
