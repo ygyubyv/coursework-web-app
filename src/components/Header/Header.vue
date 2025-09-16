@@ -15,6 +15,7 @@
       <div class="flex items-center gap-6">
         <div class="hidden md:flex items-center gap-6">
           <RouterLink
+            v-if="isAuthenticated"
             to="/parkings"
             class="text-black font-medium hover:underline hover:text-gray-700 transition-colors duration-200"
           >
@@ -31,8 +32,8 @@
         <div class="flex items-center justify-center flex-shrink-0">
           <!-- IF Authenticated -->
           <Profile
-            v-if="isAuthenticated && DEFAULT_USER"
-            :user="DEFAULT_USER"
+            v-if="isAuthenticated && user"
+            :user="user"
             :body-links="profileMenuLinks.body"
             :footer-links="profileMenuLinks.footer"
             @logout="logout"
@@ -40,7 +41,7 @@
 
           <!-- IF Not -->
           <BaseButton
-            v-else
+            v-else-if="!isAuthenticated"
             mode="Primary"
             text="Увійти"
             icon="right-to-bracket"
@@ -56,9 +57,11 @@
 <script setup lang="ts">
 import Profile from "./Profile.vue";
 import BaseButton from "../Base/BaseButton.vue";
-import { DEFAULT_USER } from "@/constants";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 
-const isAuthenticated = true;
+const { login, logout } = useAuthStore();
+const { isAuthenticated, user } = storeToRefs(useAuthStore());
 
 const profileMenuLinks = {
   body: [
@@ -73,13 +76,5 @@ const profileMenuLinks = {
     { to: "/faq", text: "FAQ" },
     { to: "/contact", text: "Contact" },
   ],
-};
-
-const login = async () => {
-  console.log("login");
-};
-
-const logout = async () => {
-  console.log("Logout");
 };
 </script>

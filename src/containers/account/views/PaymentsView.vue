@@ -25,7 +25,7 @@
     </div>
 
     <LatestTransactions
-      :transactions="DEFAULT_USER.transactions.slice(-5).reverse()"
+      :transactions="user!.transactions.slice(-5).reverse()"
     />
 
     <Security />
@@ -39,5 +39,8 @@ import PaymentMethodCard from "../components/Payments/PaymentMethodCard.vue";
 import Security from "../components/Payments/Security.vue";
 import LatestTransactions from "../components/Payments/LatestTransactions.vue";
 import { paymentMethods, tiers } from "../data";
-import { DEFAULT_USER } from "@/constants";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
+const { user } = storeToRefs(useAuthStore());
 </script>

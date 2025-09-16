@@ -30,10 +30,13 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import Chart from "../components/Stats/Chart.vue";
-import { DEFAULT_USER } from "@/constants";
 import { getTimeBoundaries } from "@/utils/getTimeBoundaries";
 import { timeUnitsInMs } from "@/utils/timeUnitsInMs";
 import Overview from "../components/Stats/Overview.vue";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
+const { user } = storeToRefs(useAuthStore());
 
 const { monthAgo, yearAgo } = getTimeBoundaries();
 const { month } = timeUnitsInMs();
@@ -55,15 +58,15 @@ const selectedTab = ref<Range>("month");
 const filterChartData = computed(() => {
   switch (selectedTab.value) {
     case "month":
-      return DEFAULT_USER.transactions.filter(
+      return user.value!.transactions.filter(
         (t) => new Date(t.date).getTime() > monthAgo
       );
     case "quarter":
-      return DEFAULT_USER.transactions.filter(
+      return user.value!.transactions.filter(
         (t) => new Date(t.date).getTime() > Date.now() - 3 * month
       );
     case "year":
-      return DEFAULT_USER.transactions.filter(
+      return user.value!.transactions.filter(
         (t) => new Date(t.date).getTime() > yearAgo
       );
   }

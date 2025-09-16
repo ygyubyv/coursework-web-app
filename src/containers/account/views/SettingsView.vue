@@ -11,7 +11,7 @@
         class="flex flex-col md:flex-col-reverse lg:flex-row md:items-start gap-6"
       >
         <Avatar
-          :avatar-url="avatarPreview || DEFAULT_USER.avatarUrl"
+          :avatar-url="avatarPreview || user!.avatarUrl"
           @on-avatar-change="handleAvatarChange"
         />
 
@@ -90,13 +90,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
-import { DEFAULT_USER } from "@/constants";
+import { ref, reactive, computed, toRaw } from "vue";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
 import InputField from "../components/Settings/InputField.vue";
 import Avatar from "../components/Settings/Avatar.vue";
 import CarCard from "../components/Settings/CarCard.vue";
 import Actions from "../components/Settings/Actions.vue";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
+
+const { user } = storeToRefs(useAuthStore());
 
 const languages = [
   { label: "English", value: "en" },
@@ -104,22 +107,22 @@ const languages = [
 ];
 
 const initialForm = structuredClone({
-  name: DEFAULT_USER.name,
-  email: DEFAULT_USER.email,
-  phoneNumber: DEFAULT_USER.phoneNumber,
-  cars: DEFAULT_USER.cars,
+  name: toRaw(user.value!.name),
+  email: toRaw(user.value!.email),
+  phoneNumber: toRaw(user.value!.phoneNumber),
+  cars: toRaw(user.value!.cars),
 });
 
 const form = reactive({
-  name: DEFAULT_USER.name,
-  email: DEFAULT_USER.email,
-  phoneNumber: DEFAULT_USER.phoneNumber,
-  cars: [...DEFAULT_USER.cars],
+  name: user.value!.name,
+  email: user.value!.email,
+  phoneNumber: user.value!.phoneNumber,
+  cars: [...user.value!.cars],
 });
 
 const preferredLanguage = ref();
 
-const avatarPreview = ref<string | null>(DEFAULT_USER.avatarUrl);
+const avatarPreview = ref<string | null>(user.value!.avatarUrl);
 
 const hasChanges = computed(() => {
   return (
@@ -142,7 +145,13 @@ const deleteCar = (id: string) => {
 };
 
 const onCancel = () => {
-  console.log("Cancel");
+  form.name = initialForm.name;
+  form.email = initialForm.email;
+  form.phoneNumber = initialForm.phoneNumber;
+
+  form.cars.splice(0, form.cars.length, ...structuredClone(initialForm.cars));
+
+  avatarPreview.value = null;
 };
 
 const saveProfile = () => {

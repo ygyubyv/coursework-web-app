@@ -5,5 +5,8 @@ export default [
     path: "/book",
     name: "book",
     component: BookView,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
