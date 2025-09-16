@@ -25,6 +25,9 @@ import {
   faPlus,
   faTrash,
   faChevronDown,
+  faWallet,
+  faReceipt,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
@@ -54,7 +57,10 @@ library.add(
   faSave,
   faPlus,
   faTrash,
-  faChevronDown
+  faChevronDown,
+  faWallet,
+  faReceipt,
+  faTimesCircle
 );
 
 export { FontAwesomeIcon };

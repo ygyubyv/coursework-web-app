@@ -22,6 +22,14 @@ export type UserSubscription = {
   status: "active" | "expired" | "canceled";
 };
 
+export interface Transaction {
+  id: string;
+  date: string | Date;
+  description: string;
+  amount: number;
+  status: "Success" | "Failed" | "Pending";
+}
+
 export type User = {
   id: string;
   name: string;
@@ -31,5 +39,6 @@ export type User = {
   cars: Car[]; // Зв'язок в бд один до багатьох
   roles: Role[];
   subscription: UserSubscription; // Зв'язок в бд один до одного
+  transactions: Transaction[];
   createdAt: string;
 };
