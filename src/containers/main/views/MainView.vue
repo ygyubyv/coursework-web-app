@@ -32,6 +32,48 @@ import Tiers from "../components/Tiers.vue";
 import PaymentWays from "../components/PaymentWays.vue";
 import Contact from "../components/Contact.vue";
 import { useRouter } from "vue-router";
+import { useHead } from "@unhead/vue";
+import { APP_URL } from "@/config";
+
+useHead({
+  title: "Virodip",
+  titleTemplate: "%s | Main",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Discover the nearest available parking spots in real-time, reserve your space, and enjoy a seamless parking experience with our smart parking app.",
+    },
+    {
+      name: "keywords",
+      content:
+        "smart parking, parking app, reserve parking, real-time parking, parking spots, mobile parking, IoT parking",
+    },
+    {
+      name: "robots",
+      content: "index, follow",
+    },
+    {
+      property: "og:title",
+      content: "Smart Parking — Find and Reserve Parking Spots Instantly",
+    },
+    {
+      property: "og:description",
+      content:
+        "Discover the nearest available parking spots in real-time, reserve your space, and enjoy a seamless parking experience with our smart parking app.",
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: APP_URL,
+    },
+  ],
+});
 
 const howItWorksRef = useTemplateRef("howItWorks");
 

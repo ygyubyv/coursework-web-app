@@ -32,6 +32,20 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from "@unhead/vue";
+
+useHead({
+  title: "Virodip",
+  titleTemplate: "%s | Account",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Manage your Virodip account, view statistics, update personal information, and configure security settings.",
+    },
+  ],
+});
+
 const links = [
   {
     to: "/account/profile",

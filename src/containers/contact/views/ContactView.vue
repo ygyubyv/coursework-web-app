@@ -53,6 +53,45 @@ import BaseButton from "@/components/Base/BaseButton.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseTextarea from "@/components/Base/BaseTextarea.vue";
 import { reactive } from "vue";
+import { useHead } from "@unhead/vue";
+import { APP_URL } from "@/config";
+
+useHead({
+  title: "Virodip",
+  titleTemplate: "%s | Contact",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Contact Virodip for support or inquiries. Fill out the form and our team will get back to you promptly regarding our smart parking service.",
+    },
+    {
+      name: "keywords",
+      content:
+        "smart parking, contact, support, inquiries, parking app, parking service, real-time parking",
+    },
+    {
+      property: "og:title",
+      content: "Contact Virodip — Smart Parking Service",
+    },
+    {
+      property: "og:description",
+      content:
+        "Contact Virodip for support or inquiries. Fill out the form and our team will get back to you promptly regarding our smart parking service.",
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: `${APP_URL}/contact`,
+    },
+  ],
+});
+
 const form = reactive({
   name: "",
   email: "",
@@ -64,6 +103,8 @@ const onSubmit = () => {
 };
 
 const onClear = () => {
-  (form.name = ""), (form.email = ""), (form.message = "");
+  form.name = "";
+  form.email = "";
+  form.message = "";
 };
 </script>

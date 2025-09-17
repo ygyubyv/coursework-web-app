@@ -4,3 +4,5 @@ export const azureConfig = {
   userFlow: import.meta.env.VITE_AZURE_USER_FLOW,
   redirectUri: import.meta.env.VITE_AZURE_REDIRECT_URI,
 };
+
+export const APP_URL = import.meta.env.VITE_APP_URL;
