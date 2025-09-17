@@ -2,7 +2,7 @@
   <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
     <BaseButton
       text="Cancel"
-      icon="save"
+      icon="xmark"
       mode="Secondary"
       class="w-full sm:w-auto"
       v-if="hasChanges"

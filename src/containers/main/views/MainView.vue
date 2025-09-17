@@ -31,8 +31,11 @@ import HowItWorks from "../components/HowItWorks.vue";
 import Tiers from "../components/Tiers.vue";
 import PaymentWays from "../components/PaymentWays.vue";
 import Contact from "../components/Contact.vue";
+import { useRouter } from "vue-router";
 
 const howItWorksRef = useTemplateRef("howItWorks");
+
+const router = useRouter();
 
 const learnMore = () => {
   if (howItWorksRef.value) {
@@ -48,6 +51,6 @@ const learnMore = () => {
 };
 
 const handleSelectPlan = (id: string) => {
-  console.log(id);
+  router.push("/account/payments");
 };
 </script>

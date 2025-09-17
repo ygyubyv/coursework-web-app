@@ -32,7 +32,8 @@ router.beforeEach(async (to, _, next) => {
   try {
     const authStore = useAuthStore();
     const { initAuth, getUser } = authStore;
-    const { isAuthenticated, isInitialized, user } = storeToRefs(authStore);
+    const { isAuthenticated, isInitialized, user, authModalIsVisible } =
+      storeToRefs(authStore);
 
     isLoading.value = true;
 
@@ -44,6 +45,7 @@ router.beforeEach(async (to, _, next) => {
       await getUser();
 
       if (!user.value) {
+        authModalIsVisible.value = true;
         return next({ name: "main" });
       }
     }

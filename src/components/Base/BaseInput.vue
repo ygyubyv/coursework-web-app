@@ -6,15 +6,18 @@
     :placeholder="placeholder"
     v-bind="$attrs"
     :class="[
-      'w-full max-w-xs sm:max-w-full rounded-md border px-4 py-2 sm:px-5 sm:py-2.5  text-sm sm:text-base transition-colors duration-200',
+      'w-full max-w-xs sm:max-w-full rounded-md border transition-colors duration-200 focus:outline-none',
+      sizeClasses,
       error
-        ? 'border-red-500 bg-red-50 text-black focus:ring-red-400 focus:outline-none'
-        : 'border-gray-300  text-black focus:border-black focus:ring-black/30',
+        ? 'border-red-500 bg-red-50 text-black focus:ring-red-400'
+        : 'border-gray-300 text-black focus:border-black focus:ring-black/30',
     ]"
   />
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+
 type InputType =
   | "text"
   | "password"
@@ -30,19 +33,37 @@ type InputType =
   | "time"
   | "color";
 
+type Size = "Small" | "Medium" | "Big";
+
 interface Props {
   placeholder: string;
   id: string;
   type?: InputType;
   error?: boolean;
+  size?: Size;
 }
 
-defineProps<Props>();
+const { size } = withDefaults(defineProps<Props>(), {
+  size: "Medium",
+});
+
 defineOptions({
   inheritAttrs: false,
 });
 
 const inputValue = defineModel();
+
+const sizeClasses = computed(() => {
+  switch (size) {
+    case "Small":
+      return "px-3 py-1.5 text-xs";
+    case "Big":
+      return "px-6 py-3 text-base";
+    case "Medium":
+    default:
+      return "px-4 py-2 text-sm";
+  }
+});
 </script>
 
 <style scoped>

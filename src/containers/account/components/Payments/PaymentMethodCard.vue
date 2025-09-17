@@ -4,12 +4,13 @@
   >
     <div>
       <p class="font-medium text-gray-800">
-        {{ paymentMethod.brand }} {{ maskPan(paymentMethod.pan) }}
+        {{ detectCardBrand(String(paymentMethod.pan)) }}
+        {{ maskPan(paymentMethod.pan) }}
       </p>
       <p class="text-sm text-gray-500">Expires {{ paymentMethod.expires }}</p>
     </div>
     <button
-      @click="emit('onDelete')"
+      @click="emit('onDelete', paymentMethod.id)"
       class="absolute top-3 right-3 text-gray-400 hover:scale-125 cursor-pointer"
       aria-label="Remove card"
     >
@@ -21,6 +22,7 @@
 <script setup lang="ts">
 import { maskPan } from "@/utils/maskPan";
 import type { PaymentMethod } from "../../types";
+import { detectCardBrand } from "@/utils/detectCardBrand";
 
 interface Props {
   paymentMethod: PaymentMethod;
@@ -28,6 +30,6 @@ interface Props {
 
 defineProps<Props>();
 const emit = defineEmits<{
-  (e: "onDelete"): void;
+  (e: "onDelete", id: string): void;
 }>();
 </script>

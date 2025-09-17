@@ -6,7 +6,7 @@ export interface Tier {
 }
 
 export interface PaymentMethod {
-  brand: string;
+  id: string;
   pan: string;
   expires: string;
 }

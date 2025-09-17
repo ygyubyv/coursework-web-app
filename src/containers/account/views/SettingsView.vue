@@ -1,4 +1,71 @@
 <template>
+  <BaseModal
+    v-if="addCarModalIsVisible"
+    @close="addCarModalIsVisible = false"
+    @submit="handleAddCar"
+    title="Add New Car"
+    submit-text="Add Car"
+  >
+    <template #default>
+      <p class="text-gray-700 mb-2">Enter the details of your car below:</p>
+      <div class="flex flex-col gap-3">
+        <BaseInput
+          v-model="newCar.numbers"
+          placeholder="License Plate Number"
+          id="car-numbers"
+          type="text"
+          size="Medium"
+        />
+        <BaseInput
+          v-model="newCar.brand"
+          placeholder="Brand"
+          id="car-brand"
+          type="text"
+          size="Medium"
+        />
+        <BaseInput
+          v-model="newCar.model"
+          placeholder="Model"
+          id="car-model"
+          type="text"
+          size="Medium"
+        />
+        <BaseInput
+          v-model="newCar.year"
+          placeholder="Year"
+          id="car-year"
+          type="number"
+          size="Medium"
+        />
+        <BaseInput
+          v-model="newCar.color"
+          placeholder="Color"
+          id="car-color"
+          type="text"
+          size="Medium"
+        />
+      </div>
+    </template>
+  </BaseModal>
+
+  <BaseModal
+    v-if="deleteAccountModalIsVisible"
+    @submit="handleDeleteAccount"
+    @close="deleteAccountModalIsVisible = false"
+    title="Delete Account"
+    message="Are you sure you want to permanently delete your account? All your data will be lost and this action cannot be undone."
+    submit-text="Delete Account"
+  />
+
+  <BaseModal
+    v-if="deleteCarModalIsVisible"
+    @close="deleteCarModalIsVisible = false"
+    @submit="confirmDeleteCar"
+    title="Confirm Car Deletion"
+    message="Are you sure you want to permanently delete this car? This action cannot be undone."
+    submit-text="Delete Car"
+  />
+
   <section class="py-6">
     <div
       class="max-w-3xl mx-auto bg-white rounded-xl shadow-sm p-6 space-y-6 mb-8"
@@ -55,7 +122,7 @@
             v-for="car in form.cars"
             :key="car.id"
             :car="car"
-            @on-car-delete="deleteCar"
+            @on-car-delete="handleDeleteCar"
           />
         </div>
       </div>
@@ -81,24 +148,28 @@
 
     <Actions
       :has-changes="hasChanges"
-      @add-car="addCar"
+      @add-car="addCarModalIsVisible = true"
       @cancel="onCancel"
       @save-profile="saveProfile"
-      @delete-account="deleteAccount"
+      @delete-account="deleteAccountModalIsVisible = true"
     />
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, toRaw } from "vue";
+import { ref, reactive, computed } from "vue";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
+import BaseInput from "@/components/Base/BaseInput.vue";
 import InputField from "../components/Settings/InputField.vue";
 import Avatar from "../components/Settings/Avatar.vue";
 import CarCard from "../components/Settings/CarCard.vue";
 import Actions from "../components/Settings/Actions.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
+import BaseModal from "@/components/Base/BaseModal.vue";
+import type { Car } from "@/types/User";
 
+const { logout } = useAuthStore();
 const { user } = storeToRefs(useAuthStore());
 
 const languages = [
@@ -106,11 +177,11 @@ const languages = [
   { label: "Ukrainian", value: "ukr" },
 ];
 
-const initialForm = structuredClone({
-  name: toRaw(user.value!.name),
-  email: toRaw(user.value!.email),
-  phoneNumber: toRaw(user.value!.phoneNumber),
-  cars: toRaw(user.value!.cars),
+const initialForm = reactive({
+  name: user.value!.name,
+  email: user.value!.email,
+  phoneNumber: user.value!.phoneNumber,
+  cars: user.value!.cars.map((car) => ({ ...car })),
 });
 
 const form = reactive({
@@ -120,14 +191,27 @@ const form = reactive({
   cars: [...user.value!.cars],
 });
 
-const preferredLanguage = ref();
+const newCar = reactive<Car>({
+  id: "",
+  numbers: "",
+  brand: "",
+  model: "",
+  year: new Date().getFullYear(),
+  color: "",
+});
 
+const addCarModalIsVisible = ref(false);
+const deleteCarModalIsVisible = ref(false);
+const deleteAccountModalIsVisible = ref(false);
+
+const deleteCarId = ref<string | null>(null);
+const preferredLanguage = ref();
 const avatarPreview = ref<string | null>(user.value!.avatarUrl);
 
 const hasChanges = computed(() => {
   return (
     JSON.stringify(initialForm) !== JSON.stringify(form) ||
-    !!avatarPreview.value
+    avatarPreview.value !== user.value!.avatarUrl
   );
 });
 
@@ -135,13 +219,35 @@ const handleAvatarChange = (file: File) => {
   avatarPreview.value = URL.createObjectURL(file);
 };
 
-const addCar = () => {
-  console.log("Add car");
+const handleAddCar = () => {
+  form.cars.push({
+    ...newCar,
+    id: String(Date.now()),
+  });
+
+  newCar.id = "";
+  newCar.numbers = "";
+  newCar.brand = "";
+  newCar.model = "";
+  newCar.color = "";
+
+  addCarModalIsVisible.value = false;
 };
 
-const deleteCar = (id: string) => {
-  const carIndex = form.cars.findIndex((c) => c.id === id);
-  form.cars.splice(carIndex, 1);
+const handleDeleteCar = (id: string) => {
+  deleteCarModalIsVisible.value = true;
+  deleteCarId.value = id;
+};
+
+const confirmDeleteCar = () => {
+  const targetIndex = form.cars.findIndex((c) => c.id === deleteCarId.value);
+
+  if (targetIndex === -1) {
+    return;
+  }
+
+  form.cars.splice(targetIndex, 1);
+  deleteCarModalIsVisible.value = false;
 };
 
 const onCancel = () => {
@@ -149,16 +255,37 @@ const onCancel = () => {
   form.email = initialForm.email;
   form.phoneNumber = initialForm.phoneNumber;
 
-  form.cars.splice(0, form.cars.length, ...structuredClone(initialForm.cars));
+  form.cars.splice(
+    0,
+    form.cars.length,
+    ...initialForm.cars.map((car) => ({ ...car }))
+  );
 
-  avatarPreview.value = null;
+  avatarPreview.value = user.value!.avatarUrl;
 };
 
 const saveProfile = () => {
-  console.log("Saved");
+  user.value!.name = form.name;
+  user.value!.cars = form.cars;
+  user.value!.email = form.email;
+  user.value!.phoneNumber = form.phoneNumber;
+  user.value!.avatarUrl = avatarPreview.value;
+
+  initialForm.name = form.name;
+  initialForm.email = form.email;
+  initialForm.phoneNumber = form.phoneNumber;
+  initialForm.cars.splice(
+    0,
+    initialForm.cars.length,
+    ...form.cars.map((car) => ({ ...car }))
+  );
 };
 
-const deleteAccount = () => {
-  console.log("Account deleted!");
+const handleDeleteAccount = async () => {
+  try {
+    await logout();
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>

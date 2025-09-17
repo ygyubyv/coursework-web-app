@@ -17,12 +17,12 @@ export const tiers: Tier[] = [
 
 export const paymentMethods: PaymentMethod[] = [
   {
-    brand: "VISA",
+    id: "1",
     expires: "07/28",
     pan: "4417394756294737",
   },
   {
-    brand: "Master Card",
+    id: "2",
     expires: "05/27",
     pan: "4417394756295716",
   },

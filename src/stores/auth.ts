@@ -8,6 +8,7 @@ import { DEFAULT_USER } from "@/constants";
 export const useAuthStore = defineStore("auth", () => {
   const isAuthenticated = ref(false);
   const isInitialized = ref(false);
+  const authModalIsVisible = ref(false);
   const bearerToken = ref("");
   const user = ref<User | null>(null);
 
@@ -96,6 +97,7 @@ export const useAuthStore = defineStore("auth", () => {
     bearerToken,
     isAdmin,
     user,
+    authModalIsVisible,
     login,
     logout,
     initAuth,
