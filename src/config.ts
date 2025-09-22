@@ -6,3 +6,4 @@ export const azureConfig = {
 };
 
 export const APP_URL = import.meta.env.VITE_APP_URL;
+export const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;

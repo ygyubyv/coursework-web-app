@@ -1,7 +1,5 @@
 <template>
-  <footer
-    class="bg-white text-black border-t border-gray-200 shadow-inner mt-12"
-  >
+  <footer class="bg-white text-black border-t border-gray-200 shadow-inner">
     <div
       class="max-w-7xl mx-auto px-6 lg:px-8 py-8 flex flex-col md:flex-row justify-between gap-6"
     >
