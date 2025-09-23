@@ -4,17 +4,19 @@
       v-for="parking in parkings"
       :parking="parking"
       :key="parking.id"
+      :coordinates="coordinates"
       @on-book="emit('onBook', $event)"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Parking } from "../types";
+import type { Coordinates, Parking } from "../types";
 import ParkingCard from "./ParkingCard.vue";
 
 interface Props {
   parkings: Parking[];
+  coordinates: Coordinates | null;
 }
 
 defineProps<Props>();
