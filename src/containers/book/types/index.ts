@@ -5,18 +5,6 @@ export interface Coordinates {
   lng: number;
 }
 
-export interface Parking {
-  id: string;
-  name: string;
-  address: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-  availableSpots: number;
-  totalSpots: number;
-}
-
 export interface Option {
   label: string;
   value: string | number | boolean;

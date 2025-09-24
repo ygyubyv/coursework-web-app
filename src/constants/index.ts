@@ -1,8 +1,60 @@
-import type { Transaction, User } from "@/types/User";
+import type { Parking, Transaction, User } from "@/types/User";
 
 export const ANDROIN_APP_URL = "https://www.google.com/?hl=uk";
 export const IOS_APP_URL = "https://www.google.com/?hl=uk";
 export const DEFAULT_AVATAR = "/src/assets/images/no-avatar-black.svg";
+
+export const parkings: Parking[] = [
+  {
+    id: "1",
+    name: "Central Parking",
+    address: "10 Soborna St, Lutsk",
+    coordinates: { lat: 50.4794, lng: 26.0 },
+    availableSpots: 5,
+    totalSpots: 20,
+  },
+  {
+    id: "2",
+    name: "Southern Parking",
+    address: "45 Bohdana Khmelnytskoho St, Lutsk",
+    coordinates: { lat: 50.4755, lng: 25.9625 },
+    availableSpots: 3,
+    totalSpots: 15,
+  },
+  {
+    id: "3",
+    name: "Western Parking",
+    address: "12 Myru Ave, Lutsk",
+    coordinates: { lat: 50.482, lng: 25.9768 },
+    availableSpots: 6,
+    totalSpots: 25,
+  },
+
+  {
+    id: "4",
+    name: "Rivne City Center Parking",
+    address: "1 Soborna St, Rivne",
+    coordinates: { lat: 50.7392, lng: 26.34 },
+    availableSpots: 7,
+    totalSpots: 30,
+  },
+  {
+    id: "5",
+    name: "Rivne North Parking",
+    address: "22 Kyivska St, Rivne",
+    coordinates: { lat: 50.742, lng: 26.351 },
+    availableSpots: 4,
+    totalSpots: 18,
+  },
+  {
+    id: "6",
+    name: "Rivne West Parking",
+    address: "15 Stepana Bandery St, Rivne",
+    coordinates: { lat: 50.7365, lng: 26.3405 },
+    availableSpots: 10,
+    totalSpots: 40,
+  },
+];
 
 export const transactions: Transaction[] = [
   {
@@ -394,4 +446,75 @@ export const DEFAULT_USER: User = {
     endDate: "2025-06-01T09:00:00Z",
     status: "active",
   },
+  bookings: [
+    {
+      id: "1",
+      status: "active",
+      date: "2025-09-23",
+      start: "09:00",
+      end: "12:00",
+      car: {
+        id: "1",
+        numbers: "AA1234BB",
+        brand: "Toyota",
+        model: "Camry",
+        year: 2020,
+        color: "White",
+      },
+      parking: {
+        id: "1",
+        name: "Central Parking",
+        address: "10 Soborna St, Lutsk",
+        availableSpots: 5,
+        totalSpots: 20,
+        coordinates: { lat: 50.4794, lng: 26.0 },
+      },
+    },
+    {
+      id: "2",
+      status: "completed",
+      date: "2025-09-22",
+      start: "14:00",
+      end: "16:00",
+      car: {
+        id: "2",
+        numbers: "CC5678DD",
+        brand: "BMW",
+        model: "X5",
+        year: 2022,
+        color: "Black",
+      },
+      parking: {
+        id: "2",
+        name: "East Side Parking",
+        address: "45 Bohdana Khmelnytskoho St, Lutsk",
+        availableSpots: 5,
+        totalSpots: 20,
+        coordinates: { lat: 50.454, lng: 30.527 },
+      },
+    },
+    {
+      id: "3",
+      status: "active",
+      date: "2025-09-24",
+      start: "08:00",
+      end: "10:00",
+      car: {
+        id: "2",
+        numbers: "CC5678DD",
+        brand: "BMW",
+        model: "X5",
+        year: 2022,
+        color: "Black",
+      },
+      parking: {
+        id: "3",
+        name: "West End Parking",
+        address: "12 Myru Ave, Lutsk",
+        availableSpots: 5,
+        totalSpots: 20,
+        coordinates: { lat: 50.448, lng: 30.519 },
+      },
+    },
+  ],
 };

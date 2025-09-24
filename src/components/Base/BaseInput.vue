@@ -6,7 +6,7 @@
     :placeholder="placeholder"
     v-bind="$attrs"
     :class="[
-      'w-full max-w-xs sm:max-w-full rounded-md border transition-colors duration-200 focus:outline-none',
+      'w-full  sm:max-w-full rounded-md border transition-colors duration-200 focus:outline-none',
       sizeClasses,
       error
         ? 'border-red-500 bg-red-50 text-black focus:ring-red-400'

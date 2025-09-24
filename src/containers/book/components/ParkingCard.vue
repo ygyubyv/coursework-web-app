@@ -44,8 +44,9 @@
 
 <script setup lang="ts">
 import BaseButton from "@/components/Base/BaseButton.vue";
-import type { Coordinates, Parking } from "../types";
+import type { Coordinates } from "../types";
 import { calculateDistance, formatDistance } from "@/utils/calculateDistance";
+import type { Parking } from "@/types/User";
 
 interface Props {
   parking: Parking;

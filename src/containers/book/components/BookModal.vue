@@ -67,9 +67,9 @@ import { reactive, ref } from "vue";
 import BaseSlideModal from "@/components/Base/BaseSlideModal.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseButton from "@/components/Base/BaseButton.vue";
-import type { BookForm, Parking } from "../types";
+import type { BookForm } from "../types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
-import type { User } from "@/types/User";
+import type { Parking, User } from "@/types/User";
 
 interface Props {
   user: User;

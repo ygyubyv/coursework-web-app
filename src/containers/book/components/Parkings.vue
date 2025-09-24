@@ -11,7 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Coordinates, Parking } from "../types";
+import type { Parking } from "@/types/User";
+import type { Coordinates } from "../types";
 import ParkingCard from "./ParkingCard.vue";
 
 interface Props {

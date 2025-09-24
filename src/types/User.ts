@@ -1,5 +1,27 @@
 export type Role = "user" | "guardian" | "admin";
 
+export interface Booking {
+  id: string;
+  status: "active" | "completed";
+  date: string;
+  start: string;
+  end: string;
+  car: Car; // звязок
+  parking: Parking; // звязок
+}
+
+export interface Parking {
+  id: string;
+  name: string;
+  address: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
+  availableSpots: number;
+  totalSpots: number;
+}
+
 export interface Car {
   id: string;
   numbers: string;
@@ -41,4 +63,5 @@ export type User = {
   subscription: UserSubscription; // Зв'язок в бд один до одного
   transactions: Transaction[];
   createdAt: string;
+  bookings: Booking[]; // звязок
 };
