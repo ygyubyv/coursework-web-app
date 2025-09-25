@@ -25,71 +25,77 @@
     </CustomMarker>
 
     <template v-if="parkings">
-      <CustomMarker
-        v-for="parking in parkings"
-        :key="parking.id"
-        :options="{
-          position: parking.coordinates,
-          anchorPoint: 'TOP_CENTER',
-        }"
-      >
-        <div
-          class="flex flex-col items-center cursor-pointer"
-          @click="toggleParkingInfo(parking.id)"
+      <MarkerCluster :options="{ renderer: customRenderer }">
+        <CustomMarker
+          v-for="parking in parkings"
+          :key="parking.id"
+          :options="{
+            position: parking.coordinates,
+            anchorPoint: 'TOP_CENTER',
+          }"
         >
           <div
-            class="text-center text-gray-900 font-medium text-sm sm:text-base"
+            class="flex flex-col items-center cursor-pointer"
+            @click="toggleParkingInfo(parking.id)"
           >
-            {{ parking.name }}
-          </div>
-          <img
-            src="/car-pin.svg"
-            alt="parking-pin"
-            class="w-12 h-12 hover:scale-110 transition-transform"
-          />
-
-          <transition name="fade">
             <div
-              v-if="activeParking === parking.id"
-              class="absolute top-full mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-sm text-gray-800 z-50"
-              style="left: 50%; transform: translateX(-50%)"
+              class="text-center text-gray-900 font-medium text-sm sm:text-base"
             >
-              <div class="font-semibold text-gray-900 mb-1">
-                {{ parking.name }}
-              </div>
-              <div class="mb-1">
-                Distance:
-                <span class="font-medium">
-                  {{
-                    formatDistance(
-                      calculateDistance(
-                        coordinates.lat,
-                        coordinates.lng,
-                        parking.coordinates.lat,
-                        parking.coordinates.lng
-                      )
-                    )
-                  }}
-                </span>
-              </div>
-              <div class="mb-2">
-                Available spots:
-                <span class="font-medium">{{ parking.availableSpots }}</span>
-              </div>
-              <BaseButton
-                mode="Primary"
-                text="Follow"
-                :onClick="
-                  () =>
-                    followMarker(coordinates, parking.coordinates, parking.name)
-                "
-                size="Small"
-                class="w-full"
-              />
+              {{ parking.name }}
             </div>
-          </transition>
-        </div>
-      </CustomMarker>
+            <img
+              src="/car-pin.svg"
+              alt="parking-pin"
+              class="w-12 h-12 hover:scale-110 transition-transform"
+            />
+
+            <transition name="fade">
+              <div
+                v-if="activeParking === parking.id"
+                class="absolute top-full mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-sm text-gray-800 z-50"
+                style="left: 50%; transform: translateX(-50%)"
+              >
+                <div class="font-semibold text-gray-900 mb-1">
+                  {{ parking.name }}
+                </div>
+                <div class="mb-1">
+                  Distance:
+                  <span class="font-medium">
+                    {{
+                      formatDistance(
+                        calculateDistance(
+                          coordinates.lat,
+                          coordinates.lng,
+                          parking.coordinates.lat,
+                          parking.coordinates.lng
+                        )
+                      )
+                    }}
+                  </span>
+                </div>
+                <div class="mb-2">
+                  Available spots:
+                  <span class="font-medium">{{ parking.availableSpots }}</span>
+                </div>
+                <BaseButton
+                  mode="Primary"
+                  text="Follow"
+                  :onClick="
+                    () =>
+                      followMarker(
+                        coordinates,
+                        parking.coordinates,
+                        parking.name
+                      )
+                  "
+                  size="Small"
+                  class="w-full"
+                />
+              </div>
+            </transition>
+          </div>
+        </CustomMarker>
+      </MarkerCluster>
 
       <div
         v-if="currentRoute"
@@ -112,7 +118,7 @@
 </template>
 
 <script setup lang="ts">
-import { GoogleMap, CustomMarker } from "vue3-google-map";
+import { GoogleMap, CustomMarker, MarkerCluster } from "vue3-google-map";
 import BaseButton from "@/components/Base/BaseButton.vue";
 import { GOOGLE_MAPS_API_KEY } from "@/config";
 import type { Coordinates } from "@/types";
@@ -132,6 +138,7 @@ const {
   mapStyle,
   currentRoute,
   activeParking,
+  customRenderer,
   followMarker,
   toggleParkingInfo,
   clearDestination,

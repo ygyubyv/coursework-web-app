@@ -1,5 +1,6 @@
 import type { Coordinates } from "@/types";
 import { onBeforeUnmount, onMounted, ref, useTemplateRef } from "vue";
+import type { Renderer } from "@googlemaps/markerclusterer";
 
 interface Destination {
   distance: string;
@@ -21,6 +22,26 @@ export const useMap = () => {
   const directionsRenderer = ref(null);
   const currentRoute = ref<Destination | null>(null);
   const activeParking = ref<string | null>(null);
+
+  const customRenderer: Renderer = {
+    render: ({ count, position }) => {
+      // @ts-ignore
+      return new google.maps.Marker({
+        position,
+        icon: {
+          url: "/car-pin.svg",
+          // @ts-ignore
+          scaledSize: new google.maps.Size(48, 48),
+        },
+        label: {
+          text: String(count),
+          color: "#d61125",
+          fontSize: "16px",
+          fontWeight: "bold",
+        },
+      });
+    },
+  };
 
   const toggleParkingInfo = (id: string) => {
     activeParking.value = activeParking.value === id ? null : id;
@@ -161,6 +182,7 @@ export const useMap = () => {
     currentRoute,
     activeParking,
     directionsRenderer,
+    customRenderer,
     toggleParkingInfo,
     followMarker,
     clearDestination,
