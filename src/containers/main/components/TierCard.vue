@@ -12,7 +12,7 @@
     <h3 class="text-xl font-semibold text-gray-900">{{ tier.plan }}</h3>
     <p class="mt-2 text-gray-500">{{ tier.description }}</p>
     <p class="mt-6 text-4xl font-bold text-gray-900">
-      $ {{ tier.price }}<span class="text-lg">/mo</span>
+      $ {{ tier.price }}<span class="text-lg">{{ $t("pricing.per_mo") }}</span>
     </p>
     <ul class="mt-6 space-y-3 text-sm text-gray-600 flex-1">
       <li

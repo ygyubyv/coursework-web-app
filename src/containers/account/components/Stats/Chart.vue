@@ -22,6 +22,7 @@ import type { Transaction } from "../../types";
 import { formatToYYYYMMDD } from "@/utils/formatToYYYYMMDD";
 
 interface Props {
+  label: string;
   transactions: Transaction[];
 }
 
@@ -44,7 +45,7 @@ const chartData = computed(() => {
     ),
     datasets: [
       {
-        label: "Spent",
+        label: props.label,
         data: props.transactions.map((t) => t.amount),
         fill: false,
         borderColor: "#364153",
@@ -63,7 +64,7 @@ const chartOptions = {
   scales: {
     x: {
       ticks: {
-        maxTicksLimit: window.innerWidth < 640 ? 4 : 12,
+        maxTicksLimit: window.innerWidth < 640 ? 6 : 12,
       },
     },
     y: {

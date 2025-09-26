@@ -25,7 +25,9 @@
           />
           <div class="pb-1">
             <h2 class="font-semibold text-black">{{ user.name }}</h2>
-            <p class="text-sm text-black cursor-pointer">View profile</p>
+            <p class="text-sm text-black cursor-pointer">
+              {{ $t("view_profile") }}
+            </p>
           </div>
         </RouterLink>
 
@@ -52,7 +54,7 @@
               :icon="['fas', 'right-from-bracket']"
               class="w-5 h-5 text-black"
             />
-            <span>Sign out</span>
+            <span>{{ $t("buttons.sign_out") }}</span>
             <span class="text-xs text-black ml-auto">{{
               maskEmail(user.email)
             }}</span>

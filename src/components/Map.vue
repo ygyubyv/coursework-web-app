@@ -14,7 +14,7 @@
     <CustomMarker v-if="mePinIsVisible" :options="{ position: coordinates }">
       <div class="flex flex-col items-center">
         <div class="text-center text-gray-900 font-medium text-sm sm:text-base">
-          Me
+          {{ $t("map.my_location") }}
         </div>
         <img
           src="/user-pin.svg"
@@ -59,7 +59,7 @@
                   {{ parking.name }}
                 </div>
                 <div class="mb-1">
-                  Distance:
+                  {{ $t("distance") }}:
                   <span class="font-medium">
                     {{
                       formatDistance(
@@ -74,12 +74,12 @@
                   </span>
                 </div>
                 <div class="mb-2">
-                  Available spots:
+                  {{ $t("parkings.available_spots") }}:
                   <span class="font-medium">{{ parking.availableSpots }}</span>
                 </div>
                 <BaseButton
                   mode="Primary"
-                  text="Follow"
+                  :text="$t('buttons.follow')"
                   :onClick="
                     () =>
                       followMarker(

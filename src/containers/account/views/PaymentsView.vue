@@ -3,36 +3,36 @@
     v-if="deleteCardModalIsVisible"
     @close="deleteCardModalIsVisible = false"
     @submit="confirmCardDelete"
-    title="Confirm Card Deletion"
-    message="Are you sure you want to permanently delete this payment method? This action cannot be undone."
-    submit-text="Delete Card"
+    :title="$t('modals.delete_card.title')"
+    :message="$t('modals.delete_card.message')"
+    :submit-text="$t('modals.delete_card.submit_text')"
   />
 
   <BaseModal
     v-if="addCardModalIsVisible"
     @close="addCardModalIsVisible = false"
     @submit="handleCardAdd"
-    title="Add New Payment Method"
-    message="Enter your card details below to add a new payment method."
-    submit-text="Add Card"
+    :title="$t('modals.add_card.title')"
+    :message="$t('modals.add_card.message')"
+    :submit-text="$t('modals.add_card.submit_text')"
   >
     <template #default>
       <BaseInput
         v-model="newCard.pan"
-        placeholder="Card Number"
+        :placeholder="$t('forms.fields.card_number.placeholder')"
         id="card-number"
         type="number"
       />
       <div class="flex gap-2">
         <BaseInput
           v-model="newCard.expMonth"
-          placeholder="MM"
+          :placeholder="$t('forms.fields.exp_month.placeholder')"
           id="exp-month"
           type="number"
         />
         <BaseInput
           v-model="newCard.expYear"
-          placeholder="YY"
+          :placeholder="$t('forms.fields.exp_year.placeholder')"
           id="exp-year"
           type="number"
         />
@@ -41,14 +41,18 @@
   </BaseModal>
 
   <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 space-y-8">
-    <h2 class="text-2xl font-bold text-black">Payments & Billing</h2>
+    <h2 class="text-2xl font-bold text-black">
+      {{ $t("views.account.payments.title") }}
+    </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <TierCard v-for="tier in tiers" :tier="tier" :key="tier.title" />
     </div>
 
     <div class="space-y-5">
-      <h3 class="font-semibold text-xl">Payment Methods</h3>
+      <h3 class="font-semibold text-xl">
+        {{ $t("views.account.payments.payment_methods") }}
+      </h3>
 
       <div
         class="flex flex-col gap-2"
@@ -63,11 +67,12 @@
       </div>
 
       <div v-else>
-        <h2>No payment methods added</h2>
+        <h2>{{ $t("views.account.payments.no_payment_methods") }}</h2>
       </div>
 
       <BaseButton
-        text="Add Payment Method"
+        :text="$t('buttons.add_payment_method')"
+        icon="plus"
         mode="Secondary"
         class="justify-self-end"
         :onClick="() => (addCardModalIsVisible = true)"
@@ -103,15 +108,15 @@ interface NewCard {
 
 const { user } = storeToRefs(useAuthStore());
 
+const deleteCardId = ref<string | null>(null);
+const deleteCardModalIsVisible = ref(false);
+const addCardModalIsVisible = ref(false);
+
 const newCard = reactive<NewCard>({
   pan: null,
   expMonth: null,
   expYear: null,
 });
-const addCardModalIsVisible = ref(false);
-
-const deleteCardId = ref<string | null>(null);
-const deleteCardModalIsVisible = ref(false);
 
 const handleCardAdd = () => {
   paymentMethods.push({

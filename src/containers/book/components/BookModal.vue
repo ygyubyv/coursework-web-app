@@ -2,53 +2,63 @@
   <BaseSlideModal @on-close="emit('onClose')">
     <template #default>
       <div class="space-y-5">
-        <h2 class="text-xl font-semibold text-gray-900">Book Parking</h2>
+        <h2 class="text-xl font-semibold text-gray-900">
+          {{ $t("modals.book_parking.title") }}
+        </h2>
 
         <div class="flex justify-between text-sm">
-          <p class="font-medium text-gray-800">Station: {{ parking.name }}</p>
+          <p class="font-medium text-gray-800">
+            {{ $t("station") }}: {{ parking.name }}
+          </p>
           <p class="text-gray-600">
-            Available spots: {{ parking.availableSpots }}
+            {{ $t("parkings.available_spots") }}: {{ parking.availableSpots }}
           </p>
         </div>
 
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">Date & Time</label>
+          <label class="text-sm font-medium text-gray-700">{{
+            $t("forms.fields.date_time.label")
+          }}</label>
           <BaseInput
             type="date"
-            placeholder="Date & Time"
+            :placeholder="$t('forms.fields.placeholder')"
             id="book-date"
             v-model="form.date"
           />
         </div>
 
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">Start Time</label>
+          <label class="text-sm font-medium text-gray-700">{{
+            $t("forms.fields.start_time.label")
+          }}</label>
           <BaseInput
             type="time"
-            placeholder="Start Time"
+            :placeholder="$t('forms.fields.start_time.placeholder')"
             id="book-start"
             v-model="form.start"
           />
         </div>
 
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700">End Time</label>
+          <label class="text-sm font-medium text-gray-700">{{
+            $t("forms.fields.end_time.label")
+          }}</label>
           <BaseInput
             type="time"
-            placeholder="End Time"
+            :placeholder="$t('forms.fields.end_time.placeholder')"
             id="book-end"
             v-model="form.end"
           />
         </div>
 
         <div class="flex flex-col gap-2">
-          <label class="text-sm font-medium text-gray-700"
-            >Select your car</label
-          >
+          <label class="text-sm font-medium text-gray-700">{{
+            $t("selects.labels.select_car")
+          }}</label>
           <BaseSelect
             :options="carOptions"
             v-model="selectedCar"
-            placeholder="Select your car"
+            :placeholder="$t('selects.labels.select_car')"
           />
         </div>
       </div>
@@ -56,7 +66,12 @@
 
     <template #footer>
       <div class="flex justify-end">
-        <BaseButton text="Confirm Booking" mode="Primary" :onClick="onSubmit" />
+        <BaseButton
+          :text="$t('buttons.confirm')"
+          icon="check"
+          mode="Primary"
+          :onClick="onSubmit"
+        />
       </div>
     </template>
   </BaseSlideModal>

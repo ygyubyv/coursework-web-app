@@ -4,14 +4,15 @@
       class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12 w-full"
     >
       <div class="flex-1 space-y-4 text-left">
-        <h1 class="text-4xl font-bold text-black leading-snug">Virodip</h1>
+        <h1 class="text-4xl font-bold text-black leading-snug">
+          {{ $t("views.main.project_title") }}
+        </h1>
         <p class="text-base sm:text-lg md:text-lg text-gray-700 max-w-md">
-          The smart platform for online parking. Find, reserve, and pay for your
-          parking spot effortlessly.
+          {{ $t("views.main.project_description") }}
         </p>
 
         <p class="text-sm text-gray-500 font-medium mt-4">
-          Download the app for your device:
+          {{ $t("views.main.download_app") }}
         </p>
 
         <div class="flex flex-col sm:flex-row gap-2 mt-2">
@@ -21,7 +22,7 @@
             class="flex items-center justify-center gap-1.75 px-4 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition md:px-3 md:py-1.5"
           >
             <font-awesome-icon :icon="['fab', 'android']" />
-            Android
+            {{ $t("android") }}
           </a>
 
           <a
@@ -30,13 +31,13 @@
             class="flex items-center justify-center gap-1.75 px-4 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition md:px-3 md:py-1.5"
           >
             <font-awesome-icon :icon="['fab', 'apple']" />
-            iOS
+            {{ $t("ios") }}
           </a>
 
           <BaseButton
             mode="Primary"
             icon="info-circle"
-            text="Learn More"
+            :text="$t('buttons.learn_more')"
             class="w-full sm:w-auto"
             :onClick="() => emit('learnMore')"
           />

@@ -21,10 +21,7 @@
         v-else
         class="flex items-center justify-center w-full h-full bg-gray-50 text-gray-500 text-center p-4"
       >
-        <p>
-          Location access is required to use this feature.<br />
-          Please enable location permissions in your browser settings.
-        </p>
+        <p v-html="$t('map.location_access')"></p>
       </div>
     </div>
 
@@ -32,12 +29,14 @@
       class="flex-1 rounded-2xl p-5 flex flex-col gap-4 max-h-[500px] border border-gray-200 bg-gray-50"
     >
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-semibold text-gray-900">Nearby Parkings</h2>
+        <h2 class="text-lg font-semibold text-gray-900">
+          {{ $t("parkings.nearby_parkings") }}
+        </h2>
 
         <div class="w-[160px] md:w-[200px]">
           <BaseSelect
             :options="sortOptions"
-            placeholder="Sort by"
+            :placeholder="$t('selects.labels.sort_by')"
             v-model="selectedOption"
           />
         </div>
@@ -65,15 +64,20 @@ import { storeToRefs } from "pinia";
 import type { Parking } from "@/types/User";
 import { parkings } from "@/constants";
 import { useMap } from "@/composables/useMap";
+import { useI18n } from "vue-i18n";
+import { useHead } from "@unhead/vue";
+import { APP_URL } from "@/config";
 
 const userStore = storeToRefs(useAuthStore());
 
+const { t } = useI18n();
 const { coordinates } = useMap();
+
 const { user, authModalIsVisible, isAuthenticated } = userStore;
 
 const sortOptions: Option[] = [
-  { label: "Distance", value: "distance" },
-  { label: "Available spots", value: "spots" },
+  { label: t("selects.distance"), value: "distance" },
+  { label: t("selects.available_spots"), value: "spots" },
 ];
 
 const selectedOption = ref<Option>(sortOptions[0]);
@@ -129,4 +133,41 @@ const handleBook = (id: string) => {
 const handleSubmit = (form: BookForm) => {
   console.log(form);
 };
+
+useHead({
+  title: t("seo.book.head.title"),
+  titleTemplate: `%s | ${t("seo.book.head.titleTemplate")}`,
+  meta: [
+    {
+      name: "description",
+      content: t("seo.book.head.description"),
+    },
+    {
+      name: "keywords",
+      content: t("seo.book.head.keywords"),
+    },
+    {
+      name: "robots",
+      content: "index, follow",
+    },
+    {
+      property: "og:title",
+      content: t("seo.book.head.ogTitle"),
+    },
+    {
+      property: "og:description",
+      content: t("seo.book.head.ogDescription"),
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: `${APP_URL}/book`,
+    },
+  ],
+});
 </script>

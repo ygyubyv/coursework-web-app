@@ -1,6 +1,8 @@
 <template>
   <div class="space-y-6">
-    <h2 class="text-2xl font-bold">Statistics</h2>
+    <h2 class="text-2xl font-bold">
+      {{ $t("views.account.statistics.title") }}
+    </h2>
 
     <div class="flex gap-3">
       <button
@@ -21,8 +23,13 @@
     <Overview :transactions-metadata="transactionsMetadata" />
 
     <div class="bg-white rounded-lg border p-4 shadow-sm">
-      <h3 class="text-lg font-semibold mb-4">Spending Trend</h3>
-      <Chart :transactions="filterChartData" />
+      <h3 class="text-lg font-semibold mb-4">
+        {{ $t("views.account.statistics.transactions.spending_trend") }}
+      </h3>
+      <Chart
+        :transactions="filterChartData"
+        :label="$t('views.account.statistics.transactions.spent')"
+      />
     </div>
   </div>
 </template>
@@ -35,9 +42,10 @@ import { timeUnitsInMs } from "@/utils/timeUnitsInMs";
 import Overview from "../components/Stats/Overview.vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth";
+import { useI18n } from "vue-i18n";
 
 const { user } = storeToRefs(useAuthStore());
-
+const { t } = useI18n();
 const { monthAgo, yearAgo } = getTimeBoundaries();
 const { month } = timeUnitsInMs();
 
@@ -48,9 +56,9 @@ interface Tab {
 }
 
 const tabs: Tab[] = [
-  { label: "This Month", value: "month" },
-  { label: "3 Months", value: "quarter" },
-  { label: "This Year", value: "year" },
+  { label: t("tabs.labels.this_month"), value: "month" },
+  { label: t("tabs.labels.this_quarter"), value: "quarter" },
+  { label: t("tabs.labels.this_year"), value: "year" },
 ];
 
 const selectedTab = ref<Range>("month");

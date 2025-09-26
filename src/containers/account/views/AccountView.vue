@@ -5,7 +5,7 @@
         class="flex flex-col md:flex-row rounded-xl shadow-sm bg-white overflow-hidden min-h-[80vh]"
       >
         <aside
-          class="w-full md:w-48 lg:w-64 flex-shrink-0 border-b md:border-b-0 md:border-r border-gray-200 p-4 bg-gray-50"
+          class="w-full md:w-58 lg:w-64 flex-shrink-0 border-b md:border-b-0 md:border-r border-gray-200 p-4 bg-gray-50"
         >
           <nav
             class="flex md:flex-col space-x-4 md:space-x-0 md:space-y-1 overflow-x-auto"
@@ -32,47 +32,79 @@
 </template>
 
 <script setup lang="ts">
+import { APP_URL } from "@/config";
 import { useHead } from "@unhead/vue";
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
+const links = computed(() => {
+  return [
+    {
+      to: "/account/profile",
+      text: t("routes.account.profile"),
+      icon: ["fas", "user"],
+    },
+    {
+      to: "/account/payments",
+      text: t("routes.account.payments"),
+      icon: ["fas", "credit-card"],
+    },
+    {
+      to: "/account/stats",
+      text: t("routes.account.statistics"),
+      icon: ["fas", "chart-line"],
+    },
+    {
+      to: "/account/settings",
+      text: t("routes.account.settings"),
+      icon: ["fas", "cog"],
+    },
+    {
+      to: "/account/security",
+      text: t("routes.account.security"),
+      icon: ["fas", "shield-alt"],
+    },
+  ];
+});
 
 useHead({
-  title: "Virodip",
-  titleTemplate: "%s | Account",
+  title: t("seo.account.head.title"),
+  titleTemplate: `%s | ${t("seo.account.head.titleTemplate")}`,
   meta: [
     {
       name: "description",
-      content:
-        "Manage your Virodip account, view statistics, update personal information, and configure security settings.",
+      content: t("seo.account.head.description"),
+    },
+    {
+      name: "keywords",
+      content: t("seo.account.head.keywords"),
+    },
+    {
+      name: "robots",
+      content: "index, follow",
+    },
+    {
+      property: "og:title",
+      content: t("seo.account.head.ogTitle"),
+    },
+    {
+      property: "og:description",
+      content: t("seo.account.head.ogDescription"),
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: `${APP_URL}/account`,
     },
   ],
 });
-
-const links = [
-  {
-    to: "/account/profile",
-    text: "Personal Info",
-    icon: ["fas", "user"],
-  },
-  {
-    to: "/account/payments",
-    text: "Payments",
-    icon: ["fas", "credit-card"],
-  },
-  {
-    to: "/account/stats",
-    text: "Statistics",
-    icon: ["fas", "chart-line"],
-  },
-  {
-    to: "/account/settings",
-    text: "Settings",
-    icon: ["fas", "cog"],
-  },
-  {
-    to: "/account/security",
-    text: "Security",
-    icon: ["fas", "shield-alt"],
-  },
-];
 </script>
 
 <style scoped>

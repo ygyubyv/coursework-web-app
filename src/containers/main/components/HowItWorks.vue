@@ -5,11 +5,10 @@
     >
       <div class="flex-1 space-y-4">
         <h2 class="text-2xl md:text-3xl font-bold text-black leading-snug">
-          How Virodip Works
+          {{ $t("views.main.how_it_works.title") }}
         </h2>
         <p class="text-gray-700 text-base md:text-lg max-w-md">
-          Find, reserve, and pay for parking spots easily. Virodip makes parking
-          simple, fast, and secure.
+          {{ $t("views.main.how_it_works.description") }}
         </p>
       </div>
 

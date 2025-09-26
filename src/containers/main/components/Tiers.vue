@@ -2,10 +2,10 @@
   <section class="py-16 px-6 lg:px-8">
     <div class="max-w-7xl mx-auto text-center">
       <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">
-        Pricing Plans
+        {{ $t("views.main.pricing.title") }}
       </h2>
       <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-        Transparent pricing tailored for private parking users.
+        {{ $t("views.main.pricing.description") }}
       </p>
     </div>
 

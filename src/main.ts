@@ -8,6 +8,7 @@ import App from "./App.vue";
 import router from "./router";
 
 import { myMSALObj } from "@/azure/msalConfig.ts";
+import { i18n } from "./i18n.ts";
 
 import { FontAwesomeIcon } from "./plugins/fontAwesome";
 
@@ -23,6 +24,7 @@ import { FontAwesomeIcon } from "./plugins/fontAwesome";
   app.use(pinia);
   app.use(router);
   app.use(head);
+  app.use(i18n);
 
   app.mount("#app");
 })();

@@ -7,32 +7,36 @@
         type: 'text',
         placeholder: 'AA1234BB',
       }"
-      label="Number"
+      :label="$t('forms.fields.numbers.label')"
     />
+
     <InputField
       v-model="car.brand"
       :input="{ id: 'carBrand', type: 'text', placeholder: 'Brand' }"
-      label="Brand"
+      :label="$t('forms.fields.brand.label')"
     />
+
     <InputField
       v-model="car.model"
       :input="{ id: 'carModel', type: 'text', placeholder: 'Model' }"
-      label="Model"
+      :label="$t('forms.fields.model.label')"
     />
+
     <InputField
       v-model="car.year"
       :input="{ id: 'carYear', type: 'number', placeholder: '2020' }"
-      label="Year"
+      :label="$t('forms.fields.year.label')"
     />
+
     <InputField
       v-model="car.color"
       :input="{ id: 'carColor', type: 'text', placeholder: 'Color' }"
-      label="Color"
+      :label="$t('forms.fields.color.label')"
     />
 
     <div class="flex justify-end mt-2">
       <BaseButton
-        text="Delete"
+        :text="$t('buttons.delete')"
         icon="trash"
         mode="Danger"
         size="Small"

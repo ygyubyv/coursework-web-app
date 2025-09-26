@@ -4,7 +4,9 @@
       class="flex-1 md:max-w-3xl rounded-2xl p-5 flex flex-col gap-4 max-h-[500px] overflow-auto border border-gray-200 bg-gray-50"
     >
       <div class="flex flex-col gap-3">
-        <h2 class="text-lg font-semibold text-gray-900">My Bookings</h2>
+        <h2 class="text-lg font-semibold text-gray-900">
+          {{ $t("views.parkings.title") }}
+        </h2>
 
         <div
           class="grid gap-3 grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] md:grid-cols-[1fr_auto]"
@@ -12,13 +14,13 @@
           <BaseInput
             id="book-name"
             v-model="selectedName"
-            placeholder="Filter by name"
+            :placeholder="$t('forms.fields.parking_name.placeholder')"
             class="w-full"
           />
 
           <BaseSelect
             :options="filterOptions"
-            placeholder="Filter By"
+            :placeholder="$t('filter_by')"
             v-model="selectedOption"
             class="w-full md:w-40"
           />
@@ -35,7 +37,7 @@
       </template>
 
       <div v-else>
-        <p>No bookings found</p>
+        <p>{{ $t("views.parkings.not_found") }}</p>
       </div>
     </div>
 
@@ -67,15 +69,17 @@ import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 import Map from "@/components/Map.vue";
 import { useMap } from "@/composables/useMap";
+import { useI18n } from "vue-i18n";
 
 const { coordinates } = useMap();
+const { t } = useI18n();
 
 const { user } = storeToRefs(useAuthStore());
 
 const filterOptions: BaseSelectOption[] = [
-  { label: "All", value: "all" },
-  { label: "Finished", value: "finished" },
-  { label: "Active", value: "active" },
+  { label: t("selects.all"), value: "all" },
+  { label: t("selects.finished"), value: "finished" },
+  { label: t("selects.active"), value: "active" },
 ];
 
 const mapComponent = useTemplateRef("mapComponent");
@@ -124,27 +128,28 @@ const showParkingOnMap = (parking: Parking) => {
 };
 
 useHead({
-  title: "Virodip",
-  titleTemplate: "%s | Parkings",
+  title: t("seo.parkings.head.title"),
+  titleTemplate: `%s | ${t("seo.parkings.head.titleTemplate")}`,
   meta: [
     {
       name: "description",
-      content:
-        "Explore available parking spots with Virodip. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience.",
+      content: t("seo.parkings.head.description"),
     },
     {
       name: "keywords",
-      content:
-        "smart parking, parkings, parking spots, reserve parking, parking app, real-time parking, mobile parking",
+      content: t("seo.parkings.head.keywords"),
+    },
+    {
+      name: "robots",
+      content: "index, follow",
     },
     {
       property: "og:title",
-      content: "Parkings — Virodip Smart Parking Service",
+      content: t("seo.parkings.head.ogTitle"),
     },
     {
       property: "og:description",
-      content:
-        "Explore available parking spots with Virodip. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience.",
+      content: t("seo.parkings.head.ogDescription"),
     },
     {
       property: "og:type",

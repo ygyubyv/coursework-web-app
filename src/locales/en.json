@@ -1,0 +1,534 @@
+{
+  "full_name": "Full name",
+  "email": "Email",
+  "phone": "Phone",
+  "joined": "Joined",
+  "view_profile": "View profile",
+  "filter_by": "Filter By",
+  "station": "Station",
+  "distance": "Distance",
+  "current": "Current",
+  "car": "Car",
+  "android": "Android",
+  "ios": "iOS",
+
+  "buttons": {
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "learn_more": "Learn More",
+    "contact_us": "Contact Us",
+    "show_on_map": "Show on map",
+    "add_payment_method": "Add Payment Method",
+    "add_car": "Add car",
+    "switch_to": "Switch to",
+    "save_changes": "Save changes",
+    "delete_account": "Delete account",
+    "book": "Book",
+    "follow": "Follow",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "send": "Send",
+    "clear": "Clear"
+  },
+
+  "forms": {
+    "fields": {
+      "full_name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "validation": {
+          "required": "This field is required",
+          "invalid": "Enter a valid email"
+        }
+      },
+
+      "phone": {
+        "label": "Phone",
+        "placeholder": "+380 123 456 789",
+        "validation": {
+          "required": "This field is required",
+          "invalid": "Enter a valid phone number"
+        }
+      },
+
+      "message": {
+        "label": "Message",
+        "placeholder": "Type your message",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "parking_name": {
+        "label": "Parking name",
+        "placeholder": "Enter parking name",
+        "validation": {
+          "minLength": "Parking name must be at least {min} characters",
+          "maxLength": "Parking name must not exceed {max} characters"
+        }
+      },
+
+      "date_time": {
+        "label": "Date & Time",
+        "placeholder": "Select date and time",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "start_time": {
+        "label": "Start Time",
+        "placeholder": "Select start time",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "end_time": {
+        "label": "End Time",
+        "placeholder": "Select end time",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "card_number": {
+        "label": "Card Number",
+        "placeholder": "Enter card number",
+        "validation": {
+          "required": "This field is required",
+          "invalid": "Enter a valid card number"
+        }
+      },
+
+      "exp_month": {
+        "label": "Expiration Month",
+        "placeholder": "MM",
+        "validation": {
+          "required": "This field is required",
+          "invalid": "Enter a valid month"
+        }
+      },
+
+      "exp_year": {
+        "label": "Expiration Year",
+        "placeholder": "YY",
+        "validation": {
+          "required": "This field is required",
+          "invalid": "Enter a valid year"
+        }
+      },
+
+      "numbers": {
+        "label": "Car numbers",
+        "placeholder": "Enter license plate number",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "brand": {
+        "label": "Brand",
+        "placeholder": "Enter brand",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "model": {
+        "label": "Model",
+        "placeholder": "Enter model",
+        "validation": {
+          "required": "This field is required"
+        }
+      },
+
+      "year": {
+        "label": "Year",
+        "placeholder": "Enter year",
+        "validation": {
+          "required": "This field is required",
+          "invalid": "Enter a valid year"
+        }
+      },
+
+      "color": {
+        "label": "Color",
+        "placeholder": "Enter color",
+        "validation": {
+          "required": "This field is required"
+        }
+      }
+    }
+  },
+
+  "selects": {
+    "all": "All",
+    "finished": "Finished",
+    "active": "Active",
+    "distance": "Distance",
+    "available_spots": "Available spots",
+
+    "labels": {
+      "select_car": "Select your car",
+      "sort_by": "Sort by"
+    }
+  },
+
+  "modals": {
+    "book_parking": {
+      "title": "Book Parking"
+    },
+
+    "delete_card": {
+      "title": "Confirm Card Deletion",
+      "message": "Are you sure you want to permanently delete this payment method? This action cannot be undone.",
+      "submit_text": "Delete Card"
+    },
+
+    "add_card": {
+      "title": "Add New Payment Method",
+      "message": "Enter your card details below to add a new payment method.",
+      "submit_text": "Add Card"
+    },
+
+    "add_car": {
+      "title": "Add New Car",
+      "message": "Enter the details of your car below:",
+      "submit_text": "Add Car"
+    },
+
+    "delete_account": {
+      "title": "Delete Account",
+      "message": "Are you sure you want to permanently delete your account? All your data will be lost and this action cannot be undone.",
+      "submit_text": "Delete Account"
+    },
+
+    "delete_car": {
+      "title": "Confirm Car Deletion",
+      "message": "Are you sure you want to permanently delete this car? This action cannot be undone.",
+      "submit_text": "Delete Car"
+    },
+
+    "required_auth": {
+      "title": "Authorization Required",
+      "message": "To access this feature, you need to be logged in. Please click 'Login' to continue. Your account information will remain secure and private.",
+      "submit_text": "Login"
+    }
+  },
+
+  "tabs": {
+    "labels": {
+      "this_month": "This Month",
+      "this_quarter": "3 Months",
+      "this_year": "This Year"
+    }
+  },
+
+  "status": {
+    "active": "Active",
+    "completed": "Completed",
+    "successful": "Successful",
+    "failed": "Failed"
+  },
+
+  "metrics": {
+    "km": "km",
+    "m": "m"
+  },
+
+  "map": {
+    "my_location": "My location",
+    "location_access": "Location access is required to use this feature.<br /> Please enable location permissions in your browser settings."
+  },
+
+  "pricing": {
+    "plan": "Plan",
+    "price": "Price",
+    "date": "Date",
+    "description": "Description",
+    "amount": "Amount",
+    "start_date": "Start date",
+    "end_date": "End date",
+    "status": "Status",
+    "current_plan": "Current plan",
+    "expires": "Expires",
+    "per_mo": "/mo",
+
+    "tiers": {
+      "standard": {
+        "plan": "Standard",
+        "description": "Best for individual drivers",
+        "features": [
+          "Unlimited bookings",
+          "Priority support",
+          "Parking history"
+        ],
+        "ctaLabel": "Choose Plan"
+      },
+      "business": {
+        "plan": "Business",
+        "description": "For companies & fleets",
+        "features": [
+          "Team management",
+          "Multiple vehicle support",
+          "Reserved spots & reports"
+        ],
+        "badgeLabel": "Popular",
+        "ctaLabel": "Contact Sales"
+      }
+    }
+  },
+
+  "parkings": {
+    "adress": "Adress",
+    "available_spots": "Available spots",
+    "nearby_parkings": "Nearby Parkings"
+  },
+
+  "cars": {
+    "title": "Cars",
+    "no_cars": "No cars added",
+    "total_cars": "Total cars",
+    "number": "Number",
+    "brand": "Brand",
+    "model": "Model",
+    "year": "Year",
+    "color": "Color"
+  },
+
+  "routes": {
+    "main": "Virodip",
+    "my_parkings": "My Parkings",
+    "reserve": "Reserve",
+    "about": "About",
+    "account": {
+      "default": "Account",
+      "profile": "Personal Info",
+      "payments": "Payments",
+      "statistics": "Statistics",
+      "settings": "Settings",
+      "security": "Security"
+    },
+    "contact": "Contact",
+    "faq": "Faq",
+    "help": "Help"
+  },
+
+  "views": {
+    "main": {
+      "project_title": "Virodip",
+      "project_description": "The smart platform for online parking. Find, reserve, and pay for your parking spot effortlessly.",
+      "download_app": "Download the app for your device:",
+
+      "how_it_works": {
+        "title": "How Virodip Works",
+        "description": "Find, reserve, and pay for parking spots easily. Virodip makes parking simple, fast, and secure.",
+        "steps": [
+          {
+            "icon": "search",
+            "title": "Find Parking",
+            "description": "Locate the nearest available parking spots quickly and easily."
+          },
+          {
+            "icon": "calendar-check",
+            "title": "Reserve Spot",
+            "description": "Reserve your chosen parking space ahead of time to guarantee availability."
+          },
+          {
+            "icon": "credit-card",
+            "title": "Pay & Park",
+            "description": "Pay securely and enjoy seamless parking with no hassle."
+          }
+        ]
+      },
+
+      "payments": {
+        "title": "Ways to Book Your Parking",
+        "description": "Choose the option that suits you best — quick payment on-site, online booking, or a subscription for frequent drivers.",
+
+        "ways": [
+          {
+            "icon": "cash-register",
+            "title": "Pay at the Cashier",
+            "description": "Convenient option if you prefer paying directly on-site."
+          },
+          {
+            "icon": "laptop",
+            "title": "Online Booking",
+            "description": "Reserve your parking spot in advance with just a few clicks."
+          },
+          {
+            "icon": "calendar-check",
+            "title": "Subscription Plans",
+            "description": "Ideal for regular drivers and companies who want flexibility."
+          }
+        ]
+      },
+
+      "pricing": {
+        "title": "Pricing Plans",
+        "description": "Transparent pricing tailored for private parking users."
+      },
+
+      "contact": {
+        "title": "Have any questions?",
+        "description": "Our team is ready to help you. Reach out anytime!"
+      }
+    },
+
+    "contact": {
+      "title": "Have Questions?",
+      "description": "Fill out the form and we'll get back to you within 2 hours."
+    },
+
+    "parkings": {
+      "title": "My Parkings",
+      "not_found": "No bookings found"
+    },
+
+    "account": {
+      "profile": {
+        "title": "Personal Information"
+      },
+
+      "payments": {
+        "title": "Payments & Billing",
+        "payment_methods": "Payment Methods",
+        "no_payment_methods": "No payment methods added",
+        "recent_transactions": "Recent Transactions",
+
+        "security": {
+          "title": "Security",
+          "features": [
+            "We follow PCI DSS standards when handling card data",
+            "All information remains secure and uncompromised",
+            "All data is encrypted",
+            "Your card information will never be mishandled or sold"
+          ]
+        }
+      },
+
+      "statistics": {
+        "title": "Statistics",
+
+        "transactions": {
+          "title": "Transactions",
+          "description": "Transaction overview",
+          "total_spent": "Total spent",
+          "spending_trend": "Spending Trend",
+          "spent": "Spent"
+        }
+      },
+
+      "settings": {
+        "title": "Personal Information"
+      }
+    }
+  },
+
+  "seo": {
+    "main": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "Main",
+        "description": "Discover the nearest available parking spots in real-time, reserve your space, and enjoy a seamless parking experience.",
+        "keywords": "smart parking, parking app, reserve parking, real-time parking, parking spots, mobile parking, IoT parking",
+        "ogTitle": "Smart Parking — Find and Reserve Parking Spots Instantly",
+        "ogDescription": "Discover the nearest available parking spots in real-time, reserve your space, and enjoy a seamless parking experience."
+      }
+    },
+
+    "about": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "About",
+        "description": "Learn more about Virodip, the smart parking service that helps you find and reserve parking spots in real-time.",
+        "keywords": "smart parking, about, parking app, parking service, real-time parking, mobile parking",
+        "ogTitle": "About Virodip — Smart Parking Service",
+        "ogDescription": "Learn more about Virodip, the smart parking service that helps you find and reserve parking spots in real-time."
+      }
+    },
+
+    "contact": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "Contact",
+        "description": "Contact the Virodip team for support or inquiries. Fill out the form and we’ll get back to you within 2 hours.",
+        "keywords": "smart parking, contact, support, inquiries, parking app, parking service, real-time parking",
+        "ogTitle": "Contact Virodip — Smart Parking Service",
+        "ogDescription": "Contact the Virodip team for support or inquiries. Fill out the form and we’ll get back to you within 2 hours."
+      }
+    },
+
+    "faq": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "FAQ",
+        "description": "Find answers to frequently asked questions about Virodip, the smart parking service that helps you locate and reserve parking spots in real-time.",
+        "keywords": "smart parking, FAQ, frequently asked questions, parking app, parking service, real-time parking, mobile parking",
+        "ogTitle": "FAQ — Virodip Smart Parking Service",
+        "ogDescription": "Find answers to frequently asked questions about Virodip, the smart parking service that helps you locate and reserve parking spots in real-time."
+      }
+    },
+
+    "help": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "Help",
+        "description": "Get help and support for Virodip, the smart parking service that assists you in finding and reserving parking spots in real-time.",
+        "keywords": "smart parking, help, support, parking app, parking service, real-time parking, mobile parking",
+        "ogTitle": "Help — Virodip Smart Parking Service",
+        "ogDescription": "Get help and support for Virodip, the smart parking service that assists you in finding and reserving parking spots in real-time."
+      }
+    },
+
+    "book": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "Book Parking",
+        "description": "Book a parking spot in real-time with Virodip — fast, easy, and hassle-free.",
+        "keywords": "smart parking, booking, parking app, parking service, reserve parking spot, real-time parking",
+        "ogTitle": "Book Parking — Virodip Smart Parking",
+        "ogDescription": "Book a parking spot in real-time with Virodip — fast, easy, and hassle-free."
+      }
+    },
+
+    "parkings": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "Parkings",
+        "description": "Explore available parking spots with Virodip. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience.",
+        "keywords": "smart parking, parkings, parking spots, reserve parking, parking app, real-time parking, mobile parking",
+        "ogTitle": "Parkings — Virodip Smart Parking Service",
+        "ogDescription": "Explore available parking spots with Virodip. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience."
+      }
+    },
+
+    "account": {
+      "head": {
+        "title": "Virodip",
+        "titleTemplate": "Account",
+        "description": "Manage your Virodip account, view statistics, update personal information, and configure security settings.",
+        "keywords": "Virodip account, manage account, parking profile, user settings, account security, parking statistics",
+        "ogTitle": "Account — Virodip Smart Parking Service",
+        "ogDescription": "Manage your Virodip account, view statistics, update personal information, and configure security settings."
+      }
+    }
+  },
+
+  "footer": {
+    "description": "Safe and easy parking management.",
+    "copyright": "© {year} Virodip. All rights reserved."
+  }
+}

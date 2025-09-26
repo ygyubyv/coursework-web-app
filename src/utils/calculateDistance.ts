@@ -1,3 +1,5 @@
+import { useI18n } from "vue-i18n";
+
 const deg2rad = (deg: number): number => deg * (Math.PI / 180);
 
 export const calculateDistance = (
@@ -20,9 +22,11 @@ export const calculateDistance = (
 };
 
 export const formatDistance = (distanceKm: number): string => {
+  const { t } = useI18n();
+
   if (distanceKm < 1) {
-    return `${Math.round(distanceKm * 1000)} m`;
+    return `${Math.round(distanceKm * 1000)} ${t("metrics.m")}`;
   } else {
-    return `${distanceKm.toFixed(1)} km`;
+    return `${distanceKm.toFixed(1)} ${t("metrics.km")}`;
   }
 };

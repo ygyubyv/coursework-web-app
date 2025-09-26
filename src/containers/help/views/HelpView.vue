@@ -1,31 +1,37 @@
-<template>Empty for now</template>
+<template>
+  <div>Empty for now</div>
+</template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
 
+const { t } = useI18n();
+
 useHead({
-  title: "Virodip",
-  titleTemplate: "%s | Help",
+  title: t("seo.help.head.title"),
+  titleTemplate: `%s | ${t("seo.help.head.titleTemplate")}`,
   meta: [
     {
       name: "description",
-      content:
-        "Get help and support for Virodip, the smart parking service that assists you in finding and reserving parking spots in real-time.",
+      content: t("seo.help.head.description"),
     },
     {
       name: "keywords",
-      content:
-        "smart parking, help, support, parking app, parking service, real-time parking, mobile parking",
+      content: t("seo.help.head.keywords"),
+    },
+    {
+      name: "robots",
+      content: "index, follow",
     },
     {
       property: "og:title",
-      content: "Help — Virodip Smart Parking Service",
+      content: t("seo.help.head.ogTitle"),
     },
     {
       property: "og:description",
-      content:
-        "Get help and support for Virodip, the smart parking service that assists you in finding and reserving parking spots in real-time.",
+      content: t("seo.help.head.ogDescription"),
     },
     {
       property: "og:type",

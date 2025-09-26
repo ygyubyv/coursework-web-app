@@ -2,11 +2,10 @@
   <section class="py-8 md:py-16 px-6 lg:px-8">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
-        Ways to Book Your Parking
+        {{ $t("views.main.payments.title") }}
       </h2>
       <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
-        Choose the option that suits you best — quick payment on-site, online
-        booking, or a subscription for frequent drivers.
+        {{ $t("views.main.payments.description") }}
       </p>
     </div>
 

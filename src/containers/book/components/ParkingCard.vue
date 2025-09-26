@@ -5,7 +5,7 @@
     <h3 class="text-md font-medium text-gray-900">{{ parking.name }}</h3>
 
     <div v-if="coordinates" class="flex justify-between text-sm text-gray-700">
-      <span>Distance:</span>
+      <span>{{ $t("distance") }}:</span>
       <span
         >{{
           formatDistance(
@@ -21,12 +21,12 @@
     </div>
 
     <div class="flex justify-between text-sm text-gray-700">
-      <span>Available spots:</span>
+      <span>{{ $t("parkings.available_spots") }}:</span>
       <span>{{ parking.availableSpots }}</span>
     </div>
 
     <div class="flex justify-between text-sm text-gray-700">
-      <span>Address:</span>
+      <span>{{ $t("parkings.adress") }}:</span>
       <span>{{ parking.address }}</span>
     </div>
 
@@ -34,7 +34,7 @@
       <BaseButton
         mode="Primary"
         icon="plus"
-        text="Book"
+        :text="$t('buttons.book')"
         :onClick="() => emit('onBook', parking.id)"
         size="Small"
       />

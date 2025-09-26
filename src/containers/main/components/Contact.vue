@@ -5,16 +5,16 @@
     >
       <div class="text-center sm:text-left">
         <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
-          Have any questions?
+          {{ $t("views.main.contact.title") }}
         </h2>
         <p class="mt-2 text-gray-700">
-          Our team is ready to help you. Reach out anytime!
+          {{ $t("views.main.contact.description") }}
         </p>
       </div>
 
       <BaseButton
         mode="Primary"
-        text="Contact Us!"
+        :text="$t('buttons.contact_us')"
         icon="arrow-right"
         :onClick="onContact"
         class="whitespace-nowrap"

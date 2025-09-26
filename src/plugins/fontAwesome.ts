@@ -66,7 +66,8 @@ library.add(
   faTimesCircle,
   faXmark,
   faCheck,
-  faLocationDot
+  faLocationDot,
+  faCheck
 );
 
 export { FontAwesomeIcon };

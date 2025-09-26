@@ -7,7 +7,9 @@
         {{ detectCardBrand(String(paymentMethod.pan)) }}
         {{ maskPan(paymentMethod.pan) }}
       </p>
-      <p class="text-sm text-gray-500">Expires {{ paymentMethod.expires }}</p>
+      <p class="text-sm text-gray-500">
+        {{ $t("pricing.expires") }} {{ paymentMethod.expires }}
+      </p>
     </div>
     <button
       @click="emit('onDelete', paymentMethod.id)"

@@ -2,9 +2,11 @@
   <div class="flex items-center justify-center pt-10 md:py-20">
     <div class="w-full max-w-md bg-white rounded-xl md:shadow-lg p-8 space-y-6">
       <div class="text-center">
-        <h1 class="text-2xl font-bold text-black">Have Questions?</h1>
+        <h1 class="text-2xl font-bold text-black">
+          {{ $t("views.contact.title") }}
+        </h1>
         <p class="text-gray-500 mt-2 text-sm">
-          Fill out the form and we'll get back to you within 2 hours.
+          {{ $t("views.contact.description") }}
         </p>
       </div>
       <form
@@ -14,32 +16,32 @@
         <BaseInput
           id="name"
           v-model="form.name"
-          placeholder="Name"
+          :placeholder="$t('forms.fields.full_name.placeholder')"
           type="text"
         />
         <BaseInput
           id="email"
           v-model="form.email"
-          placeholder="Email"
+          :placeholder="$t('forms.fields.email.placeholder')"
           type="email"
         />
         <BaseTextarea
           id="message"
           name="message"
-          placeholder="How can we help?"
+          :placeholder="$t('forms.fields.message.placeholder')"
           :rows="3"
           v-model="form.message"
         />
         <div class="flex gap-2.5 self-end">
           <BaseButton
-            text="Clear"
+            :text="$t('buttons.clear')"
             :onClick="onClear"
             mode="Secondary"
             icon="eraser"
           />
           <BaseButton
             type="submit"
-            text="Send"
+            :text="$t('buttons.send')"
             mode="Primary"
             icon="paper-plane"
           />
@@ -55,42 +57,9 @@ import BaseTextarea from "@/components/Base/BaseTextarea.vue";
 import { reactive } from "vue";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
+import { useI18n } from "vue-i18n";
 
-useHead({
-  title: "Virodip",
-  titleTemplate: "%s | Contact",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Contact Virodip for support or inquiries. Fill out the form and our team will get back to you promptly regarding our smart parking service.",
-    },
-    {
-      name: "keywords",
-      content:
-        "smart parking, contact, support, inquiries, parking app, parking service, real-time parking",
-    },
-    {
-      property: "og:title",
-      content: "Contact Virodip — Smart Parking Service",
-    },
-    {
-      property: "og:description",
-      content:
-        "Contact Virodip for support or inquiries. Fill out the form and our team will get back to you promptly regarding our smart parking service.",
-    },
-    {
-      property: "og:type",
-      content: "website",
-    },
-  ],
-  link: [
-    {
-      rel: "canonical",
-      href: `${APP_URL}/contact`,
-    },
-  ],
-});
+const { t } = useI18n();
 
 const form = reactive({
   name: "",
@@ -107,4 +76,41 @@ const onClear = () => {
   form.email = "";
   form.message = "";
 };
+
+useHead({
+  title: t("seo.contact.head.title"),
+  titleTemplate: `%s | ${t("seo.contact.head.titleTemplate")}`,
+  meta: [
+    {
+      name: "description",
+      content: t("seo.contact.head.description"),
+    },
+    {
+      name: "keywords",
+      content: t("seo.contact.head.keywords"),
+    },
+    {
+      name: "robots",
+      content: "index, follow",
+    },
+    {
+      property: "og:title",
+      content: t("seo.contact.head.ogTitle"),
+    },
+    {
+      property: "og:description",
+      content: t("seo.contact.head.ogDescription"),
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: `${APP_URL}/contact`,
+    },
+  ],
+});
 </script>

@@ -9,14 +9,14 @@
     <div class="mt-auto pt-4">
       <BaseButton
         v-if="tier.active"
-        text="Current"
+        :text="$t('current')"
         mode="Secondary"
         :disabled="true"
       />
 
       <BaseButton
         v-else
-        text="Switch to"
+        :text="$t('buttons.switch_to')"
         mode="Primary"
         :onClick="() => emit('onSwitch')"
       />

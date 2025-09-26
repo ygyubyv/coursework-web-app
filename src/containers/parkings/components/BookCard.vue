@@ -13,7 +13,11 @@
       </div>
 
       <span class="text-sm font-semibold">
-        {{ booking.status === "active" ? "Active" : "Completed" }}
+        {{
+          booking.status === "active"
+            ? $t("status.active")
+            : $t("status.completed")
+        }}
       </span>
     </div>
 
@@ -23,7 +27,7 @@
     </div>
 
     <div class="text-sm text-gray-700">
-      Car:
+      {{ $t("car") }}:
       <span class="font-medium">
         {{ booking.car.brand }} {{ booking.car.model }}
       </span>
@@ -32,7 +36,7 @@
     <div v-if="booking.status === 'active'" class="flex justify-end">
       <BaseButton
         mode="Primary"
-        text="Show on Map"
+        :text="$t('buttons.show_on_map')"
         size="Small"
         icon="location-dot"
         :onClick="() => emit('showParkingOnMap', booking.parking)"

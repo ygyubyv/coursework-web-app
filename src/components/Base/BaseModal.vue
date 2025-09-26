@@ -26,13 +26,13 @@
             <BaseButton
               :onClick="() => emit('close')"
               icon="xmark"
-              :text="cancelText || 'Cancel'"
+              :text="cancelText || $t('buttons.cancel')"
               mode="Secondary"
             />
 
             <BaseButton
               icon="check"
-              :text="submitText || 'Submit'"
+              :text="submitText || $t('buttons.submit')"
               mode="Primary"
               :onClick="() => emit('submit')"
             />

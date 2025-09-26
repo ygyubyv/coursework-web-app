@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
     <BaseButton
-      text="Cancel"
+      :text="$t('buttons.cancel')"
       icon="xmark"
       mode="Secondary"
       class="w-full sm:w-auto"
@@ -10,14 +10,14 @@
     />
 
     <BaseButton
-      text="Add Car"
+      :text="$t('buttons.add_car')"
       icon="plus"
       mode="Primary"
       :onClick="() => emit('addCar')"
     />
 
     <BaseButton
-      text="Save Changes"
+      :text="$t('buttons.save_changes')"
       icon="save"
       class="w-full sm:w-auto"
       :disabled="!hasChanges"
@@ -25,7 +25,7 @@
     />
 
     <BaseButton
-      text="Delete Account"
+      :text="$t('buttons.delete_account')"
       mode="Danger"
       icon="trash"
       :onClick="() => emit('deleteAccount')"

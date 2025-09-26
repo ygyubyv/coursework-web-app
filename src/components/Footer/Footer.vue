@@ -8,10 +8,10 @@
           to="/"
           class="text-lg font-bold hover:underline hover:text-gray-700 transition-colors duration-200"
         >
-          Virodip
+          {{ $t("routes.main") }}
         </RouterLink>
         <p class="text-xs text-gray-500 mt-1">
-          Safe and easy parking management.
+          {{ $t("footer.description") }}
         </p>
       </div>
 
@@ -30,7 +30,7 @@
         </div>
 
         <div class="text-xs text-gray-500 text-center md:text-right">
-          &copy; 2025 Virodip. All rights reserved.
+          {{ $t("footer.copyright", { year }) }}
         </div>
       </div>
     </div>
@@ -38,13 +38,22 @@
 </template>
 
 <script setup lang="ts">
-const footerLinks = [
-  { to: "/parkings", text: "Parkings" },
-  { to: "/book", text: "Book" },
-  { to: "/account", text: "Account" },
-  { to: "/help", text: "Help" },
-  { to: "/about", text: "About us" },
-  { to: "/faq", text: "FAQ" },
-  { to: "/contact", text: "Contact" },
-];
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
+const year = new Date().getFullYear();
+
+const footerLinks = computed(() => {
+  return [
+    { to: "/parkings", text: t("routes.my_parkings") },
+    { to: "/book", text: t("routes.reserve") },
+    { to: "/account", text: t("routes.account.default") },
+    { to: "/help", text: t("routes.help") },
+    { to: "/about", text: t("routes.about") },
+    { to: "/faq", text: t("routes.faq") },
+    { to: "/contact", text: t("routes.contact") },
+  ];
+});
 </script>
