@@ -27,7 +27,7 @@
     </div>
 
     <div class="text-sm text-gray-700">
-      {{ $t("car") }}:
+      {{ $t("common.car") }}:
       <span class="font-medium">
         {{ booking.car.brand }} {{ booking.car.model }}
       </span>

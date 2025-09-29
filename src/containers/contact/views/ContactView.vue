@@ -83,7 +83,9 @@ useHead({
   meta: [
     {
       name: "description",
-      content: t("seo.contact.head.description"),
+      content: t("seo.contact.head.description", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       name: "keywords",
@@ -95,11 +97,15 @@ useHead({
     },
     {
       property: "og:title",
-      content: t("seo.contact.head.ogTitle"),
+      content: t("seo.contact.head.ogTitle", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:description",
-      content: t("seo.contact.head.ogDescription"),
+      content: t("seo.contact.head.ogDescription", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:type",

@@ -20,7 +20,7 @@
 
           <BaseSelect
             :options="filterOptions"
-            :placeholder="$t('filter_by')"
+            :placeholder="$t('common.filter_by')"
             v-model="selectedOption"
             class="w-full md:w-40"
           />

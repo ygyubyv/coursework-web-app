@@ -25,7 +25,9 @@ useHead({
     },
     {
       property: "og:title",
-      content: t("seo.about.head.ogTitle"),
+      content: t("seo.about.head.ogTitle", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:description",

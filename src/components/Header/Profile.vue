@@ -26,7 +26,7 @@
           <div class="pb-1">
             <h2 class="font-semibold text-black">{{ user.name }}</h2>
             <p class="text-sm text-black cursor-pointer">
-              {{ $t("view_profile") }}
+              {{ $t("common.view_profile") }}
             </p>
           </div>
         </RouterLink>

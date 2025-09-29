@@ -22,7 +22,7 @@
             class="flex items-center justify-center gap-1.75 px-4 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition md:px-3 md:py-1.5"
           >
             <font-awesome-icon :icon="['fab', 'android']" />
-            {{ $t("android") }}
+            {{ $t("common.android") }}
           </a>
 
           <a
@@ -31,7 +31,7 @@
             class="flex items-center justify-center gap-1.75 px-4 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition md:px-3 md:py-1.5"
           >
             <font-awesome-icon :icon="['fab', 'apple']" />
-            {{ $t("ios") }}
+            {{ $t("common.ios") }}
           </a>
 
           <BaseButton

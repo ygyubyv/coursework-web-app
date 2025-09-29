@@ -59,7 +59,7 @@
                   {{ parking.name }}
                 </div>
                 <div class="mb-1">
-                  {{ $t("distance") }}:
+                  {{ $t("common.distance") }}:
                   <span class="font-medium">
                     {{
                       formatDistance(

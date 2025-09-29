@@ -8,7 +8,7 @@
 
         <div class="flex justify-between text-sm">
           <p class="font-medium text-gray-800">
-            {{ $t("station") }}: {{ parking.name }}
+            {{ $t("common.station") }}: {{ parking.name }}
           </p>
           <p class="text-gray-600">
             {{ $t("parkings.available_spots") }}: {{ parking.availableSpots }}

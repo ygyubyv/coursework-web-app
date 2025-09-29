@@ -21,7 +21,7 @@
         v-else
         class="flex items-center justify-center w-full h-full bg-gray-50 text-gray-500 text-center p-4"
       >
-        <p v-html="$t('map.location_access')"></p>
+        <p class="max-w-md mx-auto">{{ $t("map.location_access") }}</p>
       </div>
     </div>
 
@@ -140,7 +140,9 @@ useHead({
   meta: [
     {
       name: "description",
-      content: t("seo.book.head.description"),
+      content: t("seo.book.head.description", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       name: "keywords",
@@ -152,11 +154,15 @@ useHead({
     },
     {
       property: "og:title",
-      content: t("seo.book.head.ogTitle"),
+      content: t("seo.book.head.ogTitle", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:description",
-      content: t("seo.book.head.ogDescription"),
+      content: t("seo.book.head.ogDescription", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:type",

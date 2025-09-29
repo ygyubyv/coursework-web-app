@@ -9,7 +9,7 @@
     <div class="mt-auto pt-4">
       <BaseButton
         v-if="tier.active"
-        :text="$t('current')"
+        :text="$t('common.current')"
         mode="Secondary"
         :disabled="true"
       />

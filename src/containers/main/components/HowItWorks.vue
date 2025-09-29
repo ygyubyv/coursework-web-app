@@ -5,10 +5,18 @@
     >
       <div class="flex-1 space-y-4">
         <h2 class="text-2xl md:text-3xl font-bold text-black leading-snug">
-          {{ $t("views.main.how_it_works.title") }}
+          {{
+            $t("views.main.how_it_works.title", {
+              appName: $t("common.project_name"),
+            })
+          }}
         </h2>
         <p class="text-gray-700 text-base md:text-lg max-w-md">
-          {{ $t("views.main.how_it_works.description") }}
+          {{
+            $t("views.main.how_it_works.description", {
+              appName: $t("common.project_name"),
+            })
+          }}
         </p>
       </div>
 

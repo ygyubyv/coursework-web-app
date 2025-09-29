@@ -1,16 +1,19 @@
 {
-  "full_name": "Full name",
-  "email": "Email",
-  "phone": "Phone",
-  "joined": "Joined",
-  "view_profile": "View profile",
-  "filter_by": "Filter By",
-  "station": "Station",
-  "distance": "Distance",
-  "current": "Current",
-  "car": "Car",
-  "android": "Android",
-  "ios": "iOS",
+  "common": {
+    "project_name": "Virodip",
+    "full_name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "joined": "Joined",
+    "view_profile": "View profile",
+    "filter_by": "Filter By",
+    "station": "Station",
+    "distance": "Distance",
+    "current": "Current",
+    "car": "Car",
+    "android": "Android",
+    "ios": "iOS"
+  },
 
   "buttons": {
     "sign_in": "Sign in",
@@ -34,140 +37,92 @@
   },
 
   "forms": {
+    "validation": {
+      "required": "This field is required",
+      "invalid": "Enter a valid {entity}",
+      "minLength": "{entity} must be at least {min} characters",
+      "maxLength": "{entity} must not exceed {max} characters"
+    },
+
     "fields": {
       "full_name": {
-        "label": "Full Name",
-        "placeholder": "Enter your full name",
-        "validation": {
-          "required": "This field is required"
-        }
+        "label": "@:common.full_name",
+        "placeholder": "Enter your full name"
       },
 
       "email": {
-        "label": "Email",
-        "placeholder": "Enter your email",
-        "validation": {
-          "required": "This field is required",
-          "invalid": "Enter a valid email"
-        }
+        "label": "@:common.email",
+        "placeholder": "Enter your email"
       },
 
       "phone": {
-        "label": "Phone",
-        "placeholder": "+380 123 456 789",
-        "validation": {
-          "required": "This field is required",
-          "invalid": "Enter a valid phone number"
-        }
+        "label": "@:common.phone",
+        "placeholder": "+380 123 456 789"
       },
 
       "message": {
         "label": "Message",
-        "placeholder": "Type your message",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Type your message"
       },
 
       "parking_name": {
         "label": "Parking name",
-        "placeholder": "Enter parking name",
-        "validation": {
-          "minLength": "Parking name must be at least {min} characters",
-          "maxLength": "Parking name must not exceed {max} characters"
-        }
+        "placeholder": "Enter parking name"
       },
 
       "date_time": {
         "label": "Date & Time",
-        "placeholder": "Select date and time",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Select date and time"
       },
 
       "start_time": {
         "label": "Start Time",
-        "placeholder": "Select start time",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Select start time"
       },
 
       "end_time": {
         "label": "End Time",
-        "placeholder": "Select end time",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Select end time"
       },
 
       "card_number": {
         "label": "Card Number",
-        "placeholder": "Enter card number",
-        "validation": {
-          "required": "This field is required",
-          "invalid": "Enter a valid card number"
-        }
+        "placeholder": "Enter card number"
       },
 
       "exp_month": {
         "label": "Expiration Month",
-        "placeholder": "MM",
-        "validation": {
-          "required": "This field is required",
-          "invalid": "Enter a valid month"
-        }
+        "placeholder": "MM"
       },
 
       "exp_year": {
         "label": "Expiration Year",
-        "placeholder": "YY",
-        "validation": {
-          "required": "This field is required",
-          "invalid": "Enter a valid year"
-        }
+        "placeholder": "YY"
       },
 
       "numbers": {
         "label": "Car numbers",
-        "placeholder": "Enter license plate number",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Enter license plate number"
       },
 
       "brand": {
         "label": "Brand",
-        "placeholder": "Enter brand",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Enter brand"
       },
 
       "model": {
         "label": "Model",
-        "placeholder": "Enter model",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Enter model"
       },
 
       "year": {
         "label": "Year",
-        "placeholder": "Enter year",
-        "validation": {
-          "required": "This field is required",
-          "invalid": "Enter a valid year"
-        }
+        "placeholder": "Enter year"
       },
 
       "color": {
         "label": "Color",
-        "placeholder": "Enter color",
-        "validation": {
-          "required": "This field is required"
-        }
+        "placeholder": "Enter color"
       }
     }
   },
@@ -176,7 +131,7 @@
     "all": "All",
     "finished": "Finished",
     "active": "Active",
-    "distance": "Distance",
+    "distance": "@:common.distance",
     "available_spots": "Available spots",
 
     "labels": {
@@ -249,7 +204,7 @@
 
   "map": {
     "my_location": "My location",
-    "location_access": "Location access is required to use this feature.<br /> Please enable location permissions in your browser settings."
+    "location_access": "Location access is required to use this feature. Please enable location permissions in your browser settings."
   },
 
   "pricing": {
@@ -291,7 +246,7 @@
   },
 
   "parkings": {
-    "adress": "Adress",
+    "address": "Address",
     "available_spots": "Available spots",
     "nearby_parkings": "Nearby Parkings"
   },
@@ -308,7 +263,7 @@
   },
 
   "routes": {
-    "main": "Virodip",
+    "main": "@:common.project_name",
     "my_parkings": "My Parkings",
     "reserve": "Reserve",
     "about": "About",
@@ -327,13 +282,13 @@
 
   "views": {
     "main": {
-      "project_title": "Virodip",
+      "project_title": "@:common.project_name",
       "project_description": "The smart platform for online parking. Find, reserve, and pay for your parking spot effortlessly.",
       "download_app": "Download the app for your device:",
 
       "how_it_works": {
-        "title": "How Virodip Works",
-        "description": "Find, reserve, and pay for parking spots easily. Virodip makes parking simple, fast, and secure.",
+        "title": "How {appName} Works",
+        "description": "Find, reserve, and pay for parking spots easily. {appName} makes parking simple, fast, and secure.",
         "steps": [
           {
             "icon": "search",
@@ -440,7 +395,7 @@
   "seo": {
     "main": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "Main",
         "description": "Discover the nearest available parking spots in real-time, reserve your space, and enjoy a seamless parking experience.",
         "keywords": "smart parking, parking app, reserve parking, real-time parking, parking spots, mobile parking, IoT parking",
@@ -451,84 +406,84 @@
 
     "about": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "About",
-        "description": "Learn more about Virodip, the smart parking service that helps you find and reserve parking spots in real-time.",
+        "description": "Learn more about {appName}, the smart parking service that helps you find and reserve parking spots in real-time.",
         "keywords": "smart parking, about, parking app, parking service, real-time parking, mobile parking",
-        "ogTitle": "About Virodip — Smart Parking Service",
-        "ogDescription": "Learn more about Virodip, the smart parking service that helps you find and reserve parking spots in real-time."
+        "ogTitle": "About {appName} — Smart Parking Service",
+        "ogDescription": "Learn more about {appName}, the smart parking service that helps you find and reserve parking spots in real-time."
       }
     },
 
     "contact": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "Contact",
-        "description": "Contact the Virodip team for support or inquiries. Fill out the form and we’ll get back to you within 2 hours.",
+        "description": "Contact the {appName} team for support or inquiries. Fill out the form and we’ll get back to you within 2 hours.",
         "keywords": "smart parking, contact, support, inquiries, parking app, parking service, real-time parking",
-        "ogTitle": "Contact Virodip — Smart Parking Service",
-        "ogDescription": "Contact the Virodip team for support or inquiries. Fill out the form and we’ll get back to you within 2 hours."
+        "ogTitle": "Contact {appName} — Smart Parking Service",
+        "ogDescription": "Contact the {appName} team for support or inquiries. Fill out the form and we’ll get back to you within 2 hours."
       }
     },
 
     "faq": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "FAQ",
-        "description": "Find answers to frequently asked questions about Virodip, the smart parking service that helps you locate and reserve parking spots in real-time.",
+        "description": "Find answers to frequently asked questions about {appName}, the smart parking service that helps you locate and reserve parking spots in real-time.",
         "keywords": "smart parking, FAQ, frequently asked questions, parking app, parking service, real-time parking, mobile parking",
-        "ogTitle": "FAQ — Virodip Smart Parking Service",
-        "ogDescription": "Find answers to frequently asked questions about Virodip, the smart parking service that helps you locate and reserve parking spots in real-time."
+        "ogTitle": "FAQ — {appName} Smart Parking Service",
+        "ogDescription": "Find answers to frequently asked questions about {appName}, the smart parking service that helps you locate and reserve parking spots in real-time."
       }
     },
 
     "help": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "Help",
-        "description": "Get help and support for Virodip, the smart parking service that assists you in finding and reserving parking spots in real-time.",
+        "description": "Get help and support for {appName}, the smart parking service that assists you in finding and reserving parking spots in real-time.",
         "keywords": "smart parking, help, support, parking app, parking service, real-time parking, mobile parking",
-        "ogTitle": "Help — Virodip Smart Parking Service",
-        "ogDescription": "Get help and support for Virodip, the smart parking service that assists you in finding and reserving parking spots in real-time."
+        "ogTitle": "Help — {appName} Smart Parking Service",
+        "ogDescription": "Get help and support for {appName}, the smart parking service that assists you in finding and reserving parking spots in real-time."
       }
     },
 
     "book": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "Book Parking",
-        "description": "Book a parking spot in real-time with Virodip — fast, easy, and hassle-free.",
+        "description": "Book a parking spot in real-time with {appName} — fast, easy, and hassle-free.",
         "keywords": "smart parking, booking, parking app, parking service, reserve parking spot, real-time parking",
-        "ogTitle": "Book Parking — Virodip Smart Parking",
-        "ogDescription": "Book a parking spot in real-time with Virodip — fast, easy, and hassle-free."
+        "ogTitle": "Book Parking — {appName} Smart Parking",
+        "ogDescription": "Book a parking spot in real-time with {appName} — fast, easy, and hassle-free."
       }
     },
 
     "parkings": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "Parkings",
-        "description": "Explore available parking spots with Virodip. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience.",
+        "description": "Explore available parking spots with {appName}. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience.",
         "keywords": "smart parking, parkings, parking spots, reserve parking, parking app, real-time parking, mobile parking",
-        "ogTitle": "Parkings — Virodip Smart Parking Service",
-        "ogDescription": "Explore available parking spots with Virodip. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience."
+        "ogTitle": "Parkings — {appName} Smart Parking Service",
+        "ogDescription": "Explore available parking spots with {appName}. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience."
       }
     },
 
     "account": {
       "head": {
-        "title": "Virodip",
+        "title": "@:common.project_name",
         "titleTemplate": "Account",
-        "description": "Manage your Virodip account, view statistics, update personal information, and configure security settings.",
-        "keywords": "Virodip account, manage account, parking profile, user settings, account security, parking statistics",
-        "ogTitle": "Account — Virodip Smart Parking Service",
-        "ogDescription": "Manage your Virodip account, view statistics, update personal information, and configure security settings."
+        "description": "Manage your {appName} account, view statistics, update personal information, and configure security settings.",
+        "keywords": "{appName} account, manage account, parking profile, user settings, account security, parking statistics",
+        "ogTitle": "Account — {appName} Smart Parking Service",
+        "ogDescription": "Manage your {appName} account, view statistics, update personal information, and configure security settings."
       }
     }
   },
 
   "footer": {
     "description": "Safe and easy parking management.",
-    "copyright": "© {year} Virodip. All rights reserved."
+    "copyright": "© {year} {appName}. All rights reserved."
   }
 }

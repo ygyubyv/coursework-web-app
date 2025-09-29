@@ -75,11 +75,15 @@ useHead({
   meta: [
     {
       name: "description",
-      content: t("seo.account.head.description"),
+      content: t("seo.account.head.description", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       name: "keywords",
-      content: t("seo.account.head.keywords"),
+      content: t("seo.account.head.keywords", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       name: "robots",
@@ -87,11 +91,15 @@ useHead({
     },
     {
       property: "og:title",
-      content: t("seo.account.head.ogTitle"),
+      content: t("seo.account.head.ogTitle", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:description",
-      content: t("seo.account.head.ogDescription"),
+      content: t("seo.account.head.ogDescription", {
+        appName: t("common.project_name"),
+      }),
     },
     {
       property: "og:type",

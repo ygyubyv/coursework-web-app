@@ -30,7 +30,9 @@
         </div>
 
         <div class="text-xs text-gray-500 text-center md:text-right">
-          {{ $t("footer.copyright", { year }) }}
+          {{
+            $t("footer.copyright", { year, appName: $t("common.project_name") })
+          }}
         </div>
       </div>
     </div>

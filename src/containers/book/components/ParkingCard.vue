@@ -5,7 +5,7 @@
     <h3 class="text-md font-medium text-gray-900">{{ parking.name }}</h3>
 
     <div v-if="coordinates" class="flex justify-between text-sm text-gray-700">
-      <span>{{ $t("distance") }}:</span>
+      <span>{{ $t("common.distance") }}:</span>
       <span
         >{{
           formatDistance(
@@ -26,7 +26,7 @@
     </div>
 
     <div class="flex justify-between text-sm text-gray-700">
-      <span>{{ $t("parkings.adress") }}:</span>
+      <span>{{ $t("parkings.address") }}:</span>
       <span>{{ parking.address }}</span>
     </div>
 

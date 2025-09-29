@@ -7,10 +7,13 @@
 
       <div class="flex flex-col md:flex-row md:items-start gap-6">
         <div class="flex-1 space-y-4 order-2 md:order-1">
-          <Stat :label="$t('full_name')" :value="user!.name" />
-          <Stat :label="$t('email')" :value="user!.email" />
-          <Stat :label="$t('phone')" :value="user!.phoneNumber" />
-          <Stat :label="$t('joined')" :value="formatDate(user!.createdAt)" />
+          <Stat :label="$t('common.full_name')" :value="user!.name" />
+          <Stat :label="$t('common.email')" :value="user!.email" />
+          <Stat :label="$t('common.phone')" :value="user!.phoneNumber" />
+          <Stat
+            :label="$t('common.joined')"
+            :value="formatDate(user!.createdAt)"
+          />
         </div>
 
         <div class="flex justify-center md:justify-end order-1 md:order-2">
