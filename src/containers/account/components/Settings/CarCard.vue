@@ -98,7 +98,7 @@
 <script setup lang="ts">
 import BaseButton from "@/components/Base/BaseButton.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
-import type { Car } from "@/types/User";
+import type { Car } from "@/types";
 import { useValidateCar } from "../../composables/useValidateCar";
 
 interface Props {

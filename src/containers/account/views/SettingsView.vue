@@ -188,7 +188,7 @@ import { storeToRefs } from "pinia";
 import BaseModal from "@/components/Base/BaseModal.vue";
 import { useValidateUser } from "../composables/useValidateUser";
 import { useValidateCar } from "../composables/useValidateCar";
-import type { Car } from "@/types/User";
+import type { Car } from "@/types";
 
 const { logout } = useAuthStore();
 const { user } = storeToRefs(useAuthStore());

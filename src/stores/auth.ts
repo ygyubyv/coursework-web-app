@@ -1,7 +1,7 @@
 import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import { loginRequest, myMSALObj } from "@/azure/msalConfig";
-import type { User } from "@/types/User";
+import type { User } from "@/types";
 import { delay } from "@/utils/delay";
 import { DEFAULT_USER } from "@/constants";
 

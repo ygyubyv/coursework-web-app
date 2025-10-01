@@ -1,56 +1,9 @@
+import type { Car } from "./car";
+import type { UserSubscription } from "./subscription";
+import type { Transaction } from "./transaction";
+import type { Booking } from "./booking";
+
 export type Role = "user" | "guardian" | "admin";
-
-export interface Booking {
-  id: string;
-  status: "active" | "completed";
-  date: string;
-  start: string;
-  end: string;
-  car: Car; // звязок
-  parking: Parking; // звязок
-}
-
-export interface Parking {
-  id: string;
-  name: string;
-  address: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-  availableSpots: number;
-  totalSpots: number;
-}
-
-export interface Car {
-  id: string;
-  number: string;
-  brand: string;
-  model: string;
-  year: number;
-  color: string;
-}
-
-export type Tier = {
-  id: string;
-  name: string;
-  price: number;
-};
-
-export type UserSubscription = {
-  tier: Tier; // Зв'язок в бд один до одного
-  startDate: string;
-  endDate: string;
-  status: "active" | "expired" | "canceled";
-};
-
-export interface Transaction {
-  id: string;
-  date: string | Date;
-  description: string;
-  amount: number;
-  status: "Success" | "Failed" | "Pending";
-}
 
 export type User = {
   id: string;
@@ -58,10 +11,10 @@ export type User = {
   email: string;
   phoneNumber: string;
   avatarUrl: string | null;
-  cars: Car[]; // Зв'язок в бд один до багатьох
+  cars: Car[];
   roles: Role[];
-  subscription: UserSubscription; // Зв'язок в бд один до одного
+  subscription: UserSubscription;
   transactions: Transaction[];
   createdAt: string;
-  bookings: Booking[]; // звязок
+  bookings: Booking[];
 };

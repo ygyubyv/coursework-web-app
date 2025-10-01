@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import TransactionRow from "./TransactionRow.vue";
-import type { Transaction } from "../../types";
+import type { Transaction } from "@/types";
 
 interface Props {
   transactions: Transaction[];

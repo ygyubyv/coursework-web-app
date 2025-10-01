@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useForm, useFormErrors } from "vee-validate";
 import { useI18n } from "vue-i18n";
-import type { Car } from "@/types/User";
+import type { Car } from "@/types";
 
 export const useValidateCar = (initialCar?: Car) => {
   const { t } = useI18n();

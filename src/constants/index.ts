@@ -1,4 +1,4 @@
-import type { Parking, Transaction, User } from "@/types/User";
+import type { Parking, Transaction, User } from "@/types";
 
 export const ANDROIN_APP_URL = "https://www.google.com/?hl=uk";
 export const IOS_APP_URL = "https://www.google.com/?hl=uk";
@@ -424,7 +424,6 @@ export const DEFAULT_USER: User = {
       number: "AA1234BB",
       brand: "Toyota",
       model: "Camry",
-      year: 2020,
       color: "White",
     },
     {
@@ -432,7 +431,6 @@ export const DEFAULT_USER: User = {
       number: "CC5678DD",
       brand: "BMW",
       model: "X5",
-      year: 2022,
       color: "Black",
     },
   ],
@@ -458,7 +456,6 @@ export const DEFAULT_USER: User = {
         number: "AA1234BB",
         brand: "Toyota",
         model: "Camry",
-        year: 2020,
         color: "White",
       },
       parking: {
@@ -481,7 +478,6 @@ export const DEFAULT_USER: User = {
         number: "CC5678DD",
         brand: "BMW",
         model: "X5",
-        year: 2022,
         color: "Black",
       },
       parking: {
@@ -504,7 +500,6 @@ export const DEFAULT_USER: User = {
         number: "CC5678DD",
         brand: "BMW",
         model: "X5",
-        year: 2022,
         color: "Black",
       },
       parking: {

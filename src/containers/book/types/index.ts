@@ -1,20 +1,4 @@
-import type { Car } from "@/types/User";
-
-export interface Coordinates {
-  lat: number;
-  lng: number;
-}
-
-export interface Option {
-  label: string;
-  value: string | number | boolean;
-}
-
-export interface Destination {
-  distance: string;
-  duration: string;
-  name: string;
-}
+import type { Car } from "@/types";
 
 export interface BookForm {
   parkingId: string;

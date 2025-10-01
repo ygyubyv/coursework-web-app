@@ -60,7 +60,7 @@
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
 import { computed, ref, useTemplateRef } from "vue";
-import type { Parking } from "@/types/User";
+import type { Parking } from "@/types";
 import BookCard from "../components/BookCard.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseSelect from "@/components/Base/BaseSelect.vue";

@@ -84,7 +84,7 @@
 import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
 import { maskEmail } from "@/utils/maskEmail";
 import { onClickOutside } from "@vueuse/core";
-import type { User } from "@/types/User";
+import type { User } from "@/types";
 import { ref, useTemplateRef } from "vue";
 
 interface BodyLink {

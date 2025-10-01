@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { formatDate } from "@/utils/formatDate";
-import type { Transaction } from "../../types";
+import type { Transaction } from "@/types";
 
 interface Props {
   transaction: Transaction;

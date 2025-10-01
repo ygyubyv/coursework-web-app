@@ -123,7 +123,7 @@ import BaseButton from "@/components/Base/BaseButton.vue";
 import { GOOGLE_MAPS_API_KEY } from "@/config";
 import type { Coordinates } from "@/types";
 import { useMap } from "@/composables/useMap";
-import type { Parking } from "@/types/User";
+import type { Parking } from "@/types";
 import { formatDistance, calculateDistance } from "@/utils/calculateDistance";
 
 interface Props {

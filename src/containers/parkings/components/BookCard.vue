@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Parking } from "@/types/User";
+import type { Parking } from "@/types";
 import type { Booking } from "../types";
 import { formatDate } from "@/utils/formatDate";
 import BaseButton from "@/components/Base/BaseButton.vue";

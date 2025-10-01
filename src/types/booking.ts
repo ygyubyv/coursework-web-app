@@ -1,4 +1,5 @@
-import type { Parking } from "@/types";
+import type { Car } from "./car";
+import type { Parking } from "./parking";
 
 export interface Booking {
   id: string;
@@ -6,6 +7,6 @@ export interface Booking {
   date: string;
   start: string;
   end: string;
-  car: { id: string; brand: string; model: string };
+  car: Car;
   parking: Parking;
 }

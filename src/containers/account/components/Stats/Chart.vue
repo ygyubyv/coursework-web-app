@@ -18,7 +18,7 @@ import {
 import { computed } from "vue";
 
 import { Line } from "vue-chartjs";
-import type { Transaction } from "../../types";
+import type { Transaction } from "@/types";
 import { formatToYYYYMMDD } from "@/utils/formatToYYYYMMDD";
 
 interface Props {

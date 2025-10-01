@@ -67,7 +67,6 @@
             <Stat :label="$t('common.number')" :value="car.number" />
             <Stat :label="$t('common.brand')" :value="car.brand" />
             <Stat :label="$t('common.model')" :value="car.model" />
-            <Stat :label="$t('common.year')" :value="car.year" />
             <Stat :label="$t('common.color')" :value="car.color" />
           </div>
         </div>

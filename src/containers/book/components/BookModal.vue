@@ -91,7 +91,7 @@ import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseButton from "@/components/Base/BaseButton.vue";
 import type { BookForm } from "../types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
-import type { Parking, User } from "@/types/User";
+import type { Parking, User } from "@/types";
 import { useValidateBookModal } from "../composables/useValidateBookModal";
 
 interface Props {

@@ -55,13 +55,14 @@
 import Map from "@/components/Map.vue";
 import { ref, computed } from "vue";
 import Parkings from "../components/Parkings.vue";
-import type { BookForm, Option } from "../types";
+import type { BookForm } from "../types";
+import type { BaseSelectOption } from "@/types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
 import { calculateDistance } from "@/utils/calculateDistance";
 import BookModal from "../components/BookModal.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import type { Parking } from "@/types/User";
+import type { Parking } from "@/types";
 import { parkings } from "@/constants";
 import { useMap } from "@/composables/useMap";
 import { useI18n } from "vue-i18n";
@@ -75,12 +76,12 @@ const { coordinates } = useMap();
 
 const { user, authModalIsVisible, isAuthenticated } = userStore;
 
-const sortOptions: Option[] = [
+const sortOptions: BaseSelectOption[] = [
   { label: t("selects.distance"), value: "distance" },
   { label: t("selects.available_spots"), value: "spots" },
 ];
 
-const selectedOption = ref<Option>(sortOptions[0]);
+const selectedOption = ref<BaseSelectOption>(sortOptions[0]);
 const bookModalIsVisible = ref(false);
 const bookedParking = ref<Parking | null>(null);
 
