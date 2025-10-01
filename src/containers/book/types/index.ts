@@ -18,7 +18,7 @@ export interface Destination {
 
 export interface BookForm {
   parkingId: string;
-  date: Date;
+  date: string;
   start: string;
   end: string;
   car: Car;

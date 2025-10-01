@@ -18,25 +18,31 @@
   >
     <template #default>
       <BaseInput
-        v-model="newCard.pan"
+        v-model="pan"
         :placeholder="$t('forms.fields.card_number.placeholder')"
+        v-bind="panAttrs"
+        :error="errors.pan"
         id="card-number"
         type="number"
       />
-      <div class="flex gap-2">
-        <BaseInput
-          v-model="newCard.expMonth"
-          :placeholder="$t('forms.fields.exp_month.placeholder')"
-          id="exp-month"
-          type="number"
-        />
-        <BaseInput
-          v-model="newCard.expYear"
-          :placeholder="$t('forms.fields.exp_year.placeholder')"
-          id="exp-year"
-          type="number"
-        />
-      </div>
+
+      <BaseInput
+        v-model="expMonth"
+        :placeholder="$t('forms.fields.exp_month.placeholder')"
+        v-bind="expMonthAttrs"
+        :error="errors.expMonth"
+        id="exp-month"
+        type="number"
+      />
+
+      <BaseInput
+        v-model="expYear"
+        :placeholder="$t('forms.fields.exp_year.placeholder')"
+        v-bind="expYearAttrs"
+        :error="errors.expYear"
+        id="exp-year"
+        type="number"
+      />
     </template>
   </BaseModal>
 
@@ -97,40 +103,38 @@ import { paymentMethods, tiers } from "../data";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 import BaseModal from "@/components/Base/BaseModal.vue";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
-
-interface NewCard {
-  pan: number | null;
-  expMonth: number | null;
-  expYear: number | null;
-}
+import { useValidatePaymentMethod } from "../composables/useValidatePaymentMethod";
 
 const { user } = storeToRefs(useAuthStore());
+const {
+  errors,
+  pan,
+  panAttrs,
+  expMonth,
+  expMonthAttrs,
+  expYear,
+  expYearAttrs,
+  handleSubmit,
+  resetForm,
+} = useValidatePaymentMethod();
 
 const deleteCardId = ref<string | null>(null);
 const deleteCardModalIsVisible = ref(false);
 const addCardModalIsVisible = ref(false);
 
-const newCard = reactive<NewCard>({
-  pan: null,
-  expMonth: null,
-  expYear: null,
-});
-
-const handleCardAdd = () => {
+const handleCardAdd = handleSubmit((values) => {
   paymentMethods.push({
     id: Date.now().toString(),
-    pan: String(newCard.pan),
-    expires: `${newCard.expMonth}/${newCard.expYear}`,
+    pan: String(values.pan),
+    expires: `${values.expMonth}/${values.expYear}`,
   });
 
-  newCard.pan = null;
-  newCard.expYear = null;
-  newCard.expMonth = null;
+  resetForm();
 
   addCardModalIsVisible.value = false;
-};
+});
 
 const handleCardDelete = (id: string) => {
   deleteCardModalIsVisible.value = true;

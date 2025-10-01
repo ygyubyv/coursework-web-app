@@ -413,7 +413,7 @@ export const DEFAULT_USER: User = {
   id: "1",
   name: "Vasyl Kozubovych",
   email: "vasyl@example.com",
-  phoneNumber: "+380 123 456 789",
+  phoneNumber: "+380687586410",
   avatarUrl: null,
   createdAt: "2024-06-18T12:34:56Z",
   roles: ["user", "guardian", "admin"],
@@ -421,7 +421,7 @@ export const DEFAULT_USER: User = {
   cars: [
     {
       id: "1",
-      numbers: "AA1234BB",
+      number: "AA1234BB",
       brand: "Toyota",
       model: "Camry",
       year: 2020,
@@ -429,7 +429,7 @@ export const DEFAULT_USER: User = {
     },
     {
       id: "2",
-      numbers: "CC5678DD",
+      number: "CC5678DD",
       brand: "BMW",
       model: "X5",
       year: 2022,
@@ -455,7 +455,7 @@ export const DEFAULT_USER: User = {
       end: "12:00",
       car: {
         id: "1",
-        numbers: "AA1234BB",
+        number: "AA1234BB",
         brand: "Toyota",
         model: "Camry",
         year: 2020,
@@ -478,7 +478,7 @@ export const DEFAULT_USER: User = {
       end: "16:00",
       car: {
         id: "2",
-        numbers: "CC5678DD",
+        number: "CC5678DD",
         brand: "BMW",
         model: "X5",
         year: 2022,
@@ -501,7 +501,7 @@ export const DEFAULT_USER: User = {
       end: "10:00",
       car: {
         id: "2",
-        numbers: "CC5678DD",
+        number: "CC5678DD",
         brand: "BMW",
         model: "X5",
         year: 2022,

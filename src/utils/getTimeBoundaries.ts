@@ -23,14 +23,19 @@ import { timeUnitsInMs } from "./timeUnitsInMs";
  */
 
 export const getTimeBoundaries = (now?: number) => {
-  const { day, week, month, year } = timeUnitsInMs();
+  const { minute, hour, day, week, month, year } = timeUnitsInMs();
 
   const today = now || new Date().getTime();
+
+  const hourAgo = today - hour;
+  const minuteAgo = today - minute;
   const yesterday = today - day;
   const weekAgo = today - week;
   const monthAgo = today - month;
   const yearAgo = today - year;
 
+  const nextMinute = today + minute;
+  const nextHour = today + hour;
   const tomorrow = today + day;
   const nextWeek = today + week;
   const nextMonth = today + month;
@@ -38,10 +43,14 @@ export const getTimeBoundaries = (now?: number) => {
 
   return {
     today,
+    minuteAgo,
+    hourAgo,
     yesterday,
     weekAgo,
     monthAgo,
     yearAgo,
+    nextMinute,
+    nextHour,
     tomorrow,
     nextWeek,
     nextMonth,

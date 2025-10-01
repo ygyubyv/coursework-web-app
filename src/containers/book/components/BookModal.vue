@@ -21,9 +21,11 @@
           }}</label>
           <BaseInput
             type="date"
-            :placeholder="$t('forms.fields.placeholder')"
+            :placeholder="$t('forms.fields.date_time.placeholder')"
+            v-bind="dateAttrs"
+            :error="errors.date"
             id="book-date"
-            v-model="form.date"
+            v-model="date"
           />
         </div>
 
@@ -34,8 +36,10 @@
           <BaseInput
             type="time"
             :placeholder="$t('forms.fields.start_time.placeholder')"
+            v-bind="startTimeAttrs"
+            :error="errors.startTime"
             id="book-start"
-            v-model="form.start"
+            v-model="startTime"
           />
         </div>
 
@@ -46,8 +50,10 @@
           <BaseInput
             type="time"
             :placeholder="$t('forms.fields.end_time.placeholder')"
+            v-bind="endTimeAttrs"
+            :error="errors.endTime"
             id="book-end"
-            v-model="form.end"
+            v-model="endTime"
           />
         </div>
 
@@ -70,6 +76,7 @@
           :text="$t('buttons.confirm')"
           icon="check"
           mode="Primary"
+          :disabled="!meta.valid"
           :onClick="onSubmit"
         />
       </div>
@@ -78,13 +85,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import BaseSlideModal from "@/components/Base/BaseSlideModal.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseButton from "@/components/Base/BaseButton.vue";
 import type { BookForm } from "../types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
 import type { Parking, User } from "@/types/User";
+import { useValidateBookModal } from "../composables/useValidateBookModal";
 
 interface Props {
   user: User;
@@ -104,28 +112,29 @@ const carOptions = props.user.cars.map((car) => ({
 
 const selectedCar = ref(carOptions[0]);
 
-const form = reactive({
-  date: null,
-  start: null,
-  end: null,
-});
+const {
+  meta,
+  date,
+  dateAttrs,
+  startTime,
+  startTimeAttrs,
+  endTime,
+  endTimeAttrs,
+  errors,
+  handleSubmit,
+  resetForm,
+} = useValidateBookModal();
 
-const clearForm = () => {
-  form.date = null;
-  form.start = null;
-  form.end = null;
-  selectedCar.value = carOptions[0];
-};
-
-const onSubmit = () => {
+const onSubmit = handleSubmit((values) => {
   emit("onSubmit", {
     parkingId: props.parking.id,
-    date: form.date!,
-    start: form.start!,
-    end: form.end!,
+    date: date.value,
+    start: startTime.value,
+    end: endTime.value,
     car: selectedCar.value.value,
   });
+
   emit("onClose");
-  clearForm();
-};
+  resetForm();
+});
 </script>

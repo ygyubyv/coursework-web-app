@@ -21,7 +21,13 @@ export const useAuthStore = defineStore("auth", () => {
       if (!myMSALObj) {
         throw new Error("MSAL is not initialized");
       }
-      await myMSALObj.loginRedirect(loginRequest);
+
+      const locale = localStorage.getItem("locale");
+
+      await myMSALObj.loginRedirect({
+        ...loginRequest,
+        extraQueryParameters: { ui_locales: locale ?? "en" },
+      });
     } catch (error) {
       console.error("Login error", error);
     }

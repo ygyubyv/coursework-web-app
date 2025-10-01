@@ -4,13 +4,23 @@
     "full_name": "Повне ім'я",
     "email": "Електронна пошта",
     "phone": "Телефон",
+    "message": "Повідомлення",
     "joined": "Дата приєднання",
+    "card_number": "Номер картки",
+    "exp_month": "Місяць закінчення",
+    "exp_year": "Рік закінчення",
     "view_profile": "Переглянути профіль",
     "filter_by": "Фільтрувати за",
     "distance": "Відстань",
     "current": "Поточний",
     "station": "Станція",
     "car": "Машина",
+    "month": "Місяць",
+    "year": "Рік",
+    "number": "Номер",
+    "brand": "Марка",
+    "model": "Модель",
+    "color": "Колір",
     "android": "Android",
     "ios": "iOS"
   },
@@ -36,45 +46,38 @@
     "clear": "Очистити"
   },
 
-  "selects": {
-    "all": "Всі",
-    "finished": "Завершені",
-    "active": "Активні",
-    "distance": "@:common.distance",
-    "available_spots": "Доступні місця",
-
-    "labels": {
-      "select_car": "Виберіть автомобіль",
-      "sort_by": "Сортувати за"
-    }
-  },
-
   "forms": {
     "validation": {
       "required": "Це поле обов'язкове",
       "invalid": "Введіть {entity} правильно",
+      "length": "{entity} має містити рівно {length} символів",
       "minLength": "{entity} має містити щонайменше {min} символів",
-      "maxLength": "{entity} не має перевищувати {max} символів"
+      "maxLength": "{entity} не має перевищувати {max} символів",
+      "type_error": "Поле {entity} має бути типу {type}",
+      "date_not_past": "Дата не може починатися раніше ніж сьогодні",
+      "start_not_past": "Час початку не може бути раніше ніж зараз",
+      "end_after_start": "Час завершення має бути пізніше часу початку",
+      "expired": "{entity} не може бути простроченим"
     },
 
     "fields": {
       "full_name": {
-        "label": "Повне ім’я",
+        "label": "@:common.full_name",
         "placeholder": "Введіть своє повне ім’я"
       },
 
       "email": {
-        "label": "Електронна пошта",
+        "label": "@:common.email",
         "placeholder": "Введіть вашу електронну пошту"
       },
 
       "phone": {
-        "label": "Телефон",
-        "placeholder": "+380 123 456 789"
+        "label": "@:common.phone",
+        "placeholder": "+380687586410"
       },
 
       "message": {
-        "label": "Повідомлення",
+        "label": "@:common.message",
         "placeholder": "Напишіть ваше повідомлення"
       },
 
@@ -99,44 +102,57 @@
       },
 
       "card_number": {
-        "label": "Номер картки",
+        "label": "@:common.card_number",
         "placeholder": "Введіть номер картки"
       },
 
       "exp_month": {
-        "label": "Місяць закінчення",
+        "label": "@:common.exp_month",
         "placeholder": "ММ"
       },
 
       "exp_year": {
-        "label": "Рік закінчення",
+        "label": "@:common.exp_year",
         "placeholder": "РР"
       },
 
-      "numbers": {
-        "label": "Номерний знак",
+      "number": {
+        "label": "@:common.number",
         "placeholder": "Введіть номерний знак"
       },
 
       "brand": {
-        "label": "Марка",
+        "label": "@:common.brand",
         "placeholder": "Введіть марку"
       },
 
       "model": {
-        "label": "Модель",
+        "label": "@:common.model",
         "placeholder": "Введіть модель"
       },
 
       "year": {
-        "label": "Рік",
+        "label": "@:common.year",
         "placeholder": "Введіть рік"
       },
 
       "color": {
-        "label": "Колір",
+        "label": "@:common.color",
         "placeholder": "Введіть колір"
       }
+    }
+  },
+
+  "selects": {
+    "all": "Всі",
+    "finished": "Завершені",
+    "active": "Активні",
+    "distance": "@:common.distance",
+    "available_spots": "Доступні місця",
+
+    "labels": {
+      "select_car": "Виберіть автомобіль",
+      "sort_by": "Сортувати за"
     }
   },
 
@@ -254,12 +270,7 @@
   "cars": {
     "title": "Автомобілі",
     "no_cars": "Автомобілі не додані",
-    "total_cars": "Усього авто",
-    "number": "Номер",
-    "brand": "Марка",
-    "model": "Модель",
-    "year": "Рік",
-    "color": "Колір"
+    "total_cars": "Усього авто"
   },
 
   "routes": {

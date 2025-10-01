@@ -1,18 +1,24 @@
 <template>
-  <input
-    v-model="inputValue"
-    :id="id"
-    :type="type"
-    :placeholder="placeholder"
-    v-bind="$attrs"
-    :class="[
-      'w-full  sm:max-w-full rounded-md border transition-colors duration-200 focus:outline-none',
-      sizeClasses,
-      error
-        ? 'border-red-500 bg-red-50 text-black focus:ring-red-400'
-        : 'border-gray-300 text-black focus:border-black focus:ring-black/30',
-    ]"
-  />
+  <div class="flex flex-col w-full">
+    <label v-if="error" :for="id" class="mb-1 text-sm text-red-600">
+      {{ error }}
+    </label>
+
+    <input
+      v-model="inputValue"
+      :id="id"
+      :type="type"
+      :placeholder="placeholder"
+      v-bind="$attrs"
+      :class="[
+        'w-full sm:max-w-full rounded-md border transition-colors duration-200 focus:outline-none',
+        sizeClasses,
+        error
+          ? 'border-red-500 bg-red-50 text-black focus:ring-red-400'
+          : 'border-gray-300 text-black focus:border-black focus:ring-black/30',
+      ]"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -39,7 +45,7 @@ interface Props {
   placeholder: string;
   id: string;
   type?: InputType;
-  error?: boolean;
+  error?: string;
   size?: Size;
 }
 

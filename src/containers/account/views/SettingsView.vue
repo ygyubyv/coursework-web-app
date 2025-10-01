@@ -10,36 +10,40 @@
     <template #default>
       <div class="flex flex-col gap-3">
         <BaseInput
-          v-model="newCar.numbers"
-          :placeholder="$t('forms.fields.numbers.placeholder')"
-          id="car-numbers"
+          v-model="newCar.number.value"
+          :placeholder="$t('forms.fields.number.placeholder')"
+          v-bind="newCar.numberAttrs.value"
+          :error="newCar.errors.value.number"
+          id="car-number"
           type="text"
           size="Medium"
         />
+
         <BaseInput
-          v-model="newCar.brand"
+          v-model="newCar.brand.value"
           :placeholder="$t('forms.fields.brand.placeholder')"
+          v-bind="newCar.brandAttrs.value"
+          :error="newCar.errors.value.brand"
           id="car-brand"
           type="text"
           size="Medium"
         />
+
         <BaseInput
-          v-model="newCar.model"
+          v-model="newCar.model.value"
           :placeholder="$t('forms.fields.model.placeholder')"
+          v-bind="newCar.modelAttrs.value"
+          :error="newCar.errors.value.model"
           id="car-model"
           type="text"
           size="Medium"
         />
+
         <BaseInput
-          v-model="newCar.year"
-          :placeholder="$t('forms.fields.year.placeholder')"
-          id="car-year"
-          type="number"
-          size="Medium"
-        />
-        <BaseInput
-          v-model="newCar.color"
+          v-model="newCar.color.value"
           :placeholder="$t('forms.fields.color.placeholder')"
+          v-bind="newCar.colorAttrs.value"
+          :error="newCar.errors.value.color"
           id="car-color"
           type="text"
           size="Medium"
@@ -83,63 +87,88 @@
         />
 
         <div class="flex-1 space-y-4 order-2 md:order-1">
-          <InputField
-            :label="$t('forms.fields.full_name.label')"
-            :input="{
-              id: 'name',
-              placeholder: $t('forms.fields.full_name.placeholder'),
-              type: 'text',
-            }"
-            v-model="form.name"
-          />
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-center gap-2"
+          >
+            <label class="w-32 text-gray-700 font-medium"
+              >{{ $t("forms.fields.full_name.label") }}:</label
+            >
 
-          <InputField
-            :label="$t('forms.fields.email.label')"
-            :input="{
-              id: 'email',
-              placeholder: $t('forms.fields.email.placeholder'),
-              type: 'email',
-            }"
-            v-model="form.email"
-          />
+            <BaseInput
+              id="name"
+              :placeholder="$t('forms.fields.full_name.placeholder')"
+              class="w-full md:w-[300px] py-1.5 text-sm"
+              type="text"
+              v-bind="editedUser.fullNameAttrs.value"
+              v-model="editedUser.fullName.value"
+              :error="editedUser.errors.value.fullName"
+            />
+          </div>
 
-          <InputField
-            :label="$t('forms.fields.phone.label')"
-            :input="{
-              id: 'phone',
-              placeholder: $t('forms.fields.phone.placeholder'),
-              type: 'text',
-            }"
-            v-model="form.phoneNumber"
-          />
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-center gap-2"
+          >
+            <label class="w-32 text-gray-700 font-medium"
+              >{{ $t("forms.fields.email.label") }}:</label
+            >
+
+            <BaseInput
+              id="email"
+              :placeholder="$t('forms.fields.email.placeholder')"
+              class="w-full md:w-[300px] py-1.5 text-sm"
+              type="email"
+              v-bind="editedUser.emailAttrs.value"
+              v-model="editedUser.email.value"
+              :error="editedUser.errors.value.email"
+            />
+          </div>
+
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-center gap-2"
+          >
+            <label class="w-32 text-gray-700 font-medium"
+              >{{ $t("forms.fields.phone.label") }}:</label
+            >
+
+            <BaseInput
+              id="name"
+              :placeholder="$t('forms.fields.phone.placeholder')"
+              class="w-full md:w-[300px] py-1.5 text-sm"
+              type="tel"
+              v-bind="editedUser.phoneNumberAttrs.value"
+              v-model="editedUser.phoneNumber.value"
+              :error="editedUser.errors.value.phoneNumber"
+            />
+          </div>
         </div>
       </div>
 
       <h2 class="text-xl font-bold text-black">{{ $t("cars.title") }}</h2>
 
-      <div class="space-y-4">
+      <div class="space-y-4" v-if="user?.cars">
         <div
           class="flex items-center justify-between rounded-lg border border-gray-200 p-3 bg-gray-50"
         >
           <span class="font-medium text-gray-700"
             >{{ $t("cars.total_cars") }}:</span
           >
-          <span class="font-bold text-black">{{ form.cars.length }}</span>
+          <span class="font-bold text-black">{{ user.cars.length }}</span>
         </div>
 
         <div class="flex flex-col gap-4">
           <CarCard
-            v-for="car in form.cars"
+            v-for="car in user.cars"
             :key="car.id"
             :car="car"
             @on-car-delete="handleDeleteCar"
+            @save-changes="handleSaveCarChanges"
           />
         </div>
       </div>
     </div>
 
     <Actions
-      :has-changes="hasChanges"
+      :has-changes="editedUser.meta.value.dirty || !!avatarPreview"
       @add-car="addCarModalIsVisible = true"
       @cancel="onCancel"
       @save-profile="saveProfile"
@@ -149,42 +178,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref } from "vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
-import InputField from "../components/Settings/InputField.vue";
 import Avatar from "../components/Settings/Avatar.vue";
 import CarCard from "../components/Settings/CarCard.vue";
 import Actions from "../components/Settings/Actions.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 import BaseModal from "@/components/Base/BaseModal.vue";
+import { useValidateUser } from "../composables/useValidateUser";
+import { useValidateCar } from "../composables/useValidateCar";
 import type { Car } from "@/types/User";
 
 const { logout } = useAuthStore();
 const { user } = storeToRefs(useAuthStore());
 
-const initialForm = reactive({
-  name: user.value!.name,
-  email: user.value!.email,
-  phoneNumber: user.value!.phoneNumber,
-  cars: user.value!.cars.map((car) => ({ ...car })),
-});
-
-const form = reactive({
-  name: user.value!.name,
-  email: user.value!.email,
-  phoneNumber: user.value!.phoneNumber,
-  cars: [...user.value!.cars],
-});
-
-const newCar = reactive<Car>({
-  id: "",
-  numbers: "",
-  brand: "",
-  model: "",
-  year: new Date().getFullYear(),
-  color: "",
-});
+const editedUser = useValidateUser();
+const newCar = useValidateCar();
 
 const addCarModalIsVisible = ref(false);
 const deleteCarModalIsVisible = ref(false);
@@ -193,78 +203,46 @@ const deleteAccountModalIsVisible = ref(false);
 const deleteCarId = ref<string | null>(null);
 const avatarPreview = ref<string | null>(user.value!.avatarUrl);
 
-const hasChanges = computed(() => {
-  return (
-    JSON.stringify(initialForm) !== JSON.stringify(form) ||
-    avatarPreview.value !== user.value!.avatarUrl
-  );
-});
-
 const handleAvatarChange = (file: File) => {
   avatarPreview.value = URL.createObjectURL(file);
 };
 
-const handleAddCar = () => {
-  form.cars.push({
-    ...newCar,
-    id: String(Date.now()),
-  });
+const handleAddCar = newCar.handleSubmit((values) => {
+  const car = {
+    model: values.model,
+    brand: values.brand,
+    color: values.color,
+    number: values.number,
+  } as Car;
 
-  newCar.id = "";
-  newCar.numbers = "";
-  newCar.brand = "";
-  newCar.model = "";
-  newCar.color = "";
+  console.log("Car", car);
 
+  newCar.resetForm();
   addCarModalIsVisible.value = false;
-};
+});
 
 const handleDeleteCar = (id: string) => {
   deleteCarModalIsVisible.value = true;
   deleteCarId.value = id;
 };
 
+const handleSaveCarChanges = (id: string, car: Car) => {
+  console.log(id, car);
+};
+
 const confirmDeleteCar = () => {
-  const targetIndex = form.cars.findIndex((c) => c.id === deleteCarId.value);
-
-  if (targetIndex === -1) {
-    return;
-  }
-
-  form.cars.splice(targetIndex, 1);
+  console.log(deleteCarId.value);
   deleteCarModalIsVisible.value = false;
 };
 
 const onCancel = () => {
-  form.name = initialForm.name;
-  form.email = initialForm.email;
-  form.phoneNumber = initialForm.phoneNumber;
-
-  form.cars.splice(
-    0,
-    form.cars.length,
-    ...initialForm.cars.map((car) => ({ ...car }))
-  );
-
+  editedUser.resetForm();
   avatarPreview.value = user.value!.avatarUrl;
 };
 
-const saveProfile = () => {
-  user.value!.name = form.name;
-  user.value!.cars = form.cars;
-  user.value!.email = form.email;
-  user.value!.phoneNumber = form.phoneNumber;
-  user.value!.avatarUrl = avatarPreview.value;
-
-  initialForm.name = form.name;
-  initialForm.email = form.email;
-  initialForm.phoneNumber = form.phoneNumber;
-  initialForm.cars.splice(
-    0,
-    initialForm.cars.length,
-    ...form.cars.map((car) => ({ ...car }))
-  );
-};
+const saveProfile = editedUser.handleSubmit(() => {
+  console.log("Save profile");
+});
 
 const handleDeleteAccount = async () => {
   try {

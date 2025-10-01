@@ -24,7 +24,7 @@ export interface Parking {
 
 export interface Car {
   id: string;
-  numbers: string;
+  number: string;
   brand: string;
   model: string;
   year: number;

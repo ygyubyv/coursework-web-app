@@ -64,11 +64,11 @@
             :key="car.id"
             class="bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm space-y-2"
           >
-            <Stat :label="$t('cars.number')" :value="car.numbers" />
-            <Stat :label="$t('cars.brand')" :value="car.brand" />
-            <Stat :label="$t('cars.model')" :value="car.model" />
-            <Stat :label="$t('cars.year')" :value="car.year" />
-            <Stat :label="$t('cars.color')" :value="car.color" />
+            <Stat :label="$t('common.number')" :value="car.number" />
+            <Stat :label="$t('common.brand')" :value="car.brand" />
+            <Stat :label="$t('common.model')" :value="car.model" />
+            <Stat :label="$t('common.year')" :value="car.year" />
+            <Stat :label="$t('common.color')" :value="car.color" />
           </div>
         </div>
       </div>

@@ -4,13 +4,23 @@
     "full_name": "Full name",
     "email": "Email",
     "phone": "Phone",
+    "message": "Message",
     "joined": "Joined",
+    "card_number": "Card Number",
+    "exp_month": "Expiration Month",
+    "exp_year": "Expiration Year",
     "view_profile": "View profile",
     "filter_by": "Filter By",
     "station": "Station",
     "distance": "Distance",
     "current": "Current",
     "car": "Car",
+    "month": "Month",
+    "year": "Year",
+    "number": "Number",
+    "brand": "Brand",
+    "model": "Model",
+    "color": "Color",
     "android": "Android",
     "ios": "iOS"
   },
@@ -40,8 +50,14 @@
     "validation": {
       "required": "This field is required",
       "invalid": "Enter a valid {entity}",
+      "length": "{entity} must be exactly {length} characters long",
       "minLength": "{entity} must be at least {min} characters",
-      "maxLength": "{entity} must not exceed {max} characters"
+      "maxLength": "{entity} must not exceed {max} characters",
+      "type_error": "{entity} is not {type} type",
+      "date_not_past": "The date cannot be earlier than today",
+      "start_not_past": "Start time cannot be earlier than now",
+      "end_after_start": "End time must be later than start time",
+      "expired": "{entity} cannot be expired"
     },
 
     "fields": {
@@ -57,11 +73,11 @@
 
       "phone": {
         "label": "@:common.phone",
-        "placeholder": "+380 123 456 789"
+        "placeholder": "+380687586410"
       },
 
       "message": {
-        "label": "Message",
+        "label": "@:common.message",
         "placeholder": "Type your message"
       },
 
@@ -86,42 +102,42 @@
       },
 
       "card_number": {
-        "label": "Card Number",
+        "label": "@:common.card_number",
         "placeholder": "Enter card number"
       },
 
       "exp_month": {
-        "label": "Expiration Month",
+        "label": "@:common.exp_month",
         "placeholder": "MM"
       },
 
       "exp_year": {
-        "label": "Expiration Year",
+        "label": "@:common.exp_year",
         "placeholder": "YY"
       },
 
-      "numbers": {
-        "label": "Car numbers",
+      "number": {
+        "label": "@:common.number",
         "placeholder": "Enter license plate number"
       },
 
       "brand": {
-        "label": "Brand",
+        "label": "@:common.brand",
         "placeholder": "Enter brand"
       },
 
       "model": {
-        "label": "Model",
+        "label": "@:common.model",
         "placeholder": "Enter model"
       },
 
       "year": {
-        "label": "Year",
+        "label": "@:common.year",
         "placeholder": "Enter year"
       },
 
       "color": {
-        "label": "Color",
+        "label": "@:common.color",
         "placeholder": "Enter color"
       }
     }
@@ -254,12 +270,7 @@
   "cars": {
     "title": "Cars",
     "no_cars": "No cars added",
-    "total_cars": "Total cars",
-    "number": "Number",
-    "brand": "Brand",
-    "model": "Model",
-    "year": "Year",
-    "color": "Color"
+    "total_cars": "Total cars"
   },
 
   "routes": {

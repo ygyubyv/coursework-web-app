@@ -15,33 +15,43 @@
       >
         <BaseInput
           id="name"
-          v-model="form.name"
+          v-model="fullName"
+          v-bind="fullNameAttrs"
           :placeholder="$t('forms.fields.full_name.placeholder')"
+          :error="errors.fullName"
           type="text"
         />
+
         <BaseInput
           id="email"
-          v-model="form.email"
+          v-model="email"
+          v-bind="emailAttrs"
           :placeholder="$t('forms.fields.email.placeholder')"
+          :error="errors.email"
           type="email"
         />
+
         <BaseTextarea
           id="message"
           name="message"
           :placeholder="$t('forms.fields.message.placeholder')"
           :rows="3"
-          v-model="form.message"
+          :error="errors.message"
+          v-model="message"
+          v-bind="messageAttrs"
         />
+
         <div class="flex gap-2.5 self-end">
           <BaseButton
             :text="$t('buttons.clear')"
-            :onClick="onClear"
+            :onClick="resetForm"
             mode="Secondary"
             icon="eraser"
           />
           <BaseButton
             type="submit"
             :text="$t('buttons.send')"
+            :disabled="!meta.valid"
             mode="Primary"
             icon="paper-plane"
           />
@@ -51,31 +61,31 @@
   </div>
 </template>
 <script setup lang="ts">
-import BaseButton from "@/components/Base/BaseButton.vue";
-import BaseInput from "@/components/Base/BaseInput.vue";
-import BaseTextarea from "@/components/Base/BaseTextarea.vue";
-import { reactive } from "vue";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
 import { useI18n } from "vue-i18n";
+import BaseButton from "@/components/Base/BaseButton.vue";
+import BaseInput from "@/components/Base/BaseInput.vue";
+import BaseTextarea from "@/components/Base/BaseTextarea.vue";
+import { useValidateContactForm } from "../composables/useValidateContactForm";
 
 const { t } = useI18n();
+const {
+  meta,
+  errors,
+  fullName,
+  fullNameAttrs,
+  email,
+  emailAttrs,
+  message,
+  messageAttrs,
+  handleSubmit,
+  resetForm,
+} = useValidateContactForm();
 
-const form = reactive({
-  name: "",
-  email: "",
-  message: "",
+const onSubmit = handleSubmit((values) => {
+  console.log(values);
 });
-
-const onSubmit = () => {
-  console.log("Submit");
-};
-
-const onClear = () => {
-  form.name = "";
-  form.email = "";
-  form.message = "";
-};
 
 useHead({
   title: t("seo.contact.head.title"),
