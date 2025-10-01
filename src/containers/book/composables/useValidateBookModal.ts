@@ -1,9 +1,7 @@
 import * as yup from "yup";
 import { useI18n } from "vue-i18n";
 import { useForm, useFormErrors } from "vee-validate";
-import { formatToYYYYMMDD } from "@/utils/formatToYYYYMMDD";
-import { formatToHHmm } from "@/utils/formatToHHmm";
-import { getTimeBoundaries } from "@/utils/getTimeBoundaries";
+import { formatToYYYYMMDD, formatToHHmm, getTimeBoundaries } from "@/utils";
 
 export const useValidateBookModal = () => {
   const { t } = useI18n();

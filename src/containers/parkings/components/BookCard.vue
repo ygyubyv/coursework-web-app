@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import type { Parking } from "@/types";
 import type { Booking } from "../types";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/date/formatDate";
 import BaseButton from "@/components/Base/BaseButton.vue";
 
 interface Props {

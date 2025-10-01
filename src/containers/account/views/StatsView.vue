@@ -37,8 +37,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import Chart from "../components/Stats/Chart.vue";
-import { getTimeBoundaries } from "@/utils/getTimeBoundaries";
-import { timeUnitsInMs } from "@/utils/timeUnitsInMs";
+import { getTimeBoundaries, timeUnitsInMs } from "@/utils";
 import Overview from "../components/Stats/Overview.vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth";

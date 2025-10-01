@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 import { DEFAULT_AVATAR } from "@/constants";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils";
 import Stat from "../components/Stat.vue";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/auth";

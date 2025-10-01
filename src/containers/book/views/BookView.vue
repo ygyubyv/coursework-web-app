@@ -58,7 +58,7 @@ import Parkings from "../components/Parkings.vue";
 import type { BookForm } from "../types";
 import type { BaseSelectOption } from "@/types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
-import { calculateDistance } from "@/utils/calculateDistance";
+import { calculateDistance } from "@/utils";
 import BookModal from "../components/BookModal.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";

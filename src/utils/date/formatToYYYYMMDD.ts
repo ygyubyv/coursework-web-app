@@ -1,13 +1,11 @@
 /**
- * Converts a Unix timestamp to a `YYYYMMDD` formatted string.
+ * Converts a Unix timestamp to a `YYYY-MM-DD` formatted string.
  *
- * This format is required for NASA API calls.
- *
- * @param ms - The date to format in Unix timestamp.
- * @returns A string in `YYYYMMDD` format.
+ * @param ms - The date to format in Unix timestamp (milliseconds).
+ * @returns A string in `YYYY-MM-DD` format.
  *
  * @example
- * formatToYYYYMMDD(1755851392346) // "20250822"
+ * formatToYYYYMMDD(1755851392346) // "2025-08-22"
  */
 
 export const formatToYYYYMMDD = (ms: number) => {

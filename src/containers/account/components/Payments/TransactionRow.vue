@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils";
 import type { Transaction } from "@/types";
 
 interface Props {

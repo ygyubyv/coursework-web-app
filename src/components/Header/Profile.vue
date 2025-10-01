@@ -82,7 +82,7 @@
 
 <script setup lang="ts">
 import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
-import { maskEmail } from "@/utils/maskEmail";
+import { maskEmail } from "@/utils";
 import { onClickOutside } from "@vueuse/core";
 import type { User } from "@/types";
 import { ref, useTemplateRef } from "vue";

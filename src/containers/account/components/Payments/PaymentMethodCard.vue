@@ -22,9 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { maskPan } from "@/utils/maskPan";
+import { maskPan, detectCardBrand } from "@/utils";
 import type { PaymentMethod } from "../../types";
-import { detectCardBrand } from "@/utils/detectCardBrand";
 
 interface Props {
   paymentMethod: PaymentMethod;

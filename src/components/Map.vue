@@ -124,7 +124,7 @@ import { GOOGLE_MAPS_API_KEY } from "@/config";
 import type { Coordinates } from "@/types";
 import { useMap } from "@/composables/useMap";
 import type { Parking } from "@/types";
-import { formatDistance, calculateDistance } from "@/utils/calculateDistance";
+import { formatDistance, calculateDistance } from "@/utils";
 
 interface Props {
   center?: Coordinates;
