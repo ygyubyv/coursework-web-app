@@ -1,22 +1,14 @@
 import * as yup from "yup";
 import { useI18n } from "vue-i18n";
 import { useForm, useFormErrors } from "vee-validate";
-import { formatToYYYYMMDD, formatToHHmm, getTimeBoundaries } from "@/utils";
+import { formatToDatetimeLocal, getTimeBoundaries } from "@/utils";
 
 export const useValidateBookModal = () => {
   const { t } = useI18n();
   const { minuteAgo, nextHour } = getTimeBoundaries();
 
   const bookSchema = yup.object({
-    date: yup
-      .date()
-      .required(t("forms.validation.required"))
-      .min(
-        new Date(new Date().setHours(0, 0, 0, 0)),
-        t("forms.validation.date_not_past")
-      ),
-
-    startTime: yup
+    start: yup
       .string()
       .required(t("forms.validation.required"))
       .test("is-after", t("forms.validation.start_not_past"), function (value) {
@@ -24,23 +16,23 @@ export const useValidateBookModal = () => {
           return false;
         }
 
-        return value > formatToHHmm(minuteAgo);
+        return new Date(value).getTime() > minuteAgo;
       }),
 
-    endTime: yup
+    end: yup
       .string()
       .required(t("forms.validation.required"))
       .test(
         "is-after",
         t("forms.validation.end_after_start"),
         function (value) {
-          const { startTime } = this.parent;
+          const { start } = this.parent;
 
-          if (!value || !startTime) {
+          if (!value || !start) {
             return false;
           }
 
-          return value > startTime;
+          return new Date(value).getTime() > new Date(start).getTime();
         }
       ),
   });
@@ -48,26 +40,22 @@ export const useValidateBookModal = () => {
   const { defineField, handleSubmit, resetForm, meta } = useForm({
     validationSchema: bookSchema,
     initialValues: {
-      date: formatToYYYYMMDD(Date.now()),
-      startTime: formatToHHmm(Date.now()),
-      endTime: formatToHHmm(nextHour),
+      start: formatToDatetimeLocal(new Date()),
+      end: formatToDatetimeLocal(new Date(nextHour)),
     },
   });
 
   const errors = useFormErrors();
 
-  const [date, dateAttrs] = defineField("date");
-  const [startTime, startTimeAttrs] = defineField("startTime");
-  const [endTime, endTimeAttrs] = defineField("endTime");
+  const [start, startAttrs] = defineField("start");
+  const [end, endAttrs] = defineField("end");
 
   return {
     meta,
-    date,
-    dateAttrs,
-    startTime,
-    startTimeAttrs,
-    endTime,
-    endTimeAttrs,
+    start,
+    startAttrs,
+    end,
+    endAttrs,
     errors,
     handleSubmit,
     resetForm,

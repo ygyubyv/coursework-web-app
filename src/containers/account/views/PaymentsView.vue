@@ -86,7 +86,8 @@
     </div>
 
     <LatestTransactions
-      :transactions="user!.transactions.slice(-5).reverse()"
+      v-if="user?.transactions && user.transactions.length"
+      :transactions="user.transactions.slice(-5).reverse()"
     />
 
     <Security />
@@ -101,13 +102,16 @@ import Security from "../components/Payments/Security.vue";
 import LatestTransactions from "../components/Payments/LatestTransactions.vue";
 import { paymentMethods, tiers } from "../data";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth";
 import BaseModal from "@/components/Base/BaseModal.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import { useValidatePaymentMethod } from "../composables/useValidatePaymentMethod";
+import { useUserStore } from "@/stores/user";
 
-const { user } = storeToRefs(useAuthStore());
+const userStore = useUserStore();
+const { setUserTransactions } = userStore;
+const { user } = storeToRefs(userStore);
+
 const {
   errors,
   pan,
@@ -153,4 +157,8 @@ const confirmCardDelete = () => {
   paymentMethods.splice(targetIndex, 1);
   deleteCardModalIsVisible.value = false;
 };
+
+onMounted(() => {
+  setUserTransactions();
+});
 </script>

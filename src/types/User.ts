@@ -1,19 +1,24 @@
-import type { Car } from "./car";
-import type { UserSubscription } from "./subscription";
-import type { Transaction } from "./transaction";
-import type { Booking } from "./booking";
+import type { Car } from "./Car";
+import type { UserSubscription } from "./Subscription";
+import type { Transaction } from "./Transaction";
+import type { Booking } from "./Booking";
 
 export type Role = "user" | "guardian" | "admin";
+
+export type UserSummary = Pick<
+  User,
+  "id" | "name" | "email" | "phoneNumber" | "avatarUrl" | "createdAt"
+>;
 
 export type User = {
   id: string;
   name: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber: string | null;
   avatarUrl: string | null;
   cars: Car[];
   roles: Role[];
-  subscription: UserSubscription;
+  subscription: UserSubscription | null;
   transactions: Transaction[];
   createdAt: string;
   bookings: Booking[];

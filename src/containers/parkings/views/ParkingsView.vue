@@ -59,22 +59,25 @@
 <script setup lang="ts">
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
-import { computed, ref, useTemplateRef } from "vue";
+import { computed, onMounted, ref, useTemplateRef } from "vue";
 import type { Parking } from "@/types";
 import BookCard from "../components/BookCard.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
 import type { BaseSelectOption } from "@/types";
-import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 import Map from "@/components/Map.vue";
 import { useMap } from "@/composables/useMap";
 import { useI18n } from "vue-i18n";
+import { useUserStore } from "@/stores/user";
 
 const { coordinates } = useMap();
 const { t } = useI18n();
 
-const { user } = storeToRefs(useAuthStore());
+const userStore = useUserStore();
+
+const { setUserBookings } = userStore;
+const { user } = storeToRefs(userStore);
 
 const filterOptions: BaseSelectOption[] = [
   { label: t("selects.all"), value: "all" },
@@ -126,6 +129,10 @@ const showParkingOnMap = (parking: Parking) => {
   currentParking.value = parking;
   mapIsVisible.value = true;
 };
+
+onMounted(() => {
+  setUserBookings();
+});
 
 useHead({
   title: t("seo.parkings.head.title"),

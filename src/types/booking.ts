@@ -1,5 +1,5 @@
-import type { Car } from "./car";
-import type { Parking } from "./parking";
+import type { Car } from "./Car";
+import type { Parking } from "./Parking";
 
 export interface Booking {
   id: string;
@@ -9,4 +9,12 @@ export interface Booking {
   end: string;
   car: Car;
   parking: Parking;
+}
+
+export interface BookForm {
+  userId: string;
+  parkingId: string;
+  carId: string;
+  start: string;
+  end: string;
 }

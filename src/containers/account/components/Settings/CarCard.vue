@@ -99,7 +99,8 @@
 import BaseButton from "@/components/Base/BaseButton.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import type { Car } from "@/types";
-import { useValidateCar } from "../../composables/useValidateCar";
+import { useValidateCar } from "@/composables/useValidateCar";
+import { watch } from "vue";
 
 interface Props {
   car: Car;
@@ -136,4 +137,18 @@ const onSave = handleSubmit((values) => {
 
   emit("saveChanges", props.car.id, car);
 });
+
+watch(
+  () => props.car,
+  (newCar) => {
+    resetForm({
+      values: {
+        number: newCar.number,
+        brand: newCar.brand,
+        model: newCar.model,
+        color: newCar.color,
+      },
+    });
+  }
+);
 </script>

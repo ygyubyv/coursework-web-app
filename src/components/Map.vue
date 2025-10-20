@@ -24,7 +24,7 @@
       </div>
     </CustomMarker>
 
-    <template v-if="parkings">
+    <template v-if="parkings && parkings.length">
       <MarkerCluster :options="{ renderer: customRenderer }">
         <CustomMarker
           v-for="parking in parkings"

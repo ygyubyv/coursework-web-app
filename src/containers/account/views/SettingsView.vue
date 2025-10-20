@@ -1,56 +1,5 @@
 <template>
-  <BaseModal
-    v-if="addCarModalIsVisible"
-    @close="addCarModalIsVisible = false"
-    @submit="handleAddCar"
-    :title="$t('modals.add_car.title')"
-    :submit-text="$t('modals.add_car.submit_text')"
-    :message="$t('modals.add_car.message')"
-  >
-    <template #default>
-      <div class="flex flex-col gap-3">
-        <BaseInput
-          v-model="newCar.number.value"
-          :placeholder="$t('forms.fields.number.placeholder')"
-          v-bind="newCar.numberAttrs.value"
-          :error="newCar.errors.value.number"
-          id="car-number"
-          type="text"
-          size="Medium"
-        />
-
-        <BaseInput
-          v-model="newCar.brand.value"
-          :placeholder="$t('forms.fields.brand.placeholder')"
-          v-bind="newCar.brandAttrs.value"
-          :error="newCar.errors.value.brand"
-          id="car-brand"
-          type="text"
-          size="Medium"
-        />
-
-        <BaseInput
-          v-model="newCar.model.value"
-          :placeholder="$t('forms.fields.model.placeholder')"
-          v-bind="newCar.modelAttrs.value"
-          :error="newCar.errors.value.model"
-          id="car-model"
-          type="text"
-          size="Medium"
-        />
-
-        <BaseInput
-          v-model="newCar.color.value"
-          :placeholder="$t('forms.fields.color.placeholder')"
-          v-bind="newCar.colorAttrs.value"
-          :error="newCar.errors.value.color"
-          id="car-color"
-          type="text"
-          size="Medium"
-        />
-      </div>
-    </template>
-  </BaseModal>
+  <AddCarModal v-if="addCarModalIsVisible" v-model="addCarModalIsVisible" />
 
   <BaseModal
     v-if="deleteAccountModalIsVisible"
@@ -82,7 +31,7 @@
         class="flex flex-col md:flex-col-reverse lg:flex-row md:items-start gap-6"
       >
         <Avatar
-          :avatar-url="avatarPreview || user!.avatarUrl"
+          :avatar-url="avatarPreview || user?.avatarUrl || DEFAULT_AVATAR"
           @on-avatar-change="handleAvatarChange"
         />
 
@@ -99,8 +48,8 @@
               :placeholder="$t('forms.fields.full_name.placeholder')"
               class="w-full md:w-[300px] py-1.5 text-sm"
               type="text"
-              v-bind="editedUser.fullNameAttrs.value"
-              v-model="editedUser.fullName.value"
+              v-bind="editedUser.nameAttrs.value"
+              v-model="editedUser.name.value"
               :error="editedUser.errors.value.fullName"
             />
           </div>
@@ -131,7 +80,7 @@
             >
 
             <BaseInput
-              id="name"
+              id="phoneNumber"
               :placeholder="$t('forms.fields.phone.placeholder')"
               class="w-full md:w-[300px] py-1.5 text-sm"
               type="tel"
@@ -145,25 +94,29 @@
 
       <h2 class="text-xl font-bold text-black">{{ $t("cars.title") }}</h2>
 
-      <div class="space-y-4" v-if="user?.cars">
+      <div class="space-y-4" v-if="user!.cars && user!.cars?.length">
         <div
           class="flex items-center justify-between rounded-lg border border-gray-200 p-3 bg-gray-50"
         >
           <span class="font-medium text-gray-700"
             >{{ $t("cars.total_cars") }}:</span
           >
-          <span class="font-bold text-black">{{ user.cars.length }}</span>
+          <span class="font-bold text-black">{{ user!.cars.length }}</span>
         </div>
 
         <div class="flex flex-col gap-4">
           <CarCard
-            v-for="car in user.cars"
+            v-for="car in user!.cars"
             :key="car.id"
             :car="car"
             @on-car-delete="handleDeleteCar"
-            @save-changes="handleSaveCarChanges"
+            @save-changes="handleUpdateCar"
           />
         </div>
+      </div>
+
+      <div v-else>
+        <p>У вас поки що не додано жодного автомобіля</p>
       </div>
     </div>
 
@@ -178,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import Avatar from "../components/Settings/Avatar.vue";
 import CarCard from "../components/Settings/CarCard.vue";
@@ -187,52 +140,94 @@ import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 import BaseModal from "@/components/Base/BaseModal.vue";
 import { useValidateUser } from "../composables/useValidateUser";
-import { useValidateCar } from "../composables/useValidateCar";
 import type { Car } from "@/types";
+import { useUserStore } from "@/stores/user";
+import { DEFAULT_AVATAR } from "@/constants";
+import AddCarModal from "@/components/Modals/BookCar/ui/AddCarModal.vue";
+import {
+  deleteUser,
+  deleteUserCar,
+  updateUser,
+  updateUserCar,
+} from "@/services/user";
+
+const userStore = useUserStore();
 
 const { logout } = useAuthStore();
-const { user } = storeToRefs(useAuthStore());
+const { setUserCars, updateUserSummary } = userStore;
+const { user } = storeToRefs(userStore);
 
 const editedUser = useValidateUser();
-const newCar = useValidateCar();
 
 const addCarModalIsVisible = ref(false);
 const deleteCarModalIsVisible = ref(false);
 const deleteAccountModalIsVisible = ref(false);
 
 const deleteCarId = ref<string | null>(null);
-const avatarPreview = ref<string | null>(user.value!.avatarUrl);
+const avatarPreview = ref<string | null>(user.value?.avatarUrl || null);
 
 const handleAvatarChange = (file: File) => {
   avatarPreview.value = URL.createObjectURL(file);
 };
-
-const handleAddCar = newCar.handleSubmit((values) => {
-  const car = {
-    model: values.model,
-    brand: values.brand,
-    color: values.color,
-    number: values.number,
-  } as Car;
-
-  console.log("Car", car);
-
-  newCar.resetForm();
-  addCarModalIsVisible.value = false;
-});
 
 const handleDeleteCar = (id: string) => {
   deleteCarModalIsVisible.value = true;
   deleteCarId.value = id;
 };
 
-const handleSaveCarChanges = (id: string, car: Car) => {
-  console.log(id, car);
+const handleUpdateCar = async (carId: string, car: Car) => {
+  try {
+    await updateUserCar(user.value!.id, carId, car);
+    setUserCars(true);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-const confirmDeleteCar = () => {
-  console.log(deleteCarId.value);
-  deleteCarModalIsVisible.value = false;
+const confirmDeleteCar = async () => {
+  try {
+    const responseStatus = await deleteUserCar(
+      user.value!.id,
+      deleteCarId.value!
+    );
+
+    if (responseStatus !== 204) {
+      // Toast
+      throw new Error("Cant delete car");
+    }
+
+    setUserCars(true);
+    deleteCarModalIsVisible.value = false;
+
+    // Toast
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const saveProfile = editedUser.handleSubmit(async (values) => {
+  try {
+    const updates = await updateUser(user.value!.id, {
+      ...values,
+    });
+
+    updateUserSummary(updates);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+const handleDeleteAccount = async () => {
+  try {
+    const status = await deleteUser(user.value!.id);
+
+    if (status === 204) {
+      // Toast
+      await logout();
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const onCancel = () => {
@@ -240,15 +235,7 @@ const onCancel = () => {
   avatarPreview.value = user.value!.avatarUrl;
 };
 
-const saveProfile = editedUser.handleSubmit(() => {
-  console.log("Save profile");
+onMounted(() => {
+  setUserCars();
 });
-
-const handleDeleteAccount = async () => {
-  try {
-    await logout();
-  } catch (error) {
-    console.error(error);
-  }
-};
 </script>

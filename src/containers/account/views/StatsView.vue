@@ -22,7 +22,10 @@
 
     <Overview :transactions-metadata="transactionsMetadata" />
 
-    <div class="bg-white rounded-lg border p-4 shadow-sm">
+    <div
+      class="bg-white rounded-lg border p-4 shadow-sm"
+      v-if="user!.transactions?.length"
+    >
       <h3 class="text-lg font-semibold mb-4">
         {{ $t("views.account.statistics.transactions.spending_trend") }}
       </h3>
@@ -40,10 +43,13 @@ import Chart from "../components/Stats/Chart.vue";
 import { getTimeBoundaries, timeUnitsInMs } from "@/utils";
 import Overview from "../components/Stats/Overview.vue";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth";
 import { useI18n } from "vue-i18n";
+import { useUserStore } from "@/stores/user";
 
-const { user } = storeToRefs(useAuthStore());
+const userStore = useUserStore();
+
+const { user } = storeToRefs(userStore);
+
 const { t } = useI18n();
 const { monthAgo, yearAgo } = getTimeBoundaries();
 const { month } = timeUnitsInMs();
@@ -63,6 +69,10 @@ const tabs: Tab[] = [
 const selectedTab = ref<Range>("month");
 
 const filterChartData = computed(() => {
+  if (!user.value?.transactions || !user.value.transactions.length) {
+    return [];
+  }
+
   switch (selectedTab.value) {
     case "month":
       return user.value!.transactions.filter(

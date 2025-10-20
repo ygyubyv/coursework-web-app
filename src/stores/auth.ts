@@ -1,20 +1,23 @@
-import { computed, ref } from "vue";
-import { defineStore } from "pinia";
+import { ref } from "vue";
+import { defineStore, storeToRefs } from "pinia";
 import { loginRequest, myMSALObj } from "@/azure/msalConfig";
-import type { User } from "@/types";
-import { delay } from "@/utils";
-import { DEFAULT_USER } from "@/constants";
+import type { IdTokenClaimsExtended, Role } from "@/types";
+import { useUserStore } from "./user";
 
 export const useAuthStore = defineStore("auth", () => {
+  const { setUser } = useUserStore();
+
   const isAuthenticated = ref(false);
   const isInitialized = ref(false);
   const authModalIsVisible = ref(false);
   const bearerToken = ref("");
-  const user = ref<User | null>(null);
+  const idTokenClaims = ref<IdTokenClaimsExtended | null>(null);
 
-  const isAdmin = computed(() => {
-    return user.value?.roles.includes("admin");
-  });
+  const hasRole = (role: Role) => {
+    const userRoles = idTokenClaims.value!.extension_Role;
+
+    return userRoles!.includes(role);
+  };
 
   const login = async () => {
     try {
@@ -59,8 +62,10 @@ export const useAuthStore = defineStore("auth", () => {
       if (accounts.length > 0) {
         myMSALObj.setActiveAccount(accounts[0]);
         isAuthenticated.value = true;
-        bearerToken.value = accounts[0].idToken!;
-        getUser();
+        const { idToken, idTokenClaims: claims } = accounts[0];
+        bearerToken.value = idToken!;
+        idTokenClaims.value = claims as IdTokenClaimsExtended;
+        await setUser(claims!.sub!);
       } else {
         isAuthenticated.value = false;
       }
@@ -70,44 +75,14 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
-  const getMsalToken = async () => {
-    try {
-      const response = await myMSALObj.acquireTokenSilent(loginRequest);
-      return response;
-    } catch (error) {
-      console.error("Token error", error);
-    }
-  };
-
-  const getUser = async () => {
-    if (user.value) {
-      return;
-    }
-
-    // Temporary
-    if (!isAuthenticated.value) {
-      return;
-    }
-
-    try {
-      await delay(400);
-      user.value = DEFAULT_USER;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return {
     isAuthenticated,
     isInitialized,
     bearerToken,
-    isAdmin,
-    user,
     authModalIsVisible,
     login,
     logout,
     initAuth,
-    getMsalToken,
-    getUser,
+    hasRole,
   };
 });

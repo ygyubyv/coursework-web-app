@@ -11,6 +11,7 @@ import faq from "@/containers/faq/routes/index";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
+import { useUserStore } from "@/stores/user";
 
 export const isLoading = ref(false);
 
@@ -31,23 +32,26 @@ const router = createRouter({
 router.beforeEach(async (to, _, next) => {
   try {
     const authStore = useAuthStore();
-    const { initAuth, getUser } = authStore;
-    const { isAuthenticated, isInitialized, user, authModalIsVisible } =
+    const { initAuth } = authStore;
+    const { isAuthenticated, isInitialized, authModalIsVisible } =
       storeToRefs(authStore);
+    const { user } = storeToRefs(useUserStore());
 
     isLoading.value = true;
 
-    if (!isInitialized.value) {
-      await initAuth();
-    }
+    if (to.meta.requiresAuth) {
+      if (!isAuthenticated.value) {
+        await initAuth();
+      }
 
-    if (to.meta.requiresAuth && (!isAuthenticated.value || !user.value)) {
-      await getUser();
-
-      if (!user.value) {
+      if (isInitialized.value && !user.value) {
         authModalIsVisible.value = true;
         return next({ name: "main" });
       }
+    }
+
+    if (!isInitialized.value) {
+      initAuth();
     }
 
     next();

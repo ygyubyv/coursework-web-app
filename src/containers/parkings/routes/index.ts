@@ -5,5 +5,9 @@ export default [
     path: "/parkings",
     name: "parkings",
     component: ParkingsView,
+
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];

@@ -1,4 +1,4 @@
-import type { Coordinates } from "./common";
+import type { Coordinates } from "./Common";
 
 export interface Parking {
   id: string;

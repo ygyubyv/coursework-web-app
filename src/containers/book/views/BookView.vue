@@ -1,9 +1,12 @@
 <template>
   <div class="flex flex-col md:flex-row justify-center gap-5 md:gap-20 p-6">
+    <AddCarModal v-if="addCarModalIsVisible" v-model="addCarModalIsVisible" />
+
     <BookModal
       v-if="bookModalIsVisible"
       :parking="bookedParking!"
       :user="user!"
+      @on-add-car="addCarModalIsVisible = true"
       @on-close="bookModalIsVisible = false"
       @on-submit="handleSubmit"
     />
@@ -43,6 +46,7 @@
       </div>
 
       <Parkings
+        v-if="parkings && parkings.length"
         :parkings="filteredParkings"
         :coordinates="coordinates"
         @on-book="handleBook"
@@ -53,28 +57,37 @@
 
 <script setup lang="ts">
 import Map from "@/components/Map.vue";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import Parkings from "../components/Parkings.vue";
-import type { BookForm } from "../types";
-import type { BaseSelectOption } from "@/types";
+import type { BookForm, BaseSelectOption, Parking } from "@/types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
 import { calculateDistance } from "@/utils";
 import BookModal from "../components/BookModal.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import type { Parking } from "@/types";
-import { parkings } from "@/constants";
 import { useMap } from "@/composables/useMap";
 import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
+import { useUserStore } from "@/stores/user";
+import { useParkingsStore } from "@/stores/parkings";
+import { createBooking } from "@/services/bookings";
+import AddCarModal from "@/components/Modals/BookCar/ui/AddCarModal.vue";
 
-const userStore = storeToRefs(useAuthStore());
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const parkingsStore = useParkingsStore();
 
 const { t } = useI18n();
 const { coordinates } = useMap();
 
-const { user, authModalIsVisible, isAuthenticated } = userStore;
+const { authModalIsVisible, isAuthenticated } = storeToRefs(authStore);
+
+const { setUserCars } = userStore;
+const { user } = storeToRefs(userStore);
+
+const { setParkings } = parkingsStore;
+const { parkings } = storeToRefs(parkingsStore);
 
 const sortOptions: BaseSelectOption[] = [
   { label: t("selects.distance"), value: "distance" },
@@ -82,17 +95,18 @@ const sortOptions: BaseSelectOption[] = [
 ];
 
 const selectedOption = ref<BaseSelectOption>(sortOptions[0]);
+const addCarModalIsVisible = ref(false);
 const bookModalIsVisible = ref(false);
 const bookedParking = ref<Parking | null>(null);
 
 const filteredParkings = computed(() => {
   if (!coordinates.value) {
-    return parkings;
+    return parkings.value;
   }
 
   switch (selectedOption.value.value) {
     case "distance":
-      return parkings
+      return parkings.value
         .slice()
         .sort(
           (a, b) =>
@@ -111,29 +125,46 @@ const filteredParkings = computed(() => {
         );
 
     case "spots":
-      return parkings
+      return parkings.value
         .slice()
         .sort((a, b) => b.availableSpots - a.availableSpots);
 
     default:
-      return parkings;
+      return parkings.value;
   }
 });
 
-const handleBook = (id: string) => {
+const handleBook = async (id: string) => {
   if (!isAuthenticated.value || !user.value) {
     authModalIsVisible.value = true;
     return;
   }
 
-  const targetParking = parkings.find((parking) => parking.id === id)!;
+  await setUserCars();
+
+  const targetParking = parkings.value.find((parking) => parking.id === id)!;
   bookedParking.value = targetParking;
   bookModalIsVisible.value = true;
 };
 
-const handleSubmit = (form: BookForm) => {
-  console.log(form);
+const handleSubmit = async (form: BookForm) => {
+  try {
+    const status = await createBooking(form);
+
+    if (status !== 201) {
+      // Toast
+      return;
+    }
+
+    // Toast
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+onMounted(() => {
+  setParkings();
+});
 
 useHead({
   title: t("seo.book.head.title"),

@@ -1,5 +1,5 @@
 export * from "./date/formatDate";
-export * from "./date/formatToHHmm";
+export * from "./date/formatToDatetimeLocal";
 export * from "./date/formatToYYYYMMDD";
 export * from "./date/getTimeBoundaries";
 export * from "./date/timeUnitsInMs";

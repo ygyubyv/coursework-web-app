@@ -233,6 +233,7 @@
     "end_date": "End date",
     "status": "Status",
     "current_plan": "Current plan",
+    "no_plan": "You currently have no active plan.",
     "expires": "Expires",
     "per_mo": "/mo",
 

@@ -9,7 +9,11 @@
         <div class="flex-1 space-y-4 order-2 md:order-1">
           <Stat :label="$t('common.full_name')" :value="user!.name" />
           <Stat :label="$t('common.email')" :value="user!.email" />
-          <Stat :label="$t('common.phone')" :value="user!.phoneNumber" />
+          <Stat
+            v-if="user!.phoneNumber"
+            :label="$t('common.phone')"
+            :value="user!.phoneNumber"
+          />
           <Stat
             :label="$t('common.joined')"
             :value="formatDate(user!.createdAt)"
@@ -25,11 +29,11 @@
         </div>
       </div>
 
-      <div class="flex flex-col space-y-6">
+      <div class="flex flex-col space-y-4">
         <h3 class="text-xl font-bold text-black">
           {{ $t("pricing.current_plan") }}
         </h3>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4" v-if="user!.subscription">
           <Stat
             :label="$t('pricing.plan')"
             :value="user!.subscription.tier.name"
@@ -51,11 +55,15 @@
             :value="user!.subscription.status"
           />
         </div>
+
+        <div v-else>
+          <p>{{ $t("pricing.no_plan") }}</p>
+        </div>
       </div>
 
       <div class="flex flex-col space-y-6">
         <h3 class="text-xl font-bold text-black">{{ $t("cars.title") }}</h3>
-        <div v-if="user!.cars.length === 0" class="text-gray-500">
+        <div v-if="user!.cars && user!.cars.length === 0" class="text-gray-500">
           {{ $t("cars.no_cars") }}
         </div>
         <div v-else class="flex flex-col gap-4">
@@ -80,7 +88,16 @@ import { DEFAULT_AVATAR } from "@/constants";
 import { formatDate } from "@/utils";
 import Stat from "../components/Stat.vue";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth";
+import { useUserStore } from "@/stores/user";
+import { onMounted } from "vue";
 
-const { user } = storeToRefs(useAuthStore());
+const userStore = useUserStore();
+
+const { setUserCars, setUserSubscriptions } = userStore;
+const { user } = storeToRefs(userStore);
+
+onMounted(() => {
+  setUserCars();
+  // setUserSubscriptions(); Потім розкоментувати
+});
 </script>

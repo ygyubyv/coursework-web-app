@@ -5,3 +5,5 @@ export interface Car {
   model: string;
   color: string;
 }
+
+export type CreateCar = Omit<Car, "id">;

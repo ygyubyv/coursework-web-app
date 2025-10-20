@@ -64,9 +64,12 @@ import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { computed } from "vue";
+import { useUserStore } from "@/stores/user";
 
 const { login, logout } = useAuthStore();
-const { isAuthenticated, user } = storeToRefs(useAuthStore());
+const { isAuthenticated } = storeToRefs(useAuthStore());
+
+const { user } = storeToRefs(useUserStore());
 
 const { t } = useI18n();
 
