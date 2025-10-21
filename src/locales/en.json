@@ -22,7 +22,50 @@
     "model": "Model",
     "color": "Color",
     "android": "Android",
-    "ios": "iOS"
+    "ios": "iOS",
+    "account": "Account",
+    "account_data": "Account data",
+    "subscriptions": "Subscriptions",
+    "transactions": "Transactions",
+    "booking": "Booking",
+    "bookings": "Bookings",
+    "parking": "Parking",
+    "parkings": "Parkings"
+  },
+
+  "actions": {
+    "get": "Get",
+    "create": "Create",
+    "edit": "Edit",
+    "update": "Update",
+    "delete": "Delete",
+    "save": "Save"
+  },
+
+  "toasts": {
+    "success": {
+      "created": "{entity} successfully created",
+      "updated": "{entity} successfully updated",
+      "deleted": "{entity} successfully deleted",
+      "saved": "Changes saved successfully",
+      "generic": "Action completed successfully"
+    },
+
+    "error": {
+      "failed_action": "Failed to {action} {entity}",
+      "generic": "Something went wrong. Please try again.",
+      "not_found": "{entity} not found",
+
+      "auth": {
+        "auth_failed": "Failed to authorize. Please check your credentials and try again.",
+        "logout_failed": "Failed to log out. Please try again."
+      }
+    },
+
+    "warning": {
+      "unsaved": "You have unsaved changes",
+      "delete_confirm": "Are you sure you want to delete this {entity}?"
+    }
   },
 
   "buttons": {

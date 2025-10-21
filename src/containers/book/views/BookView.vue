@@ -61,7 +61,7 @@ import { ref, computed, onMounted } from "vue";
 import Parkings from "../components/Parkings.vue";
 import type { BookForm, BaseSelectOption, Parking } from "@/types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
-import { calculateDistance } from "@/utils";
+import { calculateDistance, showNotification } from "@/utils";
 import BookModal from "../components/BookModal.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
@@ -152,12 +152,23 @@ const handleSubmit = async (form: BookForm) => {
     const status = await createBooking(form);
 
     if (status !== 201) {
-      // Toast
-      return;
+      throw new Error("Failed create car");
     }
 
-    // Toast
+    showNotification(
+      "success",
+      t("toasts.success.created", {
+        entity: t("common.booking"),
+      })
+    );
   } catch (error) {
+    showNotification(
+      "error",
+      t("toasts.error.failed_action", {
+        action: t("actions.create"),
+        entity: t("common.booking"),
+      })
+    );
     console.error(error);
   }
 };

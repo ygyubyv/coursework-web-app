@@ -59,6 +59,10 @@ import { useValidateCar } from "@/composables/useValidateCar";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user";
 import { createUserCar } from "@/services/user";
+import { showNotification } from "@/utils";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const userStore = useUserStore();
 const { setUserCars } = userStore;
@@ -85,8 +89,21 @@ const handleAddCar = newCar.handleSubmit(async (values) => {
     newCar.resetForm();
     closeModal();
 
-    // Toast
+    showNotification(
+      "success",
+      t("toasts.success.created", {
+        entity: t("common.car"),
+      })
+    );
   } catch (error) {
+    showNotification(
+      "error",
+      t("toasts.error.failed_action", {
+        action: t("actions.create"),
+        entity: t("common.car"),
+      })
+    );
+
     console.error(error);
   }
 });

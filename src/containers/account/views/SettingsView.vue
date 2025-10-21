@@ -150,10 +150,14 @@ import {
   updateUser,
   updateUserCar,
 } from "@/services/user";
+import { showNotification } from "@/utils";
+import { useI18n } from "vue-i18n";
 
-const userStore = useUserStore();
+const { t } = useI18n();
 
 const { logout } = useAuthStore();
+
+const userStore = useUserStore();
 const { setUserCars, updateUserSummary } = userStore;
 const { user } = storeToRefs(userStore);
 
@@ -178,8 +182,22 @@ const handleDeleteCar = (id: string) => {
 const handleUpdateCar = async (carId: string, car: Car) => {
   try {
     await updateUserCar(user.value!.id, carId, car);
+    showNotification(
+      "success",
+      t("toasts.success.updated", {
+        entity: t("common.car"),
+      })
+    );
+
     setUserCars(true);
   } catch (error) {
+    showNotification(
+      "error",
+      t("toasts.error.failed_action", {
+        action: t("actions.update"),
+        entity: t("common.car"),
+      })
+    );
     console.error(error);
   }
 };
@@ -192,15 +210,26 @@ const confirmDeleteCar = async () => {
     );
 
     if (responseStatus !== 204) {
-      // Toast
       throw new Error("Cant delete car");
     }
 
+    showNotification(
+      "success",
+      t("toasts.success.deleted", {
+        entity: t("common.car"),
+      })
+    );
+
     setUserCars(true);
     deleteCarModalIsVisible.value = false;
-
-    // Toast
   } catch (error) {
+    showNotification(
+      "error",
+      t("toasts.error.failed_action", {
+        action: t("actions.delete"),
+        entity: t("common.car"),
+      })
+    );
     console.error(error);
   }
 };
@@ -212,7 +241,21 @@ const saveProfile = editedUser.handleSubmit(async (values) => {
     });
 
     updateUserSummary(updates);
+
+    showNotification(
+      "success",
+      t("toasts.success.updated", {
+        entity: t("common.account"),
+      })
+    );
   } catch (error) {
+    showNotification(
+      "error",
+      t("toasts.error.failed_action", {
+        action: t("actions.save"),
+        entity: t("common.account"),
+      })
+    );
     console.error(error);
   }
 });
@@ -222,10 +265,22 @@ const handleDeleteAccount = async () => {
     const status = await deleteUser(user.value!.id);
 
     if (status === 204) {
-      // Toast
+      showNotification(
+        "success",
+        t("toasts.success.updated", {
+          entity: t("common.account"),
+        })
+      );
       await logout();
     }
   } catch (error) {
+    showNotification(
+      "error",
+      t("toasts.error.failed_action", {
+        action: t("actions.delete"),
+        entity: t("common.account"),
+      })
+    );
     console.error(error);
   }
 };

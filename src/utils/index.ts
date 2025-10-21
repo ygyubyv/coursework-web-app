@@ -12,3 +12,5 @@ export * from "./string/roleConverters";
 export * from "./number/detectCardBrand";
 
 export * from "./geolocation/calculateDistance";
+
+export * from "./notification/showNotification";

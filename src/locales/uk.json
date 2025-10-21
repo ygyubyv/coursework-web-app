@@ -22,7 +22,50 @@
     "model": "Модель",
     "color": "Колір",
     "android": "Android",
-    "ios": "iOS"
+    "ios": "iOS",
+    "account": "Обліковий запис",
+    "account_data": "Дані облікового запису",
+    "subscriptions": "Підписки",
+    "transactions": "Транзакції",
+    "booking": "Бронювання",
+    "bookings": "Бронювання",
+    "parking": "Парковка",
+    "parkings": "Парковки"
+  },
+
+  "actions": {
+    "get": "Отримати",
+    "create": "Створити",
+    "edit": "Редагувати",
+    "update": "Оновити",
+    "delete": "Видалити",
+    "save": "Зберегти"
+  },
+
+  "toasts": {
+    "success": {
+      "created": "{entity} успішно створено",
+      "updated": "{entity} успішно оновлено",
+      "deleted": "{entity} успішно видалено",
+      "saved": "Зміни успішно збережено",
+      "generic": "Дію успішно виконано"
+    },
+
+    "error": {
+      "failed_action": "Не вдалося {action} {entity}",
+      "generic": "Сталася помилка. Спробуйте ще раз.",
+      "not_found": "{entity} не знайдено",
+
+      "auth": {
+        "auth_failed": "Не вдалося авторизуватися. Перевірте свої дані та спробуйте ще раз.",
+        "logout_failed": "Не вдалося вийти з акаунта. Спробуйте ще раз."
+      }
+    },
+
+    "warning": {
+      "unsaved": "У вас є незбережені зміни",
+      "delete_confirm": "Ви впевнені, що хочете видалити {entity}?"
+    }
   },
 
   "buttons": {

@@ -3,8 +3,11 @@ import { defineStore, storeToRefs } from "pinia";
 import { loginRequest, myMSALObj } from "@/azure/msalConfig";
 import type { IdTokenClaimsExtended, Role } from "@/types";
 import { useUserStore } from "./user";
+import { useI18n } from "vue-i18n";
+import { showNotification } from "@/utils";
 
 export const useAuthStore = defineStore("auth", () => {
+  const { t } = useI18n();
   const { setUser } = useUserStore();
 
   const isAuthenticated = ref(false);
@@ -32,6 +35,7 @@ export const useAuthStore = defineStore("auth", () => {
         extraQueryParameters: { ui_locales: locale ?? "en" },
       });
     } catch (error) {
+      showNotification("error", t("toasts.error.auth.auth_failed"));
       console.error("Login error", error);
     }
   };
@@ -45,6 +49,7 @@ export const useAuthStore = defineStore("auth", () => {
       isInitialized.value = false;
       await myMSALObj.logoutRedirect();
     } catch (error) {
+      showNotification("error", t("toasts.error.auth.logout_failed"));
       console.error("Logout error", error);
     }
   };

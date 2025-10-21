@@ -7,6 +7,9 @@ import { createHead } from "@unhead/vue/client";
 import App from "./App.vue";
 import router from "./router";
 
+import ToastPlugin from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-bootstrap.css";
+
 import { myMSALObj } from "@/azure/msalConfig.ts";
 import { i18n } from "./i18n.ts";
 
@@ -25,6 +28,7 @@ import { FontAwesomeIcon } from "./plugins/fontAwesome";
   app.use(router);
   app.use(head);
   app.use(i18n);
+  app.use(ToastPlugin);
 
   app.mount("#app");
 })();
