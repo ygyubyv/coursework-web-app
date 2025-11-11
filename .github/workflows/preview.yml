@@ -1,0 +1,49 @@
+name: (Staging) CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Pull Vercel Environment (Preview)
+        run: vercel pull --yes --environment=preview --git-branch=staging --token=${{ secrets.VITE_VERCEL_TOKEN }}
+
+      - name: Build project for Cypress
+        run: npm run build
+
+      - name: Start project locally
+        run: npm run preview &
+
+      - name: Wait for local server
+        uses: jakejarvis/wait-action@v0.1.2
+        with:
+          url: http://localhost:4173
+          timeout: 60
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
+        with:
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.VITE_CYPRESS_RECORD_KEY }}
+
+      - name: Deploy to Vercel
+        run: vercel deploy --token=${{ secrets.VITE_VERCEL_TOKEN }} --prebuilt

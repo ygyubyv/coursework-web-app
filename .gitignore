@@ -31,3 +31,5 @@ env
 *.sw?
 
 *.tsbuildinfo
+
+.vercel

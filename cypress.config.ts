@@ -2,7 +2,8 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
-    baseUrl: "http://localhost:5173",
+    projectId: "bq916w",
+    baseUrl: "http://localhost:4173",
     setupNodeEvents(on, config) {},
   },
 });
