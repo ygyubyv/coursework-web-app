@@ -33,7 +33,7 @@ jobs:
         run: npm run preview &
 
       - name: Wait for local server
-        uses: jakejarvis/wait-action@v0.1.2
+        uses: jakejarvis/wait-action@v0.1.1
         with:
           url: http://localhost:4173
           timeout: 60
