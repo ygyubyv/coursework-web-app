@@ -3,7 +3,7 @@ name: (Staging) CI/CD Pipeline
 on:
   push:
     branches:
-      - staging
+      - main
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
         run: npm install --global vercel
 
       - name: Pull Vercel Environment (Preview)
-        run: vercel pull --yes --environment=preview --git-branch=staging --token=${{ secrets.VITE_VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=preview --git-branch=main --token=${{ secrets.VITE_VERCEL_TOKEN }}
 
       - name: Build project for Cypress
         run: npm run build
