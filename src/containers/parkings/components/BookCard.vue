@@ -1,14 +1,15 @@
 <template>
   <div
     class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col gap-2 hover:shadow-md transition-shadow"
+    v-if="booking.parkingObj"
   >
     <div class="flex justify-between items-center">
       <div class="flex flex-col">
         <span class="text-base font-medium text-gray-900">
-          {{ booking.parking.name }}
+          {{ booking.parkingObj.name }}
         </span>
         <span class="text-sm text-gray-500">
-          {{ booking.parking.address }}
+          {{ booking.parkingObj.address }}
         </span>
       </div>
 
@@ -22,16 +23,16 @@
     </div>
 
     <div class="text-sm text-gray-700">
-      {{ formatDate(booking.date) }} | {{ booking.start }} –
-      {{ booking.end }}
+      {{ formatDateTime(booking.start) }} –
+      {{ formatDateTime(booking.end) }}
     </div>
 
-    <div class="text-sm text-gray-700">
+    <!-- <div class="text-sm text-gray-700">
       {{ $t("common.car") }}:
       <span class="font-medium">
         {{ booking.car.brand }} {{ booking.car.model }}
       </span>
-    </div>
+    </div> -->
 
     <div v-if="booking.status === 'active'" class="flex justify-end">
       <BaseButton
@@ -39,17 +40,17 @@
         :text="$t('buttons.show_on_map')"
         size="Small"
         icon="location-dot"
-        :onClick="() => emit('showParkingOnMap', booking.parking)"
+        :onClick="() => emit('showParkingOnMap', booking.parkingObj!)"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Parking } from "@/types";
-import type { Booking } from "../types";
+import type { Parking, Booking } from "@/types";
 import { formatDate } from "@/utils/date/formatDate";
 import BaseButton from "@/components/Base/BaseButton.vue";
+import { formatDateTime } from "@/utils/date/formatDateTime";
 
 interface Props {
   booking: Booking;

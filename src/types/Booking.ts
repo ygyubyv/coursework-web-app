@@ -1,14 +1,13 @@
-import type { Car } from "./Car";
 import type { Parking } from "./Parking";
 
 export interface Booking {
-  id: string;
-  status: "active" | "completed";
-  date: string;
+  id: number;
+  carId: number;
+  userId: string;
   start: string;
   end: string;
-  car: Car;
-  parking: Parking;
+  status: "active" | "completed";
+  parkingObj?: Parking;
 }
 
 export interface BookForm {

@@ -101,7 +101,7 @@ const filteredBookings = computed(() => {
 
   if (selectedName.value) {
     bookings = bookings.filter((booking) =>
-      booking.parking.name
+      booking.parkingObj?.name
         .toUpperCase()
         .includes(selectedName.value.toUpperCase())
     );
