@@ -9,7 +9,7 @@ npm run preview &
 SERVER_PID=$!
 
 echo "Waiting for server to be ready..."
-npx wait-on http://localhost:4173
+npx wait-on http://localhost:5173
 
 echo "Running Cypress tests..."
 npm run test:e2e:ci

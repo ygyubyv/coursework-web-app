@@ -1,37 +1,54 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
+
+// const loginToAzureADB2C = (email: string, password: string) => {
+//   const azureADB2CTenantName = Cypress.env("azure_ad_b2c_tenant_name");
+
+//   cy.visit("/");
+//   cy.get("button")
+//     .contains(/Sign in/i)
+//     .click();
+
+//   cy.origin(
+//     `https://${azureADB2CTenantName}.b2clogin.com`,
+//     { args: { email, password } },
+//     ({ email, password }) => {
+//       cy.get('input[type="email"]', { timeout: 15000 }).should("be.visible");
+
+//       cy.wait(5000);
+//       cy.get('input[type="email"]').type(email, { delay: 300 });
+
+//       cy.get('button[type="submit"]').should("be.enabled").click();
+
+//       cy.get('input[type="password"]', { timeout: 15000 }).should("be.visible");
+
+//       cy.wait(1000);
+//       cy.get('input[type="password"]').type(password, {
+//         log: false,
+//         delay: 300,
+//       });
+
+//       cy.get('input[type="password"]').type("{enter}");
 //     }
-//   }
-// }
+//   );
+
+//   cy.url({ timeout: 10000 }).should("include", "/");
+// };
+
+// Cypress.Commands.add("loginToAzureADB2C", (email: string, password: string) => {
+//   cy.session(
+//     `b2c-${email}`,
+//     () => {
+//       loginToAzureADB2C(email, password);
+//     },
+//     {
+//       validate: () => {
+//         cy.visit("/");
+//         cy.url().should("include", "/");
+//         cy.get('img[alt="Profile"]').click();
+//         cy.get("button")
+//           .contains(/Sign out/i)
+//           .should("exist");
+//       },
+//     }
+//   );
+// });

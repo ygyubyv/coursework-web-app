@@ -33,3 +33,4 @@ env
 *.tsbuildinfo
 
 .vercel
+cypress.env.json
