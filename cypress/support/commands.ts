@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 const loginToAzureADB2C = (email: string, password: string) => {
-  const azureADB2CTenantName = Cypress.env("azure_ad_b2c_tenant_name");
+  const azureADB2CTenantName = Cypress.env("AZURE_AD_B2C_TENANT_NAME");
 
   cy.visit("/");
   cy.get("button")

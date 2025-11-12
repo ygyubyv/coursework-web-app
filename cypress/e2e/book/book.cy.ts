@@ -34,8 +34,8 @@ describe("Book page — parkings load", () => {
   });
 
   it("shows booking modal if user is logged in", () => {
-    const email = Cypress.env("azure_ad_b2c_email");
-    const password = Cypress.env("azure_ad_b2c_password");
+    const email = Cypress.env("AZURE_AD_B2C_EMAIL");
+    const password = Cypress.env("AZURE_AD_B2C_PASSWORD");
 
     cy.loginToAzureADB2C(email, password).then(() => {
       cy.visit("/book");

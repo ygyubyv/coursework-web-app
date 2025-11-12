@@ -44,6 +44,9 @@ jobs:
           record: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.VITE_CYPRESS_RECORD_KEY }}
+          CYPRESS_AZURE_AD_B2C_EMAIL: ${{ secrets.CYPRESS_AZURE_AD_B2C_EMAIL }}
+          CYPRESS_AZURE_AD_B2C_PASSWORD: ${{ secrets.CYPRESS_AZURE_AD_B2C_PASSWORD }}
+          CYPRESS_AZURE_AD_B2C_TENANT_NAME: ${{ secrets.CYPRESS_AZURE_AD_B2C_TENANT_NAME }}
 
       - name: Link Vercel project
         run: vercel link --yes --token=${{ secrets.VITE_VERCEL_TOKEN }} --project virodip
