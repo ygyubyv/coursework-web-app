@@ -28,6 +28,16 @@ jobs:
 
       - name: Build project for Cypress
         run: npm run build
+        env:
+          VITE_AZURE_CLIENT_ID: ${{ secrets.VITE_AZURE_CLIENT_ID }}
+          VITE_AZURE_TENANT_NAME: ${{ secrets.VITE_AZURE_TENANT_NAME }}
+          VITE_AZURE_USER_FLOW: ${{ secrets.VITE_AZURE_USER_FLOW }}
+          VITE_AZURE_REDIRECT_URI: ${{ secrets.VITE_AZURE_REDIRECT_URI }}
+          VITE_APP_URL: ${{ secrets.VITE_APP_URL }}
+          VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
+          VITE_DEFAULT_LOCALE: ${{ secrets.VITE_DEFAULT_LOCALE }}
+          VITE_FALLBACK_LOCALE: ${{ secrets.VITE_FALLBACK_LOCALE }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
       - name: Start project locally
         run: npm run preview &
