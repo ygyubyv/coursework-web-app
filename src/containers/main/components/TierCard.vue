@@ -2,6 +2,7 @@
   <div
     class="bg-white rounded-2xl shadow-md border border-gray-200 p-8 cursor-pointer flex flex-col relative transform transition duration-300 hover:scale-102 hover:shadow-xl"
     @click="emit('selectPlan', tier.id)"
+    data-cy="tier-card"
   >
     <span
       class="absolute -top-3 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-3 py-1 rounded-full"

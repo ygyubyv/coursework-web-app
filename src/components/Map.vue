@@ -11,7 +11,11 @@
     ref="mapRef"
     class="w-full h-full relative"
   >
-    <CustomMarker v-if="mePinIsVisible" :options="{ position: coordinates }">
+    <CustomMarker
+      v-if="mePinIsVisible"
+      :options="{ position: coordinates }"
+      data-cy="user-marker"
+    >
       <div class="flex flex-col items-center">
         <div class="text-center text-gray-900 font-medium text-sm sm:text-base">
           {{ $t("map.my_location") }}
@@ -36,6 +40,8 @@
         >
           <div
             class="flex flex-col items-center cursor-pointer"
+            data-cy="parking-marker"
+            :data-id="parking.id"
             @click="toggleParkingInfo(parking.id)"
           >
             <div
@@ -52,6 +58,7 @@
             <transition name="fade">
               <div
                 v-if="activeParking === parking.id"
+                data-cy="parking-info"
                 class="absolute top-full mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-xl p-3 text-sm text-gray-800 z-50"
                 style="left: 50%; transform: translateX(-50%)"
               >
@@ -79,6 +86,7 @@
                 </div>
                 <BaseButton
                   mode="Primary"
+                  data-cy="follow-button"
                   :text="$t('buttons.follow')"
                   :onClick="
                     () =>
@@ -99,6 +107,7 @@
 
       <div
         v-if="currentRoute"
+        data-cy="route-panel"
         class="absolute bottom-0 left-0 w-full h-10 bg-white/90 flex items-center justify-between px-4 shadow-inner text-sm font-medium text-gray-900"
       >
         <div>{{ currentRoute.name }}</div>
@@ -106,6 +115,7 @@
           <div>{{ currentRoute.distance }} / {{ currentRoute.duration }}</div>
           <button
             @click="clearDestination()"
+            data-cy="clear-route"
             class="w-5 h-5 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer text-lg"
             title="Clear route"
           >

@@ -13,6 +13,7 @@
 
     <div
       class="flex-1 rounded-xl overflow-hidden border border-gray-200 aspect-[3/2]"
+      data-cy="book-map"
     >
       <Map
         v-if="coordinates"
@@ -41,6 +42,7 @@
             :options="sortOptions"
             :placeholder="$t('selects.labels.sort_by')"
             v-model="selectedOption"
+            data-cy="parking-sort"
           />
         </div>
       </div>

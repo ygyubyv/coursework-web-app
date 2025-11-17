@@ -1,6 +1,7 @@
 <template>
   <div
     class="p-4 border border-gray-200 rounded-lg bg-white transition flex flex-col gap-2"
+    data-cy="parking-item"
   >
     <h3 class="text-md font-medium text-gray-900">{{ parking.name }}</h3>
 

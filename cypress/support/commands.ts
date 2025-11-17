@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const loginToAzureADB2C = (email: string, password: string) => {
+export const loginToAzureADB2C = (email: string, password: string) => {
   const azureADB2CTenantName = Cypress.env("AZURE_AD_B2C_TENANT_NAME");
 
   cy.visit("/");
@@ -30,6 +30,72 @@ const loginToAzureADB2C = (email: string, password: string) => {
     }
   );
 };
+
+export const injectGeolocationBeforeLoad = (
+  win: Window,
+  latitude: number = 50.45,
+  longitude: number = 30.523,
+  accuracy: number = 20
+) => {
+  if (win.navigator.permissions) {
+    cy.stub(win.navigator.permissions, "query")
+      .withArgs({ name: "geolocation" })
+      .resolves({ state: "granted" });
+  }
+
+  const geolocationMock = {
+    coords: {
+      latitude,
+      longitude,
+      accuracy,
+      altitude: null,
+      altitudeAccuracy: null,
+      heading: null,
+      speed: null,
+    },
+    timestamp: Date.now(),
+  };
+
+  win.navigator.geolocation.getCurrentPosition = (success) => {
+    success(geolocationMock);
+  };
+
+  win.navigator.geolocation.watchPosition = (success) => {
+    success(geolocationMock);
+    return 1;
+  };
+};
+
+Cypress.Commands.add("interceptParkings", () => {
+  cy.intercept("GET", "**/parkings/**", {
+    statusCode: 200,
+    body: [
+      {
+        id: "p1",
+        name: "A Parking",
+        availableSpots: 2,
+        coordinates: { lat: 50.45, lng: 30.523 },
+      },
+      {
+        id: "p2",
+        name: "B Parking",
+        availableSpots: 15,
+        coordinates: { lat: 50.46, lng: 30.531 },
+      },
+      {
+        id: "p3",
+        name: "C Parking",
+        availableSpots: 7,
+        coordinates: { lat: 50.455, lng: 30.529 },
+      },
+    ],
+  }).as("getParkings");
+});
+
+Cypress.Commands.add("expectAuthModal", () => {
+  cy.contains("Login").should("be.visible");
+  cy.contains("Authorization Required").should("exist");
+});
 
 Cypress.Commands.add("loginToAzureADB2C", (email: string, password: string) => {
   cy.session(

@@ -1,5 +1,5 @@
 <template>
-  <section class="py-16 px-6 lg:px-8">
+  <section class="py-16 px-6 lg:px-8" data-cy="pricing-section">
     <div class="max-w-7xl mx-auto text-center">
       <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl">
         {{ $t("views.main.pricing.title") }}

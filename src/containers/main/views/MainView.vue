@@ -8,7 +8,7 @@
       />
     </div>
 
-    <div ref="howItWorks">
+    <div ref="howItWorks" data-cy="how-it-works">
       <HowItWorks :steps="steps" />
     </div>
 

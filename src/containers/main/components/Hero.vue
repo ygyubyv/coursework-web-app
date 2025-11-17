@@ -37,6 +37,7 @@
           <BaseButton
             mode="Primary"
             icon="info-circle"
+            data-cy="learn-more-btn"
             :text="$t('buttons.learn_more')"
             class="w-full sm:w-auto"
             :onClick="() => emit('learnMore')"

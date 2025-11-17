@@ -11,6 +11,7 @@
       </div>
       <form
         @submit.prevent="onSubmit"
+        data-cy="contact-form"
         class="flex flex-col items-center space-y-4"
       >
         <BaseInput
@@ -19,6 +20,7 @@
           v-bind="fullNameAttrs"
           :placeholder="$t('forms.fields.full_name.placeholder')"
           :error="errors.fullName"
+          data-cy="contact-name"
           type="text"
         />
 
@@ -28,6 +30,7 @@
           v-bind="emailAttrs"
           :placeholder="$t('forms.fields.email.placeholder')"
           :error="errors.email"
+          data-cy="contact-email"
           type="email"
         />
 
@@ -39,6 +42,7 @@
           :error="errors.message"
           v-model="message"
           v-bind="messageAttrs"
+          data-cy="contact-message"
         />
 
         <div class="flex gap-2.5 self-end">

@@ -17,6 +17,7 @@
         :text="$t('buttons.contact_us')"
         icon="arrow-right"
         :onClick="onContact"
+        data-cy="contact-us-btn"
         class="whitespace-nowrap"
       />
     </div>
