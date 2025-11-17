@@ -15,12 +15,14 @@
             id="book-name"
             v-model="selectedName"
             :placeholder="$t('forms.fields.parking_name.placeholder')"
+            data-cy="filter-input"
             class="w-full"
           />
 
           <BaseSelect
             :options="filterOptions"
             :placeholder="$t('common.filter_by')"
+            data-cy="filter-select"
             v-model="selectedOption"
             class="w-full md:w-40"
           />
@@ -44,6 +46,7 @@
     <div
       class="flex-1 md:max-w-lg rounded-xl overflow-hidden border border-gray-200 aspect-[3/2]"
       v-if="mapIsVisible"
+      data-cy="book-map"
     >
       <Map
         v-if="coordinates && currentParking"

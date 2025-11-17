@@ -2,6 +2,7 @@
   <div
     class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col gap-2 hover:shadow-md transition-shadow"
     v-if="booking.parkingObj"
+    data-cy="booking-item"
   >
     <div class="flex justify-between items-center">
       <div class="flex flex-col">
@@ -41,6 +42,7 @@
         size="Small"
         icon="location-dot"
         :onClick="() => emit('showParkingOnMap', booking.parkingObj!)"
+        data-cy="show-on-map"
       />
     </div>
   </div>

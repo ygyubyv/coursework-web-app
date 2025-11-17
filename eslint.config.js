@@ -1,14 +1,16 @@
 import vue from "eslint-plugin-vue";
 import ts from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import vueParser from "vue-eslint-parser";
 import globals from "globals";
 
 export default [
   {
     files: ["**/*.{js,ts,vue}"],
     languageOptions: {
-      parser: tsParser,
+      parser: vueParser,
       parserOptions: {
+        parser: tsParser,
         ecmaVersion: "latest",
         sourceType: "module",
       },

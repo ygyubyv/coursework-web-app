@@ -92,6 +92,48 @@ Cypress.Commands.add("interceptParkings", () => {
   }).as("getParkings");
 });
 
+Cypress.Commands.add("interceptBookings", () => {
+  cy.intercept("GET", "**/users/**/bookings", {
+    statusCode: 200,
+    body: {
+      bookings: [
+        {
+          id: 1,
+          carId: 12,
+          userId: "u1",
+          start: "2025-01-01T10:00:00Z",
+          end: "2025-01-01T12:00:00Z",
+          status: "active",
+          parkingObj: {
+            id: "p1",
+            name: "Alpha Parking",
+            address: "Alpha Street 10",
+            coordinates: { lat: 50.45, lng: 30.523 },
+            availableSpots: 4,
+            totalSpots: 20,
+          },
+        },
+        {
+          id: 2,
+          carId: 13,
+          userId: "u1",
+          start: "2025-01-03T12:00:00Z",
+          end: "2025-01-03T15:00:00Z",
+          status: "completed",
+          parkingObj: {
+            id: "p2",
+            name: "Beta Parking",
+            address: "Beta Avenue 55",
+            coordinates: { lat: 50.455, lng: 30.527 },
+            availableSpots: 0,
+            totalSpots: 15,
+          },
+        },
+      ],
+    },
+  }).as("getBookings");
+});
+
 Cypress.Commands.add("expectAuthModal", () => {
   cy.contains("Login").should("be.visible");
   cy.contains("Authorization Required").should("exist");
