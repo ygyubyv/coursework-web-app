@@ -134,6 +134,71 @@ Cypress.Commands.add("interceptBookings", () => {
   }).as("getBookings");
 });
 
+Cypress.Commands.add("interceptUser", () => {
+  cy.intercept("GET", "**/users/**", {
+    statusCode: 200,
+    body: {
+      avatarUrl: null,
+      createdAt: "2025-10-19T19:26:34Z",
+      email: "vasys004@gmail.com",
+      id: "b2983e05-4d77-4588-8ecb-fe80168b5aac",
+      name: "full master",
+      phoneNumber: "+380687586411",
+      roles: ["user", "analyst", "moderator", "admin", "owner"],
+    },
+  }).as("getUser");
+});
+
+Cypress.Commands.add("interceptUserCars", () => {
+  cy.intercept("GET", "**/users/**/cars", {
+    statusCode: 200,
+    body: {
+      cars: [
+        {
+          id: 10,
+          number: "BK3093AE",
+          brand: "Opel",
+          model: "x4",
+          color: "White",
+        },
+        {
+          id: 12,
+          number: "BK3031AE",
+          brand: "Opel",
+          model: "x2",
+          color: "White",
+        },
+        {
+          id: 13,
+          number: "BK3090AE",
+          brand: "Opel",
+          model: "X1",
+          color: "Green",
+        },
+        {
+          id: 14,
+          number: "BK3094AE",
+          brand: "Opel",
+          model: "X5",
+          color: "Green",
+        },
+      ],
+    },
+  }).as("getUserCars");
+});
+
+Cypress.Commands.add("interceptUserSubscription", () => {
+  cy.intercept("GET", "**/users/**/subscription", {
+    statusCode: 200,
+    body: {
+      tier: { name: "Premium", price: 19.99 },
+      startDate: "2025-11-01T12:00:00Z",
+      endDate: "2026-11-01T12:00:00Z",
+      status: "active",
+    },
+  }).as("getUserSubscription");
+});
+
 Cypress.Commands.add("expectAuthModal", () => {
   cy.contains("Login").should("be.visible");
   cy.contains("Authorization Required").should("exist");

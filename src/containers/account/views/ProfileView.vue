@@ -1,5 +1,5 @@
 <template>
-  <section class="py-6">
+  <section class="py-6" data-cy="account-profile">
     <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-sm p-6 space-y-6">
       <h2 class="text-xl font-bold text-black">
         {{ $t("views.account.profile.title") }}
@@ -7,14 +7,24 @@
 
       <div class="flex flex-col md:flex-row md:items-start gap-6">
         <div class="flex-1 space-y-4 order-2 md:order-1">
-          <Stat :label="$t('common.full_name')" :value="user!.name" />
-          <Stat :label="$t('common.email')" :value="user!.email" />
+          <Stat
+            data-cy="stat-full-name"
+            :label="$t('common.full_name')"
+            :value="user!.name"
+          />
+          <Stat
+            data-cy="stat-email"
+            :label="$t('common.email')"
+            :value="user!.email"
+          />
           <Stat
             v-if="user!.phoneNumber"
             :label="$t('common.phone')"
             :value="user!.phoneNumber"
+            data-cy="stat-phone"
           />
           <Stat
+            data-cy="stat-joined"
             :label="$t('common.joined')"
             :value="formatDate(user!.createdAt)"
           />
@@ -30,7 +40,7 @@
       </div>
 
       <div class="flex flex-col space-y-4">
-        <h3 class="text-xl font-bold text-black">
+        <h3 class="text-xl font-bold text-black" data-cy="subscription-title">
           {{ $t("pricing.current_plan") }}
         </h3>
         <div class="flex flex-col gap-4" v-if="user!.subscription">
@@ -71,6 +81,7 @@
             v-for="car in user!.cars"
             :key="car.id"
             class="bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm space-y-2"
+            data-cy="car-item"
           >
             <Stat :label="$t('common.number')" :value="car.number" />
             <Stat :label="$t('common.brand')" :value="car.brand" />
@@ -98,6 +109,6 @@ const { user } = storeToRefs(userStore);
 
 onMounted(() => {
   setUserCars();
-  // setUserSubscriptions(); Потім розкоментувати
+  // setUserSubscriptions();
 });
 </script>

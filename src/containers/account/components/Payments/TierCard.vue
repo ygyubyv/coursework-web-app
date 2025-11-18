@@ -1,6 +1,7 @@
 <template>
   <div
     class="relative border rounded-xl p-6 shadow-sm flex flex-col items-start transform transition duration-300 hover:scale-[1.01] hover:shadow-lg"
+    data-cy="tier-card"
   >
     <h3 class="text-xl font-semibold">{{ tier.title }}</h3>
     <p class="text-gray-600">{{ tier.description }}</p>
