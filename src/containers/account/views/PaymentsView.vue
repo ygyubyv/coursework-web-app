@@ -46,7 +46,10 @@
     </template>
   </BaseModal>
 
-  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 space-y-8">
+  <div
+    class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 space-y-8"
+    data-cy="account-payments"
+  >
     <h2 class="text-2xl font-bold text-black">
       {{ $t("views.account.payments.title") }}
     </h2>

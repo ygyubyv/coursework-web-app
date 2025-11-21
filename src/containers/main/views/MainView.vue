@@ -4,6 +4,7 @@
       <Hero
         :app-android-url="ANDROIN_APP_URL"
         :app-ios-url="IOS_APP_URL"
+        @download-android-apk="handleDownloadAndroidApk"
         @learn-more="learnMore"
       />
     </div>
@@ -34,6 +35,7 @@ import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
 import { useI18n } from "vue-i18n";
 import type { PaymentWay, Step, Tier } from "../types";
+import { downloadFile } from "@/utils";
 
 const { t, tm } = useI18n();
 const router = useRouter();
@@ -71,6 +73,13 @@ const tiers = computed(() => {
 
 const getTiers = () => {
   fetchedTiers.value = ts;
+};
+
+const handleDownloadAndroidApk = () => {
+  const androidBlobUrl =
+    "https://virodip.blob.core.windows.net/android-apps/current-version/virodip.apk";
+
+  downloadFile("virodip", androidBlobUrl);
 };
 
 const learnMore = () => {
