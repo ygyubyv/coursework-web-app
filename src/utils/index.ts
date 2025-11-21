@@ -16,3 +16,4 @@ export * from "./geolocation/calculateDistance";
 export * from "./notification/showNotification";
 
 export * from "./file/uploadFileToAzure";
+export * from "./file/downloadFile";

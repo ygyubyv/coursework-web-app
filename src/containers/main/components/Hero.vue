@@ -16,14 +16,13 @@
         </p>
 
         <div class="flex flex-col sm:flex-row gap-2 mt-2">
-          <a
-            :href="appAndroidUrl"
-            target="_blank"
-            class="flex items-center justify-center gap-1.75 px-4 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition md:px-3 md:py-1.5"
+          <button
+            class="flex items-center justify-center cursor-pointer gap-1.75 px-4 py-2 bg-black text-white rounded-md font-medium hover:bg-gray-900 transition md:px-3 md:py-1.5"
+            @click="emit('downloadAndroidApk')"
           >
             <font-awesome-icon :icon="['fab', 'android']" />
             {{ $t("common.android") }}
-          </a>
+          </button>
 
           <a
             :href="appIosUrl"
@@ -64,6 +63,7 @@ interface Props {
   appIosUrl: string;
 }
 const emit = defineEmits<{
+  (e: "downloadAndroidApk"): void;
   (e: "learnMore"): void;
 }>();
 
