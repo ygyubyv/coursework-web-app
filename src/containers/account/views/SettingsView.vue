@@ -50,7 +50,7 @@
               type="text"
               v-bind="editedUser.nameAttrs.value"
               v-model="editedUser.name.value"
-              :error="editedUser.errors.value.fullName"
+              :error="editedUser.errors.value.name"
             />
           </div>
 
@@ -121,7 +121,7 @@
     </div>
 
     <Actions
-      :has-changes="editedUser.meta.value.dirty || !!avatarPreview"
+      :has-changes="editedUser.meta.value.dirty || !!avatarFile"
       @add-car="addCarModalIsVisible = true"
       @cancel="onCancel"
       @save-profile="saveProfile"
@@ -145,12 +145,14 @@ import { useUserStore } from "@/stores/user";
 import { DEFAULT_AVATAR } from "@/constants";
 import AddCarModal from "@/components/Modals/BookCar/ui/AddCarModal.vue";
 import {
+  createUserAvatarUploadUrl,
   deleteUser,
   deleteUserCar,
   updateUser,
+  updateUserAvatar,
   updateUserCar,
 } from "@/services/user";
-import { showNotification } from "@/utils";
+import { showNotification, uploadBlob } from "@/utils";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -168,9 +170,11 @@ const deleteCarModalIsVisible = ref(false);
 const deleteAccountModalIsVisible = ref(false);
 
 const deleteCarId = ref<string | null>(null);
+const avatarFile = ref<File | Blob | null>(null);
 const avatarPreview = ref<string | null>(user.value?.avatarUrl || null);
 
 const handleAvatarChange = (file: File) => {
+  avatarFile.value = file;
   avatarPreview.value = URL.createObjectURL(file);
 };
 
@@ -234,13 +238,36 @@ const confirmDeleteCar = async () => {
   }
 };
 
+const saveAvatar = async () => {
+  const { uploadUrl, fileUrl } = await createUserAvatarUploadUrl(
+    user.value!.id
+  );
+
+  const response = await uploadBlob(uploadUrl, avatarFile.value!);
+
+  if (!response?.ok) {
+    throw new Error("Не вдалося завантажити файл на Azure Blob Storage");
+  }
+
+  const newAvatarUrl = await updateUserAvatar(user.value!.id, fileUrl);
+
+  return newAvatarUrl;
+};
+
 const saveProfile = editedUser.handleSubmit(async (values) => {
   try {
     const updates = await updateUser(user.value!.id, {
       ...values,
     });
 
+    if (avatarFile.value) {
+      const newAvatar = await saveAvatar();
+      updates.avatarUrl = newAvatar;
+    }
+
     updateUserSummary(updates);
+
+    onCancel();
 
     showNotification(
       "success",
@@ -287,6 +314,7 @@ const handleDeleteAccount = async () => {
 
 const onCancel = () => {
   editedUser.resetForm();
+  avatarFile.value = null;
   avatarPreview.value = user.value!.avatarUrl;
 };
 

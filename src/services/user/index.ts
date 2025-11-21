@@ -6,8 +6,10 @@ import {
   get_user_transactions,
   get_user_bookings,
   create_user_car,
+  create_user_avatar_upload_url,
   update_user,
   update_user_car,
+  update_user_avatar,
   delete_user,
   delete_user_car,
 } from "./api";
@@ -30,6 +32,11 @@ interface GetUserCarsResponse {
 
 interface GetUserBookingsResponse {
   bookings: Booking[];
+}
+
+interface CreateUserAvatarUploadUrl {
+  fileUrl: string;
+  uploadUrl: string;
 }
 
 interface DeleteUserResponse {
@@ -152,6 +159,29 @@ export const createUserCar = async (id: string, car: CreateCar) => {
   return response.json();
 };
 
+export const createUserAvatarUploadUrl = async (id: string) => {
+  const { bearerToken } = storeToRefs(useAuthStore());
+
+  const response = await fetch(create_user_avatar_upload_url(), {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${bearerToken.value}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId: id,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create upload avatar url");
+  }
+
+  const data = (await response.json()) as CreateUserAvatarUploadUrl;
+
+  return data;
+};
+
 // Patch
 
 export const updateUser = async (id: string, user: Partial<UserSummary>) => {
@@ -197,6 +227,30 @@ export const updateUserCar = async (
   const updatedCar = (await response.json()) as Car;
 
   return updatedCar;
+};
+
+export const updateUserAvatar = async (id: string, fileUrl: string) => {
+  const { bearerToken } = storeToRefs(useAuthStore());
+
+  const response = await fetch(update_user_avatar(), {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${bearerToken.value}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId: id,
+      fileUrl: fileUrl,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update avatar");
+  }
+
+  const data = await response.json();
+
+  return data;
 };
 
 // Delete

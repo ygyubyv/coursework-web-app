@@ -14,3 +14,5 @@ export * from "./number/detectCardBrand";
 export * from "./geolocation/calculateDistance";
 
 export * from "./notification/showNotification";
+
+export * from "./file/uploadFileToAzure";
