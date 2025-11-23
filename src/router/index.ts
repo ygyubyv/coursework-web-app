@@ -8,6 +8,7 @@ import parkings from "@/containers/parkings/routes/index";
 import contact from "@/containers/contact/routes/index";
 import help from "@/containers/help/routes/index";
 import faq from "@/containers/faq/routes/index";
+import users from "@/containers/users/routes/index";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
@@ -18,27 +19,36 @@ export const isLoading = ref(false);
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // Public
     ...main,
     ...about,
-    ...account,
-    ...book,
-    ...parkings,
     ...contact,
     ...help,
     ...faq,
+
+    // Public + Authenticated
+    ...book,
+
+    // Authenticated
+    ...account,
+    ...parkings,
+
+    // Admin
+    ...users,
   ],
 });
 
 router.beforeEach(async (to, _, next) => {
   try {
     const authStore = useAuthStore();
-    const { initAuth } = authStore;
+    const { initAuth, hasRole } = authStore;
     const { isAuthenticated, isInitialized, authModalIsVisible } =
       storeToRefs(authStore);
     const { user } = storeToRefs(useUserStore());
 
     isLoading.value = true;
 
+    // Force init for protected routes
     if (to.meta.requiresAuth) {
       if (!isAuthenticated.value) {
         await initAuth();
@@ -50,6 +60,18 @@ router.beforeEach(async (to, _, next) => {
       }
     }
 
+    // Has role check for admin routes
+    if (to.meta.requiresAdmin) {
+      if (!isAuthenticated.value) {
+        await initAuth();
+      }
+
+      if (isInitialized.value && (!user.value || !hasRole("admin"))) {
+        return next({ name: "main" });
+      }
+    }
+
+    // Optional init for public routes
     if (!isInitialized.value) {
       initAuth();
     }
