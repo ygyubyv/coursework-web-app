@@ -7,7 +7,7 @@ export type Role = "user" | "guardian" | "admin" | "owner";
 
 export type UserSummary = Pick<
   User,
-  "id" | "name" | "email" | "phoneNumber" | "avatarUrl" | "createdAt"
+  "id" | "name" | "email" | "phoneNumber" | "avatarUrl" | "createdAt" | "roles"
 >;
 
 export type User = {

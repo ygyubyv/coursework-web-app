@@ -1,5 +1,3 @@
-import UsersView from "../views/UsersView.vue";
-
 export default [
   {
     path: "/users",
@@ -7,6 +5,15 @@ export default [
     meta: {
       requiresAdmin: true,
     },
-    component: UsersView,
+    component: () => import("../views/UsersView.vue"),
+  },
+
+  {
+    path: "/users/:id",
+    name: "user",
+    meta: {
+      requiresAdmin: true,
+    },
+    component: () => import("../views/UserView.vue"),
   },
 ];

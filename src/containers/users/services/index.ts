@@ -1,7 +1,7 @@
 import axiosInstance from "@/plugins/axios";
-import type { IUser } from "../types";
+import type { UserSummary } from "@/types";
 
-const MOCK_USERS: IUser[] = [
+const MOCK_USERS: UserSummary[] = [
   {
     avatarUrl: null,
     createdAt: "Tue, 21 Oct 2025 21:08:05 GMT",
@@ -59,8 +59,13 @@ const MOCK_USERS: IUser[] = [
   },
 ];
 
+export const getUser = async (id: string) => {
+  const response = await axiosInstance.get<UserSummary>(`/users/${id}`);
+  return response.data;
+};
+
 // Temporary mock implementation
-export const getUsers = async (): Promise<IUser[]> => {
+export const getUsers = async (): Promise<UserSummary[]> => {
   await new Promise((resolve) => setTimeout(resolve, 300));
   return MOCK_USERS;
 };

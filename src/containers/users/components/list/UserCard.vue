@@ -50,13 +50,13 @@
 
 <script setup lang="ts">
 import { DEFAULT_AVATAR } from "@/constants";
-import type { IUser } from "../../types";
-import InfoItem from "./InfoItem.vue";
+import type { UserSummary } from "@/types";
+import InfoItem from "../list/InfoItem.vue";
 import { formatDate } from "@/utils";
 import { useRouter } from "vue-router";
 
 interface Props {
-  user: IUser;
+  user: UserSummary;
 }
 
 const props = defineProps<Props>();

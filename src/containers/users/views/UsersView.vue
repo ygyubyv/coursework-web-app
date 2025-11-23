@@ -37,13 +37,13 @@ import { getUsers } from "../services";
 import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
-import type { IUser } from "../types";
+import type { UserSummary } from "@/types";
 
 const { t } = useI18n();
 
 const searchQuery = ref("");
 
-const users = computed((): IUser[] => {
+const users = computed((): UserSummary[] => {
   if (!data.value) {
     return [];
   }
