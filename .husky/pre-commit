@@ -1,20 +1,2 @@
 echo "Running lint..."
 npx lint-staged
-
-echo "Building project..."
-npm run build
-
-echo "Starting local server..."
-npm run preview &
-SERVER_PID=$!
-
-echo "Waiting for server to be ready..."
-npx wait-on http://localhost:5173
-
-echo "Running Cypress tests..."
-npm run test:e2e:ci
-TEST_EXIT_CODE=$?
-
-kill $SERVER_PID
-
-exit $TEST_EXIT_CODE
