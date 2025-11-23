@@ -21,46 +21,23 @@
       <BaseSpinner mode="Black-spinner" />
     </div>
 
-    <div v-if="!isLoading" class="space-y-4">
+    <div v-if="!isLoading && users.length" class="space-y-4">
       <UserCard v-for="user in users" :key="user.id" :user="user" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseSpinner from "@/components/Base/BaseSpinner.vue";
 import UserCard from "../components/list/UserCard.vue";
-import { useQuery } from "@tanstack/vue-query";
-import { getUsers } from "../services";
 import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
-import type { UserSummary } from "@/types";
+import { useUsersList } from "../composables/details/useUsersList";
 
 const { t } = useI18n();
-
-const searchQuery = ref("");
-
-const users = computed((): UserSummary[] => {
-  if (!data.value) {
-    return [];
-  }
-
-  if (searchQuery.value.trim()) {
-    return data.value.filter((user) =>
-      user.name.toLowerCase().includes(searchQuery.value.trim().toLowerCase())
-    );
-  }
-
-  return data.value;
-});
-
-const { data, isPending: isLoading } = useQuery({
-  queryKey: ["users"],
-  queryFn: getUsers,
-});
+const { users, searchQuery, isLoading } = useUsersList();
 
 useHead({
   title: t("seo.users.head.title"),

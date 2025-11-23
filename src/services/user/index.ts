@@ -1,5 +1,6 @@
 import {
   get_user,
+  get_users,
   get_user_cars,
   get_user_subscriptions,
   get_user_transactions,
@@ -24,6 +25,10 @@ import type {
   UserSubscription,
   UserSummary,
 } from "@/types";
+
+interface GetUsersResponse {
+  users: UserSummary[];
+}
 
 interface GetUserCarsResponse {
   cars: Car[];
@@ -52,6 +57,11 @@ interface DeleteUserResponse {
 export const getUser = async (id: string) => {
   const response = await axiosInstance.get<User>(get_user(id));
   return response.data;
+};
+
+export const getUsers = async () => {
+  const response = await axiosInstance.get<GetUsersResponse>(get_users);
+  return response.data.users;
 };
 
 export const getUserCars = async (id: string) => {

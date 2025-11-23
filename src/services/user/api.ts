@@ -4,6 +4,8 @@ import { API_URL } from "@/config";
 
 export const get_user = (id: string) => `${API_URL}/users/${id}`;
 
+export const get_users = `${API_URL}/users`;
+
 export const get_user_cars = (id: string) => `${API_URL}/users/${id}/cars`;
 
 export const get_user_subscriptions = (id: string) =>
