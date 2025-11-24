@@ -91,12 +91,12 @@ const { user } = storeToRefs(userStore);
 const { setParkings } = parkingsStore;
 const { parkings } = storeToRefs(parkingsStore);
 
-const sortOptions: BaseSelectOption[] = [
+const sortOptions: BaseSelectOption<string>[] = [
   { label: t("selects.distance"), value: "distance" },
   { label: t("selects.available_spots"), value: "spots" },
 ];
 
-const selectedOption = ref<BaseSelectOption>(sortOptions[0]);
+const selectedOption = ref<BaseSelectOption<string>>(sortOptions[0]);
 const addCarModalIsVisible = ref(false);
 const bookModalIsVisible = ref(false);
 const bookedParking = ref<Parking | null>(null);

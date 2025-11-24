@@ -210,7 +210,16 @@
 
     "labels": {
       "select_car": "Select your car",
-      "sort_by": "Sort by"
+      "sort_by": "Sort by",
+      "role": "Role",
+      "per_page": "Per page"
+    },
+
+    "roles": {
+      "admin": "Admin",
+      "user": "User",
+      "guardian": "Guardian",
+      "owner": "Owner"
     }
   },
 

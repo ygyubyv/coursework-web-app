@@ -20,15 +20,14 @@ import type {
   Booking,
   Car,
   CreateCar,
+  PaginatedResponse,
+  PaginationParams,
+  Role,
   Transaction,
   User,
   UserSubscription,
   UserSummary,
 } from "@/types";
-
-interface GetUsersResponse {
-  users: UserSummary[];
-}
 
 interface GetUserCarsResponse {
   cars: Car[];
@@ -59,9 +58,19 @@ export const getUser = async (id: string) => {
   return response.data;
 };
 
-export const getUsers = async () => {
-  const response = await axiosInstance.get<GetUsersResponse>(get_users);
-  return response.data.users;
+export const getUsers = async (
+  query?: PaginationParams & {
+    name?: string;
+    role?: Role;
+  }
+) => {
+  const response = await axiosInstance.get<
+    PaginatedResponse<UserSummary, "users">
+  >(get_users, {
+    params: query,
+  });
+
+  return response.data;
 };
 
 export const getUserCars = async (id: string) => {

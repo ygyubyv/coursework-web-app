@@ -82,7 +82,7 @@ const userStore = useUserStore();
 const { setUserBookings } = userStore;
 const { user } = storeToRefs(userStore);
 
-const filterOptions: BaseSelectOption[] = [
+const filterOptions: BaseSelectOption<string>[] = [
   { label: t("selects.all"), value: "all" },
   { label: t("selects.finished"), value: "finished" },
   { label: t("selects.active"), value: "active" },
@@ -91,7 +91,7 @@ const filterOptions: BaseSelectOption[] = [
 const mapComponent = useTemplateRef("mapComponent");
 const mapIsVisible = ref(false);
 const selectedName = ref("");
-const selectedOption = ref<BaseSelectOption>(filterOptions[0]);
+const selectedOption = ref<BaseSelectOption<string>>(filterOptions[0]);
 
 const currentParking = ref<Parking | null>(null);
 

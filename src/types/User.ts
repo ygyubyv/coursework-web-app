@@ -2,8 +2,7 @@ import type { Car } from "./Car";
 import type { UserSubscription } from "./Subscription";
 import type { Transaction } from "./Transaction";
 import type { Booking } from "./Booking";
-
-export type Role = "user" | "guardian" | "admin" | "owner";
+import type { Role } from "./Constants";
 
 export type UserSummary = Pick<
   User,

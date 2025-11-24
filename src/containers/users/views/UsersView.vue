@@ -1,12 +1,27 @@
 <template>
   <div class="w-full max-w-4xl mx-auto my-10 space-y-6 px-4">
-    <div class="flex gap-2 items-center">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
       <BaseInput
         v-model="searchQuery"
         id="search-users"
         type="text"
         size="Medium"
+        class="w-full"
         :placeholder="$t('forms.admin.fields.search_users.placeholder')"
+      />
+
+      <BaseSelect
+        class="w-full sm:w-70"
+        :placeholder="$t('selects.labels.role')"
+        @update:model-value="((option: BaseSelectOption<Role>) => role = option.value)"
+        :options="roleOptions"
+      />
+
+      <BaseSelect
+        class="w-full sm:w-70"
+        :placeholder="$t('selects.labels.per_page')"
+        :options="perPageOptions"
+        @update:model-value="((option: BaseSelectOption<number>) => perPage = option.value)"
       />
     </div>
 
@@ -24,6 +39,13 @@
     <div v-if="!isLoading && users.length" class="space-y-4">
       <UserCard v-for="user in users" :key="user.id" :user="user" />
     </div>
+
+    <Pagination
+      :has-next="hasNext"
+      :has-prev="hasPrev"
+      :total-pages="totalPages"
+      v-model="currentPage"
+    />
   </div>
 </template>
 
@@ -31,13 +53,51 @@
 import BaseInput from "@/components/Base/BaseInput.vue";
 import BaseSpinner from "@/components/Base/BaseSpinner.vue";
 import UserCard from "../components/list/UserCard.vue";
+import BaseSelect from "@/components/Base/BaseSelect.vue";
 import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
 import { useUsersList } from "../composables/details/useUsersList";
+import Pagination from "@/components/Pagination/Pagination.vue";
+import { type BaseSelectOption, type Role } from "@/types";
+import { computed } from "vue";
 
 const { t } = useI18n();
-const { users, searchQuery, isLoading } = useUsersList();
+const {
+  users,
+  currentPage,
+  perPage,
+  totalPages,
+  role,
+  hasNext,
+  hasPrev,
+  searchQuery,
+  isLoading,
+} = useUsersList();
+
+// const roleOptions: BaseSelectOption<Role>[] = [
+//   { label: t("selects.roles.admin"), value: "admin" },
+//   { label: t("selects.roles.user"), value: "user" },
+//   { label: t("selects.roles.guardian"), value: "guardian" },
+//   { label: t("selects.roles.owner"), value: "owner" },
+// ];
+
+const roleOptions = computed(() => {
+  return [
+    { label: t("selects.roles.admin"), value: "admin" },
+    { label: t("selects.roles.user"), value: "user" },
+    { label: t("selects.roles.guardian"), value: "guardian" },
+    { label: t("selects.roles.owner"), value: "owner" },
+  ];
+});
+
+const perPageOptions: BaseSelectOption<number>[] = [
+  { label: "5", value: 5 },
+  { label: "10", value: 10 },
+  { label: "20", value: 20 },
+  { label: "50", value: 50 },
+  { label: "100", value: 100 },
+];
 
 useHead({
   title: t("seo.users.head.title"),
