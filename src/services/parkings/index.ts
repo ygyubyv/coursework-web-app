@@ -1,4 +1,4 @@
-import type { Parking } from "@/types";
+import type { PaginatedResponse, PaginationParams, Parking } from "@/types";
 import {
   create_parking,
   delete_parking,
@@ -12,8 +12,12 @@ export const getParking = async (id: string) => {
   return response.data;
 };
 
-export const getParkings = async () => {
-  const response = await axiosInstance.get<Parking[]>(get_parkings);
+export const getParkings = async (query?: PaginationParams) => {
+  const response = await axiosInstance.get<
+    PaginatedResponse<Parking, "parkings">
+  >(get_parkings, {
+    params: query,
+  });
   return response.data;
 };
 

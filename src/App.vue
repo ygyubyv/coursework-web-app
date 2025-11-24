@@ -11,10 +11,12 @@
   <div class="flex flex-col min-h-screen">
     <Header />
 
-    <main class="flex-1 w-full">
-      <RouterView v-if="!isLoading" />
-      <div class="flex min-h-screen items-center justify-center" v-else>
-        <BaseSpinner mode="Black-spinner" />
+    <main class="flex-1 w-full flex justify-center items-center">
+      <div class="w-full max-w-7xl p-6">
+        <RouterView v-if="!isLoading" />
+        <div class="flex items-center justify-center min-h-[200px]" v-else>
+          <BaseSpinner mode="Black-spinner" />
+        </div>
       </div>
     </main>
 

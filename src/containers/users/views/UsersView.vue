@@ -57,7 +57,7 @@ import BaseSelect from "@/components/Base/BaseSelect.vue";
 import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
-import { useUsersList } from "../composables/details/useUsersList";
+import { useUsersList } from "../composables/list/useUsersList";
 import Pagination from "@/components/Pagination/Pagination.vue";
 import { type BaseSelectOption, type Role } from "@/types";
 import { computed } from "vue";
@@ -75,12 +75,13 @@ const {
   isLoading,
 } = useUsersList();
 
-// const roleOptions: BaseSelectOption<Role>[] = [
-//   { label: t("selects.roles.admin"), value: "admin" },
-//   { label: t("selects.roles.user"), value: "user" },
-//   { label: t("selects.roles.guardian"), value: "guardian" },
-//   { label: t("selects.roles.owner"), value: "owner" },
-// ];
+const perPageOptions: BaseSelectOption<number>[] = [
+  { label: "5", value: 5 },
+  { label: "10", value: 10 },
+  { label: "20", value: 20 },
+  { label: "50", value: 50 },
+  { label: "100", value: 100 },
+];
 
 const roleOptions = computed(() => {
   return [
@@ -90,14 +91,6 @@ const roleOptions = computed(() => {
     { label: t("selects.roles.owner"), value: "owner" },
   ];
 });
-
-const perPageOptions: BaseSelectOption<number>[] = [
-  { label: "5", value: 5 },
-  { label: "10", value: 10 },
-  { label: "20", value: 20 },
-  { label: "50", value: 50 },
-  { label: "100", value: 100 },
-];
 
 useHead({
   title: t("seo.users.head.title"),
