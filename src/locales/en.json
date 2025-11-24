@@ -246,6 +246,12 @@
       "submit_text": "Add Car"
     },
 
+    "update_car": {
+      "title": "Edit Car",
+      "message": "Update your car details below:",
+      "submit_text": "Save"
+    },
+
     "delete_account": {
       "title": "Delete Account",
       "message": "Are you sure you want to permanently delete your account? All your data will be lost and this action cannot be undone.",

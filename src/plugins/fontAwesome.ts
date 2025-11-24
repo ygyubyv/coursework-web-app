@@ -31,6 +31,7 @@ import {
   faXmark,
   faCheck,
   faLocationDot,
+  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faApple, faAndroid } from "@fortawesome/free-brands-svg-icons";
@@ -67,7 +68,8 @@ library.add(
   faXmark,
   faCheck,
   faLocationDot,
-  faCheck
+  faCheck,
+  faPenToSquare
 );
 
 export { FontAwesomeIcon };

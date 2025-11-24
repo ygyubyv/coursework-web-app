@@ -70,19 +70,19 @@ export const useUserDetails = (userId: string) => {
 
   watch(userCars, (val) => {
     if (val) {
-      user.value!.cars = { ...val };
+      user.value!.cars = [...val];
     }
   });
 
   watch(userBookings, (val) => {
     if (val) {
-      user.value!.bookings = { ...val };
+      user.value!.bookings = [...val];
     }
   });
 
   watch(userTransactions, (val) => {
     if (val) {
-      user.value!.transactions = { ...val };
+      user.value!.transactions = [...val];
     }
   });
 

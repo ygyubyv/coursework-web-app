@@ -7,3 +7,6 @@ export interface Car {
 }
 
 export type CreateCar = Omit<Car, "id">;
+export type UpdateCar = Omit<Car, "id">;
+
+export type CarAction = "create" | "update" | "delete";

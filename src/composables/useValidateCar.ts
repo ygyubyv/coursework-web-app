@@ -2,9 +2,9 @@ import * as yup from "yup";
 import { useForm, useFormErrors } from "vee-validate";
 import { useI18n } from "vue-i18n";
 import type { Car } from "@/types";
-import { watch } from "vue";
+import { watch, type Ref } from "vue";
 
-export const useValidateCar = (initialCar?: Car) => {
+export const useValidateCar = (initialCar?: Ref<Car>) => {
   const { t } = useI18n();
 
   const carSchema = yup.object({
@@ -44,10 +44,10 @@ export const useValidateCar = (initialCar?: Car) => {
   const { handleSubmit, resetForm, defineField, meta } = useForm({
     validationSchema: carSchema,
     initialValues: {
-      number: initialCar?.number || "",
-      brand: initialCar?.brand || "",
-      model: initialCar?.model || "",
-      color: initialCar?.color || "",
+      number: initialCar?.value.number || "",
+      brand: initialCar?.value.brand || "",
+      model: initialCar?.value.model || "",
+      color: initialCar?.value.color || "",
     },
   });
 
@@ -59,18 +59,20 @@ export const useValidateCar = (initialCar?: Car) => {
   const [color, colorAttrs] = defineField("color");
 
   watch(
-    () => initialCar,
-    (newCar) => {
-      if (newCar) {
-        resetForm({
-          values: {
-            number: newCar.number,
-            brand: newCar.brand,
-            model: newCar.model,
-            color: newCar.color,
-          },
-        });
+    () => initialCar?.value,
+    (newVal) => {
+      if (!newVal) {
+        return;
       }
+
+      resetForm({
+        values: {
+          number: newVal.number,
+          brand: newVal.brand,
+          model: newVal.model,
+          color: newVal.color,
+        },
+      });
     },
     { immediate: true, deep: true }
   );

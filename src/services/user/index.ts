@@ -24,6 +24,7 @@ import type {
   PaginationParams,
   Role,
   Transaction,
+  UpdateCar,
   User,
   UserSubscription,
   UserSummary,
@@ -35,6 +36,10 @@ interface GetUserCarsResponse {
 
 interface GetUserBookingsResponse {
   bookings: Booking[];
+}
+
+interface GetUserTransactionsResponse {
+  transactions: Transaction[];
 }
 
 interface CreateUserAvatarUploadUrl {
@@ -88,10 +93,10 @@ export const getUserSubscriptions = async (id: string) => {
 };
 
 export const getUserTransactions = async (id: string) => {
-  const response = await axiosInstance.get<Transaction[]>(
+  const response = await axiosInstance.get<GetUserTransactionsResponse>(
     get_user_transactions(id)
   );
-  return response.data;
+  return response.data.transactions;
 };
 
 export const getUserBookings = async (id: string) => {
@@ -129,7 +134,7 @@ export const updateUser = async (id: string, user: Partial<UserSummary>) => {
 export const updateUserCar = async (
   userId: string,
   carId: string,
-  car: Car
+  car: UpdateCar
 ) => {
   const response = await axiosInstance.patch<Car>(
     update_user_car(userId, carId),
