@@ -4,6 +4,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createHead } from "@unhead/vue/client";
 
+import { VueQueryPlugin } from "@tanstack/vue-query";
+
 import App from "./App.vue";
 import router from "./router";
 
@@ -29,6 +31,7 @@ import { FontAwesomeIcon } from "./plugins/fontAwesome";
   app.use(head);
   app.use(i18n);
   app.use(ToastPlugin);
+  app.use(VueQueryPlugin);
 
   app.mount("#app");
 })();

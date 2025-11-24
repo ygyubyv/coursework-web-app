@@ -31,7 +31,12 @@
     "booking": "Booking",
     "bookings": "Bookings",
     "parking": "Parking",
-    "parkings": "Parkings"
+    "parkings": "Parkings",
+    "user": "User",
+    "users": "Users",
+    "roles": "Roles",
+    "not_specified": "Not specified",
+    "not_found": "{entity} not found"
   },
 
   "actions": {
@@ -184,6 +189,15 @@
         "label": "@:common.color",
         "placeholder": "Enter color"
       }
+    },
+
+    "admin": {
+      "fields": {
+        "search_users": {
+          "label": "Search Users",
+          "placeholder": "Search users by name..."
+        }
+      }
     }
   },
 
@@ -196,7 +210,16 @@
 
     "labels": {
       "select_car": "Select your car",
-      "sort_by": "Sort by"
+      "sort_by": "Sort by",
+      "role": "Role",
+      "per_page": "Per page"
+    },
+
+    "roles": {
+      "admin": "Admin",
+      "user": "User",
+      "guardian": "Guardian",
+      "owner": "Owner"
     }
   },
 
@@ -323,6 +346,7 @@
     "my_parkings": "My Parkings",
     "reserve": "Reserve",
     "about": "About",
+    "users": "Users",
     "account": {
       "default": "Account",
       "profile": "Personal Info",
@@ -534,6 +558,17 @@
         "keywords": "{appName} account, manage account, parking profile, user settings, account security, parking statistics",
         "ogTitle": "Account — {appName} Smart Parking Service",
         "ogDescription": "Manage your {appName} account, view statistics, update personal information, and configure security settings."
+      }
+    },
+
+    "users": {
+      "head": {
+        "title": "@:common.project_name",
+        "titleTemplate": "Users",
+        "description": "View all registered users of {appName}. Browse profiles, check roles, and manage account details within the administration interface.",
+        "keywords": "users, user list, admin users, user management, accounts, roles, admin panel",
+        "ogTitle": "Users — {appName} Admin Panel",
+        "ogDescription": "Browse and manage all registered users of {appName}. View profiles, check roles, and explore account details."
       }
     }
   },

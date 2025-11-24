@@ -22,6 +22,13 @@
             {{ $t("routes.my_parkings") }}
           </RouterLink>
           <RouterLink
+            v-if="isAuthenticated && hasRole('admin')"
+            to="/users"
+            class="text-black font-medium hover:underline hover:text-gray-700 transition-colors duration-200"
+          >
+            {{ $t("routes.users") }}
+          </RouterLink>
+          <RouterLink
             to="/book"
             class="text-black font-medium hover:underline hover:text-gray-700 transition-colors duration-200"
           >
@@ -66,7 +73,7 @@ import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
 
-const { login, logout } = useAuthStore();
+const { login, logout, hasRole } = useAuthStore();
 const { isAuthenticated } = storeToRefs(useAuthStore());
 
 const { user } = storeToRefs(useUserStore());

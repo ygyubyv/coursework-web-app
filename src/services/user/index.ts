@@ -1,5 +1,6 @@
 import {
   get_user,
+  get_users,
   get_user_cars,
   get_user_subscriptions,
   get_user_transactions,
@@ -19,6 +20,9 @@ import type {
   Booking,
   Car,
   CreateCar,
+  PaginatedResponse,
+  PaginationParams,
+  Role,
   Transaction,
   User,
   UserSubscription,
@@ -51,6 +55,21 @@ interface DeleteUserResponse {
 
 export const getUser = async (id: string) => {
   const response = await axiosInstance.get<User>(get_user(id));
+  return response.data;
+};
+
+export const getUsers = async (
+  query?: PaginationParams & {
+    name?: string;
+    role?: Role;
+  }
+) => {
+  const response = await axiosInstance.get<
+    PaginatedResponse<UserSummary, "users">
+  >(get_users, {
+    params: query,
+  });
+
   return response.data;
 };
 

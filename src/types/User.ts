@@ -2,12 +2,11 @@ import type { Car } from "./Car";
 import type { UserSubscription } from "./Subscription";
 import type { Transaction } from "./Transaction";
 import type { Booking } from "./Booking";
-
-export type Role = "user" | "guardian" | "admin";
+import type { Role } from "./Constants";
 
 export type UserSummary = Pick<
   User,
-  "id" | "name" | "email" | "phoneNumber" | "avatarUrl" | "createdAt"
+  "id" | "name" | "email" | "phoneNumber" | "avatarUrl" | "createdAt" | "roles"
 >;
 
 export type User = {

@@ -1,7 +1,9 @@
 <template>
-  <div class="flex flex-col md:flex-row justify-center gap-5 md:gap-20 p-6">
+  <div class="flex flex-col lg:flex-row gap-5 md:gap-12 p-6">
+    <!-- Add Car Modal -->
     <AddCarModal v-if="addCarModalIsVisible" v-model="addCarModalIsVisible" />
 
+    <!-- Book Modal -->
     <BookModal
       v-if="bookModalIsVisible"
       :parking="bookedParking!"
@@ -11,59 +13,107 @@
       @on-submit="handleSubmit"
     />
 
+    <!-- Map -->
     <div
-      class="flex-1 rounded-xl overflow-hidden border border-gray-200 aspect-[3/2]"
+      class="rounded-xl overflow-hidden border border-gray-200 h-[400px] sm:h-[500px] lg:h-auto lg:flex-1"
       data-cy="book-map"
     >
       <Map
         v-if="coordinates"
         :coordinates="coordinates"
-        :parkings="filteredParkings"
+        :parkings="parkings"
+        class="w-full h-full"
       />
 
       <div
         v-else
-        class="flex items-center justify-center w-full h-full bg-gray-50 text-gray-500 text-center p-4"
+        class="flex items-center justify-center w-full h-full bg-gray-50 text-gray-500"
       >
-        <p class="max-w-md mx-auto">{{ $t("map.location_access") }}</p>
+        {{ $t("map.location_access") }}
       </div>
     </div>
 
+    <!-- Parking List -->
     <div
-      class="flex-1 rounded-2xl p-5 flex flex-col gap-4 max-h-[500px] border border-gray-200 bg-gray-50"
+      class="flex-1 rounded-2xl p-5 flex flex-col border border-gray-200 bg-gray-50 max-h-[600px] min-h-[600px]"
     >
-      <div class="flex items-center justify-between">
+      <!-- Header -->
+      <div
+        class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 mb-4"
+      >
         <h2 class="text-lg font-semibold text-gray-900">
           {{ $t("parkings.nearby_parkings") }}
         </h2>
 
-        <div class="w-[160px] md:w-[200px]">
+        <div class="flex flex-col sm:flex-row gap-2.5 w-full xl:w-auto">
           <BaseSelect
             :options="sortOptions"
             :placeholder="$t('selects.labels.sort_by')"
             v-model="selectedOption"
+            class="sm:w-[200px] w-full"
             data-cy="parking-sort"
+          />
+
+          <BaseSelect
+            class="sm:w-40 w-full"
+            :placeholder="$t('selects.labels.per_page')"
+            :options="perPageOptions"
+            @update:model-value="((option: BaseSelectOption<number>) => perPage = option.value)"
           />
         </div>
       </div>
 
-      <Parkings
-        v-if="parkings && parkings.length"
-        :parkings="filteredParkings"
-        :coordinates="coordinates"
-        @on-book="handleBook"
-      />
+      <!-- CONTENT WRAPPER -->
+      <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- CASE: Parkings list -->
+        <div
+          v-if="parkings && parkings.length && !isLoading"
+          class="overflow-auto"
+        >
+          <Parkings
+            :parkings="parkings"
+            :coordinates="coordinates"
+            @on-book="handleBook"
+          />
+        </div>
+
+        <!-- CASE: Loading -->
+        <div
+          v-else-if="isLoading"
+          class="flex-1 flex items-center justify-center"
+        >
+          <BaseSpinner mode="Black-spinner" />
+        </div>
+
+        <!-- CASE: No parkings -->
+        <div
+          v-else
+          class="flex-1 flex items-center justify-center text-gray-500"
+        >
+          {{ $t("parkings.no_results") }}
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center mt-4">
+        <Pagination
+          :has-next="hasNext"
+          :has-prev="hasPrev"
+          :total-pages="totalPages"
+          v-model="currentPage"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import Map from "@/components/Map.vue";
-import { ref, computed, onMounted } from "vue";
+import { ref } from "vue";
 import Parkings from "../components/Parkings.vue";
 import type { BookForm, BaseSelectOption, Parking } from "@/types";
 import BaseSelect from "@/components/Base/BaseSelect.vue";
-import { calculateDistance, showNotification } from "@/utils";
+import { showNotification } from "@/utils";
 import BookModal from "../components/BookModal.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
@@ -72,69 +122,38 @@ import { useI18n } from "vue-i18n";
 import { useHead } from "@unhead/vue";
 import { APP_URL } from "@/config";
 import { useUserStore } from "@/stores/user";
-import { useParkingsStore } from "@/stores/parkings";
 import { createBooking } from "@/services/bookings";
 import AddCarModal from "@/components/Modals/BookCar/ui/AddCarModal.vue";
+import { useParkingsList } from "../composables/useParkingsList";
+import Pagination from "@/components/Pagination/Pagination.vue";
+import BaseSpinner from "@/components/Base/BaseSpinner.vue";
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
-const parkingsStore = useParkingsStore();
 
 const { t } = useI18n();
 const { coordinates } = useMap();
+const {
+  parkings,
+  totalPages,
+  perPage,
+  isLoading,
+  currentPage,
+  hasNext,
+  hasPrev,
+  perPageOptions,
+  sortOptions,
+} = useParkingsList();
 
 const { authModalIsVisible, isAuthenticated } = storeToRefs(authStore);
 
 const { setUserCars } = userStore;
 const { user } = storeToRefs(userStore);
 
-const { setParkings } = parkingsStore;
-const { parkings } = storeToRefs(parkingsStore);
-
-const sortOptions: BaseSelectOption[] = [
-  { label: t("selects.distance"), value: "distance" },
-  { label: t("selects.available_spots"), value: "spots" },
-];
-
-const selectedOption = ref<BaseSelectOption>(sortOptions[0]);
+const selectedOption = ref<BaseSelectOption<string>>(sortOptions.value[0]);
 const addCarModalIsVisible = ref(false);
 const bookModalIsVisible = ref(false);
 const bookedParking = ref<Parking | null>(null);
-
-const filteredParkings = computed(() => {
-  if (!coordinates.value) {
-    return parkings.value;
-  }
-
-  switch (selectedOption.value.value) {
-    case "distance":
-      return parkings.value
-        .slice()
-        .sort(
-          (a, b) =>
-            calculateDistance(
-              coordinates.value!.lat,
-              coordinates.value!.lng,
-              a.coordinates.lat,
-              a.coordinates.lng
-            ) -
-            calculateDistance(
-              coordinates.value!.lat,
-              coordinates.value!.lng,
-              b.coordinates.lat,
-              b.coordinates.lng
-            )
-        );
-
-    case "spots":
-      return parkings.value
-        .slice()
-        .sort((a, b) => b.availableSpots - a.availableSpots);
-
-    default:
-      return parkings.value;
-  }
-});
 
 const handleBook = async (id: string) => {
   if (!isAuthenticated.value || !user.value) {
@@ -174,10 +193,6 @@ const handleSubmit = async (form: BookForm) => {
     console.error(error);
   }
 };
-
-onMounted(() => {
-  setParkings();
-});
 
 useHead({
   title: t("seo.book.head.title"),
