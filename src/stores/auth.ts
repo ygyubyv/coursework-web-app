@@ -31,7 +31,7 @@ export const useAuthStore = defineStore("auth", () => {
   const hasRole = (role: Role) => {
     const userRoles = idTokenClaims.value!.extension_Role;
 
-    return userRoles!.includes(role);
+    return userRoles?.includes(role);
   };
 
   const login = async () => {
