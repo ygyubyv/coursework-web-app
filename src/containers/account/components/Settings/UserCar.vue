@@ -1,5 +1,14 @@
 <template>
   <div class="border border-gray-200 rounded-lg p-4 flex flex-col gap-3">
+    <Confirm
+      v-model="deleteCarModalIsVisible"
+      :title="$t('modals.delete_car.title')"
+      :message="$t('modals.delete_car.message')"
+      :confirm-text="$t('modals.delete_car.submit_text')"
+      :cancel-text="$t('buttons.cancel')"
+      @confirm="onDelete"
+    />
+
     <div class="flex flex-col md:flex-row md:items-center justify-center gap-2">
       <label class="w-32 text-gray-700 font-medium"
         >{{ $t("forms.fields.number.label") }}:</label
@@ -81,7 +90,7 @@
         class="w-full sm:w-auto"
         size="Small"
         v-if="meta.dirty"
-        :onClick="onSave"
+        :onClick="onUpdate"
       />
 
       <BaseButton
@@ -89,18 +98,19 @@
         icon="trash"
         mode="Danger"
         size="Small"
-        @click="() => emit('onCarDelete', car.id)"
+        @click="deleteCarModalIsVisible = true"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Confirm from "@/components/Modals/Confirm.vue";
 import BaseButton from "@/components/Base/BaseButton.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
 import type { Car } from "@/types";
 import { useValidateCar } from "@/composables/useValidateCar";
-import { watch } from "vue";
+import { ref, toRef, watch } from "vue";
 
 interface Props {
   car: Car;
@@ -108,8 +118,8 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-  (e: "saveChanges", id: string, car: Car): void;
-  (e: "onCarDelete", id: string): void;
+  (e: "updateCar", carId: string, car: Car): void;
+  (e: "deleteCar", carId: string): void;
 }>();
 
 const {
@@ -125,9 +135,11 @@ const {
   errors,
   handleSubmit,
   resetForm,
-} = useValidateCar(props.car);
+} = useValidateCar(toRef(props, "car"));
 
-const onSave = handleSubmit((values) => {
+const deleteCarModalIsVisible = ref(false);
+
+const onUpdate = handleSubmit((values) => {
   const car = {
     number: values.number,
     brand: values.brand,
@@ -135,8 +147,12 @@ const onSave = handleSubmit((values) => {
     model: values.model,
   } as Car;
 
-  emit("saveChanges", props.car.id, car);
+  emit("updateCar", props.car.id, car);
 });
+
+const onDelete = () => {
+  emit("deleteCar", props.car.id);
+};
 
 watch(
   () => props.car,
