@@ -4,7 +4,7 @@ import main from "@/containers/main/routes/index";
 import about from "@/containers/about/routes/index";
 import account from "@/containers/account/routes/index";
 import book from "@/containers/book/routes/index";
-import parkings from "@/containers/parkings/routes/index";
+import my_bookings from "@/containers/my-bookings/routes/index";
 import contact from "@/containers/contact/routes/index";
 import help from "@/containers/help/routes/index";
 import faq from "@/containers/faq/routes/index";
@@ -31,7 +31,7 @@ const router = createRouter({
 
     // Authenticated
     ...account,
-    ...parkings,
+    ...my_bookings,
 
     // Admin
     ...users,

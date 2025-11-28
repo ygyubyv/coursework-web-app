@@ -85,10 +85,10 @@ const perPageOptions: BaseSelectOption<number>[] = [
 
 const roleOptions = computed(() => {
   return [
-    { label: t("selects.roles.admin"), value: "admin" },
-    { label: t("selects.roles.user"), value: "user" },
-    { label: t("selects.roles.guardian"), value: "guardian" },
-    { label: t("selects.roles.owner"), value: "owner" },
+    { label: t("roles.admin"), value: "admin" },
+    { label: t("roles.user"), value: "user" },
+    { label: t("roles.guardian"), value: "guardian" },
+    { label: t("roles.owner"), value: "owner" },
   ];
 });
 

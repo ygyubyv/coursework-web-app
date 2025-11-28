@@ -16,10 +16,10 @@
         <div class="hidden md:flex items-center gap-6">
           <RouterLink
             v-if="isAuthenticated"
-            to="/parkings"
+            to="/my-bookings"
             class="text-black font-medium hover:underline hover:text-gray-700 transition-colors duration-200"
           >
-            {{ $t("routes.my_parkings") }}
+            {{ $t("routes.my_bookings") }}
           </RouterLink>
           <RouterLink
             v-if="isAuthenticated && hasRole('admin')"
@@ -82,7 +82,11 @@ const { t } = useI18n();
 
 const profileMenuLinks = computed(() => ({
   body: [
-    { to: "/parkings", text: t("routes.my_parkings"), icon: "calendar-check" },
+    {
+      to: "/my-bookings",
+      text: t("routes.my_bookings"),
+      icon: "calendar-check",
+    },
     { to: "/book", text: t("routes.reserve"), icon: "credit-card" },
     { to: "/account", text: t("routes.account.default"), icon: "user" },
     {

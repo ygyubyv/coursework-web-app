@@ -1,9 +1,16 @@
 <template>
   <div
-    class="fixed top-0 right-0 z-50 h-full bg-white w-64 md:w-96 shadow-xl transform transition-transform duration-300 translate-x-0 overflow-y-auto"
+    class="fixed top-0 right-0 z-50 h-full bg-white w-64 md:w-96 shadow-xl transform transition-transform duration-300 translate-x-0 flex flex-col"
     ref="slideModalRef"
   >
-    <div class="flex justify-end p-4">
+    <div
+      class="flex items-center p-4 pt-8 border-b"
+      :class="headerHasContent ? 'justify-between' : 'justify-end'"
+    >
+      <div v-if="headerHasContent" class="flex items-center">
+        <slot name="header"></slot>
+      </div>
+
       <font-awesome-icon
         :icon="['fas', 'xmark']"
         class="cursor-pointer text-black"
@@ -11,25 +18,34 @@
       />
     </div>
 
-    <div class="p-6 flex-1">
+    <div class="p-6 flex-1 overflow-y-auto">
       <slot></slot>
     </div>
 
-    <div class="p-4">
+    <div class="p-4 pb-8 border-t">
       <slot name="footer"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed, useSlots } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { useTemplateRef } from "vue";
 
+interface Emits {
+  (e: "onClose"): void;
+}
+
 const modalRef = useTemplateRef("slideModalRef");
 
-const emit = defineEmits<{
-  (e: "onClose"): void;
-}>();
+const emit = defineEmits<Emits>();
+
+const slots = useSlots();
+
+const headerHasContent = computed(() => {
+  return !!slots.header;
+});
 
 onClickOutside(modalRef, () => {
   emit("onClose");

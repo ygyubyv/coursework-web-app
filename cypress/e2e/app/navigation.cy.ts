@@ -60,10 +60,10 @@ describe("Routing — authenticated navigation", () => {
       .click();
   };
 
-  it("navigates to My Parkings from profile menu", () => {
+  it("navigates to My Bookings from profile menu", () => {
     openProfileMenu();
-    cy.contains("span", "My Parkings").click();
-    cy.url().should("include", "/parkings");
+    cy.contains("span", "My Bookings").click();
+    cy.url().should("include", "/my-bookings");
   });
 
   it("navigates to Book from profile menu", () => {

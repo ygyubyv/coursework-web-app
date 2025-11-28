@@ -39,6 +39,13 @@
     "not_found": "{entity} not found"
   },
 
+  "roles": {
+    "admin": "Admin",
+    "user": "User",
+    "guardian": "Guardian",
+    "owner": "Owner"
+  },
+
   "actions": {
     "get": "Get",
     "create": "Create",
@@ -64,7 +71,8 @@
 
       "auth": {
         "auth_failed": "Failed to authorize. Please check your credentials and try again.",
-        "logout_failed": "Failed to log out. Please try again."
+        "logout_failed": "Failed to log out. Please try again.",
+        "no_permission": "You do not have enough permissions to perform this action."
       }
     },
 
@@ -188,6 +196,11 @@
       "color": {
         "label": "@:common.color",
         "placeholder": "Enter color"
+      },
+
+      "roles": {
+        "label": "Roles",
+        "placeholder": "Select user roles"
       }
     },
 
@@ -213,13 +226,6 @@
       "sort_by": "Sort by",
       "role": "Role",
       "per_page": "Per page"
-    },
-
-    "roles": {
-      "admin": "Admin",
-      "user": "User",
-      "guardian": "Guardian",
-      "owner": "Owner"
     }
   },
 
@@ -262,6 +268,12 @@
       "title": "Confirm Car Deletion",
       "message": "Are you sure you want to permanently delete this car? This action cannot be undone.",
       "submit_text": "Delete Car"
+    },
+
+    "update_user": {
+      "title": "Update User Information",
+      "message": "Are you sure you want to apply these changes to the user’s profile?",
+      "submit_text": "Update User"
     },
 
     "required_auth": {
@@ -349,7 +361,7 @@
 
   "routes": {
     "main": "@:common.project_name",
-    "my_parkings": "My Parkings",
+    "my_bookings": "My Bookings",
     "reserve": "Reserve",
     "about": "About",
     "users": "Users",
@@ -433,8 +445,8 @@
       "description": "Fill out the form and we'll get back to you within 2 hours."
     },
 
-    "parkings": {
-      "title": "My Parkings",
+    "my_bookings": {
+      "title": "My bookings",
       "not_found": "No bookings found"
     },
 
@@ -545,14 +557,14 @@
       }
     },
 
-    "parkings": {
+    "my_bookings": {
       "head": {
         "title": "@:common.project_name",
-        "titleTemplate": "Parkings",
-        "description": "Explore available parking spots with {appName}. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience.",
-        "keywords": "smart parking, parkings, parking spots, reserve parking, parking app, real-time parking, mobile parking",
-        "ogTitle": "Parkings — {appName} Smart Parking Service",
-        "ogDescription": "Explore available parking spots with {appName}. Find, reserve, and navigate to parking spaces in real-time for a seamless parking experience."
+        "titleTemplate": "My Bookings",
+        "description": "View your active and past bookings with {appName}. Manage reservations, see booking details, and navigate to your selected parking spots in real time.",
+        "keywords": "my bookings, parking bookings, booking history, reservation management, smart parking, {appName}",
+        "ogTitle": "My Bookings — {appName}",
+        "ogDescription": "Manage your active and past bookings in {appName}. Check details and navigate to your reserved parking spots in real time."
       }
     },
 

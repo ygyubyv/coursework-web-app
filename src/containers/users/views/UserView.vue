@@ -2,11 +2,13 @@
   <div class="max-w-5xl mx-auto p-6" v-if="user && !isLoading">
     <!-- Modals -->
     <div>
+      <!-- Create Car -->
       <CreateCar
         v-model:modal-is-visible="createCarModalIsVisible"
         @submit="handleCreateCar"
       />
 
+      <!-- Update Car -->
       <UpdateCar
         v-if="selectedCar"
         v-model:modal-is-visible="updateCarModalIsVisible"
@@ -14,6 +16,14 @@
         @submit="handleUpdateCar"
       />
 
+      <!-- Update User -->
+      <UpdateUserModal
+        v-model:modal-is-visible="updateUserModalIsVisible"
+        :initial-values="user"
+        @submit="handleUpdateUser"
+      />
+
+      <!-- Delete Car -->
       <Confirm
         v-model="deleteCarModalIsVisible"
         :title="$t('modals.delete_car.title')"
@@ -24,7 +34,7 @@
       />
     </div>
 
-    <ProfileHeader :user="user" />
+    <ProfileHeader :user="user" @on-update="updateUserModalIsVisible = true" />
 
     <Divider />
 
@@ -49,6 +59,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import BaseSpinner from "@/components/Base/BaseSpinner.vue";
+import UpdateUserModal from "../components/details/modals/UpdateUserModal.vue";
 import { useUserDetails } from "../composables/details/useUserDetails";
 import ProfileHeader from "../components/details/ProfileHeader.vue";
 import Divider from "../components/details/Divider.vue";
@@ -63,7 +74,13 @@ import { computed } from "vue";
 const route = useRoute();
 const userId = route.params.id as string;
 
-const { user, isLoading: userDetailsLoading } = useUserDetails(userId);
+const {
+  user,
+  isLoading: userDetailsLoading,
+  updateUserModalIsVisible,
+  handleUpdateUser,
+} = useUserDetails(userId);
+
 const {
   isLoading: carActionsLoading,
   onCarAction,

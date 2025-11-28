@@ -49,7 +49,7 @@ const year = new Date().getFullYear();
 
 const footerLinks = computed(() => {
   return [
-    { to: "/parkings", text: t("routes.my_parkings") },
+    { to: "/my-bookings", text: t("routes.my_bookings") },
     { to: "/book", text: t("routes.reserve") },
     { to: "/account", text: t("routes.account.default") },
     { to: "/help", text: t("routes.help") },

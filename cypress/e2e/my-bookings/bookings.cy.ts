@@ -6,18 +6,18 @@ const email = Cypress.env("AZURE_AD_B2C_EMAIL");
 const password = Cypress.env("AZURE_AD_B2C_PASSWORD");
 
 const login = () => {
-  cy.session("b2c-session-parkings", () => {
+  cy.session("b2c-session-bookings", () => {
     cy.loginToAzureADB2C(email, password);
   });
 };
 
-describe("My Parkings — initial load", () => {
+describe("My Bookings — initial load", () => {
   beforeEach(() => {
     login();
 
     cy.interceptBookings();
 
-    cy.visit("/parkings", {
+    cy.visit("/my-bookings", {
       onBeforeLoad(win) {
         injectGeolocationBeforeLoad(win, 50.45, 30.523);
       },
@@ -33,13 +33,13 @@ describe("My Parkings — initial load", () => {
   });
 });
 
-describe("My Parkings — filtering", () => {
+describe("My Bookings — filtering", () => {
   beforeEach(() => {
     login();
 
     cy.interceptBookings();
 
-    cy.visit("/parkings", {
+    cy.visit("/my-bookings", {
       onBeforeLoad(win) {
         injectGeolocationBeforeLoad(win, 50.45, 30.523);
       },
@@ -75,13 +75,13 @@ describe("My Parkings — filtering", () => {
   });
 });
 
-describe("My Parkings — map interaction", () => {
+describe("My Bookings — map interaction", () => {
   beforeEach(() => {
     login();
 
     cy.interceptBookings();
 
-    cy.visit("/parkings", {
+    cy.visit("/my-bookings", {
       onBeforeLoad(win) {
         injectGeolocationBeforeLoad(win, 50.45, 30.523);
       },

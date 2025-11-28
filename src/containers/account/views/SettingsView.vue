@@ -28,6 +28,7 @@
       />
 
       <UserCars
+        v-if="user!.cars"
         :cars="user!.cars"
         @update-car="handleUpdateUserCar"
         @delete-car="handleDeleteUserCar"

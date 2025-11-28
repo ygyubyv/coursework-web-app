@@ -1,11 +1,13 @@
 <template>
   <BaseSlideModal @on-close="emit('onClose')">
+    <template #header>
+      <h2 class="text-xl font-semibold text-gray-900">
+        {{ $t("modals.book_parking.title") }}
+      </h2>
+    </template>
+
     <template #default>
       <div class="space-y-5">
-        <h2 class="text-xl font-semibold text-gray-900">
-          {{ $t("modals.book_parking.title") }}
-        </h2>
-
         <div class="flex justify-between text-sm">
           <p class="font-medium text-gray-800">
             {{ $t("common.station") }}: {{ parking.name }}
@@ -66,7 +68,15 @@
     </template>
 
     <template #footer>
-      <div class="flex justify-end">
+      <div class="flex gap-3 justify-end">
+        <BaseButton
+          icon="xmark"
+          :text="$t('buttons.cancel')"
+          mode="Secondary"
+          size="Medium"
+          @click="emit('onClose')"
+        />
+
         <BaseButton
           :text="$t('buttons.confirm')"
           icon="check"

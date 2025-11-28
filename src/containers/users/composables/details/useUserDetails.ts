@@ -3,12 +3,21 @@ import {
   getUserCars,
   getUserBookings,
   getUserTransactions,
+  updateUser,
 } from "@/services/user";
-import type { User } from "@/types";
-import { useQuery } from "@tanstack/vue-query";
+import { useAuthStore } from "@/stores/auth";
+import type { User, UserSummary } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import { ref, computed, watch } from "vue";
+import { showNotification } from "@/utils";
+import { useI18n } from "vue-i18n";
 
 export const useUserDetails = (userId: string) => {
+  const { hasRole } = useAuthStore();
+
+  const queryClient = useQueryClient();
+  const { t } = useI18n();
+
   const emptyUser: User = {
     id: "",
     name: "",
@@ -24,13 +33,15 @@ export const useUserDetails = (userId: string) => {
   };
 
   const user = ref<User>(emptyUser);
+  const updateUserModalIsVisible = ref(false);
 
   const isLoading = computed(() => {
     return (
       userLoading.value ||
       userCarsLoading.value ||
       userBookingsLoading.value ||
-      userTransactionsLoading.value
+      userTransactionsLoading.value ||
+      updateUserLoading.value
     );
   });
 
@@ -62,6 +73,30 @@ export const useUserDetails = (userId: string) => {
       enabled: userLoaded,
     });
 
+  const { mutate: handleUpdateUser, isPending: updateUserLoading } =
+    useMutation({
+      mutationFn: async (payload: Partial<UserSummary>) => {
+        if ("roles" in payload) {
+          if (payload.roles?.includes("admin") && !hasRole("owner")) {
+            showNotification("error", t("toasts.error.auth.no_permission"));
+            throw new Error("NO_PERMISSION");
+          }
+        }
+
+        return await updateUser(userId, payload);
+      },
+
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["user", userId],
+        });
+      },
+
+      onError: (err) => {
+        console.error("Failed to update user:", err);
+      },
+    });
+
   watch(userData, (val) => {
     if (val) {
       user.value = { ...val };
@@ -89,5 +124,7 @@ export const useUserDetails = (userId: string) => {
   return {
     user,
     isLoading,
+    updateUserModalIsVisible,
+    handleUpdateUser,
   };
 };

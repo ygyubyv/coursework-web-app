@@ -5,7 +5,7 @@
     >
       <div class="flex flex-col gap-3">
         <h2 class="text-lg font-semibold text-gray-900">
-          {{ $t("views.parkings.title") }}
+          {{ $t("views.my_bookings.title") }}
         </h2>
 
         <div
@@ -39,7 +39,7 @@
       </template>
 
       <div v-else>
-        <p>{{ $t("views.parkings.not_found") }}</p>
+        <p>{{ $t("views.my_bookings.not_found") }}</p>
       </div>
     </div>
 
@@ -138,16 +138,16 @@ onMounted(() => {
 });
 
 useHead({
-  title: t("seo.parkings.head.title"),
-  titleTemplate: `%s | ${t("seo.parkings.head.titleTemplate")}`,
+  title: t("seo.my_bookings.head.title"),
+  titleTemplate: `%s | ${t("seo.my_bookings.head.titleTemplate")}`,
   meta: [
     {
       name: "description",
-      content: t("seo.parkings.head.description"),
+      content: t("seo.my_bookings.head.description"),
     },
     {
       name: "keywords",
-      content: t("seo.parkings.head.keywords"),
+      content: t("seo.my_bookings.head.keywords"),
     },
     {
       name: "robots",
@@ -155,11 +155,11 @@ useHead({
     },
     {
       property: "og:title",
-      content: t("seo.parkings.head.ogTitle"),
+      content: t("seo.my_bookings.head.ogTitle"),
     },
     {
       property: "og:description",
-      content: t("seo.parkings.head.ogDescription"),
+      content: t("seo.my_bookings.head.ogDescription"),
     },
     {
       property: "og:type",
@@ -169,7 +169,7 @@ useHead({
   link: [
     {
       rel: "canonical",
-      href: `${APP_URL}/parkings`,
+      href: `${APP_URL}/my-bookings`,
     },
   ],
 });
