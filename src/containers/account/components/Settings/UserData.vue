@@ -8,7 +8,7 @@
       class="flex flex-col md:flex-col-reverse lg:flex-row md:items-start gap-6"
     >
       <UserAvatar
-        :avatar-url="avatarPreview || avatarUrl || DEFAULT_AVATAR"
+        :avatar-url="avatarPreview || avatarUrl || NoAvatarImage"
         @on-avatar-change="emit('onAvatarChange', $event)"
       />
 
@@ -74,7 +74,7 @@
 <script setup lang="ts">
 import UserAvatar from "./UserAvatar.vue";
 import BaseInput from "@/components/Base/BaseInput.vue";
-import { DEFAULT_AVATAR } from "@/constants";
+import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
 
 interface Props {
   editedUser: any;

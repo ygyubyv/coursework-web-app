@@ -361,6 +361,7 @@
 
   "routes": {
     "main": "@:common.project_name",
+    "parkings": "Парковки",
     "my_bookings": "Мої паркування",
     "reserve": "Забронювати",
     "about": "Про нас",

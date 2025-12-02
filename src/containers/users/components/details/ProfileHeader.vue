@@ -3,7 +3,7 @@
     <div class="flex items-center gap-6">
       <!-- Avatar -->
       <img
-        :src="user.avatarUrl ?? DEFAULT_AVATAR"
+        :src="user.avatarUrl ?? NoAvatarImage"
         class="w-28 h-28 rounded-xl object-cover bg-gray-100 shadow-sm"
       />
 
@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import type { User } from "@/types";
 import { formatDate } from "@/utils";
-import { DEFAULT_AVATAR } from "@/constants";
+import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
 
 interface Props {
   user: User;

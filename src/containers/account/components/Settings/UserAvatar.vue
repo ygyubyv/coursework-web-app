@@ -4,7 +4,7 @@
     class="relative flex justify-center md:justify-end order-1 md:order-2 cursor-pointer"
   >
     <img
-      :src="avatarUrl || DEFAULT_AVATAR"
+      :src="avatarUrl || NoAvatarImage"
       alt="Avatar"
       class="w-28 h-28 md:w-24 md:h-24 rounded-full object-cover border border-gray-300"
     />
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { DEFAULT_AVATAR } from "@/constants";
+import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
 
 interface Props {
   avatarUrl: string | null;

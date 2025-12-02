@@ -9,6 +9,7 @@ import contact from "@/containers/contact/routes/index";
 import help from "@/containers/help/routes/index";
 import faq from "@/containers/faq/routes/index";
 import users from "@/containers/users/routes/index";
+import parkings from "@/containers/parkings/routes";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
@@ -35,6 +36,7 @@ const router = createRouter({
 
     // Admin
     ...users,
+    ...parkings,
   ],
 });
 

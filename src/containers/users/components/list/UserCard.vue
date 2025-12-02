@@ -2,7 +2,7 @@
   <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
     <div class="flex items-center gap-4">
       <img
-        :src="user.avatarUrl ?? DEFAULT_AVATAR"
+        :src="user.avatarUrl ?? NoAvatarImage"
         alt="avatar"
         class="w-12 h-12 rounded-full object-cover border border-gray-300"
       />
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { DEFAULT_AVATAR } from "@/constants";
+import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
 import type { UserSummary } from "@/types";
 import InfoItem from "../list/InfoItem.vue";
 import { formatDate } from "@/utils";

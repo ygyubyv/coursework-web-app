@@ -32,7 +32,7 @@
 
         <div class="flex justify-center md:justify-end order-1 md:order-2">
           <img
-            :src="user!.avatarUrl || DEFAULT_AVATAR"
+            :src="user!.avatarUrl || NoAvatarImage"
             alt="Avatar"
             class="w-24 h-24 rounded-full object-cover border border-gray-300"
           />
@@ -95,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { DEFAULT_AVATAR } from "@/constants";
+import NoAvatarImage from "@/assets/images/no-avatar-black.svg";
 import { formatDate } from "@/utils";
 import Stat from "../components/Stat.vue";
 import { storeToRefs } from "pinia";
